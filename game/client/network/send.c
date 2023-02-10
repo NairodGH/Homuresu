@@ -1,4 +1,4 @@
-#include "server.h"
+#include "general.h"
 
 static char *set_send_opt(char const *msg, char const *eof)
 {

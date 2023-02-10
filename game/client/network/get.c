@@ -1,4 +1,4 @@
-#include "server.h"
+#include "general.h"
 
 static int check_eof(client_t *client, char *msg, ssize_t size)
 {

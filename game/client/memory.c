@@ -1,4 +1,4 @@
-#include "client.h"
+#include "general.h"
 
 client_t *init_struct()
 {

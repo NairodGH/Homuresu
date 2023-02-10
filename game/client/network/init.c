@@ -1,8 +1,8 @@
-#include "client.h"
+#include "general.h"
 
 static int init_client(client_t *client, char *ip, int port)
 {
-    client->sock = socket(AF_INET, SOCK_STREAM, 0);
+    client->sock = socket(AF_INET, SOCK_DGRAM, 0);
     if (client->sock == -1) {
         printf("Error: Socket creation failed\n");
         return 84;
