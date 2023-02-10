@@ -1,0 +1,7 @@
+.vscode
+build/
+*.ini
+*.dll
+*.pdb
+.DS_STORE
+superHeroes
