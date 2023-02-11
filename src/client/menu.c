@@ -49,7 +49,7 @@ static void add_back(menu_t *menu_st)
     DrawCubeTexture(texture, (Vector3){ 0.0f, 0.0f, 25.0f }, 50.0f, 20.0f, 0.1f, WHITE);
     DrawCubeTexture(texture, (Vector3){ -25.0f, 0.0f, 0.0f }, 0.1f, 20.0f, 50.0f, WHITE);
     DrawCubeTexture(texture, (Vector3){ 25.0f, 0.0f, 0.0f }, 0.1f, 20.0f, 50.0f, WHITE);
-    DrawCubeTexture(LoadTexture("./resources/menu/grass.png"), (Vector3){ 0.0f, 0.0f, 0.0f }, 32.0f, 0.1f, 32.0f, WHITE);
+    DrawCube((Vector3){ 0.0f, 0.0f, 0.0f }, 50.0f, 0.1f, 50.0f, DARKGREEN);
     EndMode3D();
 }
 
