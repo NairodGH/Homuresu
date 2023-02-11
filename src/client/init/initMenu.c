@@ -7,7 +7,7 @@ static void initSelectionMenu(game_t *game)
 void initMenu(game_t *game)
 {
     game->menu = calloc(1, sizeof(menu_t));
-    game->menu->button = LoadTexture("./ressources/button.png");
+    game->menu->button = LoadTexture("./resources/menu/button.png");
     game->menu->button.width *= 5;
     game->menu->button.height *= 5;
     game->menu->sourceRec = (Rectangle){ 0, 0, (float)game->menu->button.width / 2, game->menu->button.height};
@@ -15,7 +15,7 @@ void initMenu(game_t *game)
     game->menu->btnBounds = (Rectangle){ (GetMonitorWidth(GetCurrentMonitor()) / 2) - (game->menu->button.width / 3),
     (GetMonitorHeight(GetCurrentMonitor()) - game->menu->button.height) - 50, game->menu->button.width / 2, game->menu->button.height};
 
-    game->menu->quit_button = LoadTexture("./ressources/quit_button.png");
+    game->menu->quit_button = LoadTexture("./resources/menu/quit_button.png");
     game->menu->quit_button.width *= 5;
     game->menu->quit_button.height *= 5;
     game->menu->quit_sourceRec = (Rectangle){ 0, 0, (float)game->menu->quit_button.width / 2, game->menu->quit_button.height};
@@ -36,7 +36,7 @@ void initMenu(game_t *game)
 
     game->menu->is_menu = 1;
 
-    game->menu->title = LoadTexture("./ressources/title_homuresu.png");
+    game->menu->title = LoadTexture("./resources/menu/title_homuresu.png");
     game->menu->title.width *= 4;
     game->menu->title.height *= 4;
 

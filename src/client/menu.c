@@ -40,13 +40,16 @@ static void menu_ui(menu_t *menu_st)
 
 static void add_back(menu_t *menu_st)
 {
+    Texture2D texture = LoadTexture("./resources/immeuble/immeuble1.png");
     BeginMode3D(menu_st->camera);
-    ClearBackground(RAYWHITE);
+    ClearBackground(SKYBLUE);
 
     //Draw Walls
-    DrawCube((Vector3){ -16.0f, 2.5f, -15.0f }, 1.0f, 5.0f, 32.0f, BLUE);
-    DrawCube((Vector3){ 16.0f, 2.5f, 0.0f }, 1.0f, 5.0f, 32.0f, LIME);
-    DrawCube((Vector3){ 0.0f, 2.5f, 16.0f }, 32.0f, 5.0f, 1.0f, GOLD);
+    DrawCubeTexture(texture, (Vector3){ 0.0f, 0.0f, -25.0f }, 50.0f, 20.0f, 0.1f, WHITE);
+    DrawCubeTexture(texture, (Vector3){ 0.0f, 0.0f, 25.0f }, 50.0f, 20.0f, 0.1f, WHITE);
+    DrawCubeTexture(texture, (Vector3){ -25.0f, 0.0f, 0.0f }, 0.1f, 20.0f, 50.0f, WHITE);
+    DrawCubeTexture(texture, (Vector3){ 25.0f, 0.0f, 0.0f }, 0.1f, 20.0f, 50.0f, WHITE);
+    DrawCubeTexture(LoadTexture("./resources/menu/grass.png"), (Vector3){ 0.0f, 0.0f, 0.0f }, 32.0f, 0.1f, 32.0f, WHITE);
     EndMode3D();
 }
 
