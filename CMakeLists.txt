@@ -66,17 +66,16 @@ set(SERVER_SRC
 set(CMAKE_EXE_LINKER_FLAGS -fexceptions)
 
 add_executable(${SERVER_EXEC}
-  ${SERVER_SRC}/network/action.c
-  ${SERVER_SRC}/network/cliclose.c
-  ${SERVER_SRC}/network/client.c
-  ${SERVER_SRC}/network/connection.c
-  ${SERVER_SRC}/network/get.c
-  ${SERVER_SRC}/network/init.c
-  ${SERVER_SRC}/network/send.c
-  ${SERVER_SRC}/network/server.c
-  ${SERVER_SRC}/network/utils.c
+  ${SERVER_SRC}/network/add_client.c
+  ${SERVER_SRC}/network/get_packet.c
+  ${SERVER_SRC}/network/init_srv.c
+  ${SERVER_SRC}/network/rm_client.c
+  ${SERVER_SRC}/network/send_packet.c
+  ${SERVER_SRC}/network/srv_struct.c
+  ${SERVER_SRC}/cli_accept.c
   ${SERVER_SRC}/main.c
-  ${SERVER_SRC}/memory.c
+  ${SERVER_SRC}/manage.c
+  ${SERVER_SRC}/server.c
 )
 
 target_include_directories(${SERVER_EXEC} PUBLIC

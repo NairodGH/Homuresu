@@ -1,19 +1,18 @@
 #ifndef SERVER_H_
 #define SERVER_H_
 
-#include <arpa/inet.h>
-#include <ctype.h>
-#include <signal.h>
-#include <stdbool.h>
 #include <stdio.h>
+#include <arpa/inet.h>
+#include <sys/select.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/select.h>
-#include <sys/time.h>
-#include <sys/types.h>
+#include <stdbool.h>
 #include <unistd.h>
+#include <fcntl.h>
 
-#define MAX_CLIENTS 100
+#define DEFAULT_PORT 4242
+#define MAX_CLIENTS 20
+
 #define BUFFER_SIZE 1024
 #define EOF_NETWORK "\r\n"
 
@@ -27,50 +26,46 @@ struct client_s
     client_t *prev;
 };
 
-typedef struct server_s
-{
+typedef struct server_tcp_s {
     int sock;
     size_t port;
-    struct sockaddr_in servaddr;
+    struct sockaddr_in addr;
     fd_set read_fd;
     fd_set write_fd;
     client_t *clients;
-} server_t;
+} server_tcp_t;
 
-// memory.c
-server_t *init_struct();
-void free_memory(server_t *server);
+typedef struct server_udp_s {
+    int sock;
+    size_t port;
+    struct sockaddr_in addr;
+    fd_set read_fd;
+    fd_set write_fd;
+} server_udp_t;
 
-// network/server.c
-int start_server(server_t *server);
+// srv_struct.c
+server_tcp_t *init_srv_struct_tcp();
+server_udp_t *init_srv_struct_udp();
+void free_srv_struct_tcp(server_tcp_t *srv);
+void free_srv_struct_udp(server_udp_t *srv);
 
-// network/server.c
-int start_server(server_t *server);
-
-// network/init.c
-int init_server(server_t *server);
-
-// network/connection.c
-int check_connection(server_t *server);
-
-// network/get.c
-char *get_message(client_t *client);
-
-// network/send.c
-int send_message(client_t *client, char const *msg, char const *eof);
-
-// network/action.c
-int manage_commands(server_t *server, client_t *client);
-
-// network/utils.c
-int count_client(client_t *clients);
-
-// network/client.c
+// add_client.c
 client_t *init_clients(int sock);
 client_t *add_client(client_t *clients, int sock);
 
-// network/cliclose.c
+// rm_client.c
 void remove_client(client_t *client);
-void free_clients(client_t *clients);
+void free_clients(client_t *client);
+
+// init_srv.c
+int init_server_tcp(server_tcp_t *server);
+int init_server_udp(server_udp_t *server);
+
+// get_packet.c
+char *get_tcp_packet(int sock);
+char *get_udp_packet(int sock);
+
+// send_packet.c
+int send_tcp_packet(int sock, char const *msg, char const *eof);
 
 #endif /* !SERVER_H_ */

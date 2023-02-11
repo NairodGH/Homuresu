@@ -1,6 +1,6 @@
 #include "general.h"
 
-static int check_eof(client_t *client, char *msg, ssize_t size)
+static int check_eof(char *msg, ssize_t size)
 {
     if (size >= 2 && memcmp(msg + size - 2, EOF_NETWORK, 2) == 0) {
         msg[size - 2] = '\0';
@@ -26,7 +26,7 @@ char *get_message(client_t *client)
         memcpy(msg + size, buffer, size_read);
         msg[size + size_read] = '\0';
         size += size_read;
-        if (check_eof(client, msg, size) != 0)
+        if (check_eof(msg, size) != 0)
             break;
     }
     return msg;
