@@ -22,6 +22,7 @@
         int btnState;
         bool btnAction;
 
+        int is_menu;
     } menu_t;
 
 #endif //SUPERHEROES_MENU_H

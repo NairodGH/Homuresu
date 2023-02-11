@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include "../include/menu.h"
+#include <stdlib.h>
 
 #define MAX_COLUMNS 20
 int menu(menu_t *menu_st);
@@ -24,41 +25,23 @@ static void init_menu(menu_t *menu_st)
     menu_st->camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };
     menu_st->camera.fovy = 60.0f;
     menu_st->camera.projection = CAMERA_PERSPECTIVE;
+
+    menu_st->is_menu = 1;
 }
 
-int main(void)
+int main_loop(Camera camera)
 {
-    const int screenWidth = 1920;
-    const int screenHeight = 1080;
-
-    InitWindow(screenWidth, screenHeight, "yeeet");
-
-    Camera camera = { 0 };
-    camera.position = (Vector3){ 4.0f, 2.0f, 4.0f };
-    camera.target = (Vector3){ 0.0f, 1.8f, 0.0f };
-    camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };
-    camera.fovy = 60.0f;
-    camera.projection = CAMERA_PERSPECTIVE;
-
     float heights[MAX_COLUMNS] = { 0 };
     Vector3 positions[MAX_COLUMNS] = { 0 };
     Color colors[MAX_COLUMNS] = { 0 };
 
-    for (int i = 0; i < MAX_COLUMNS; i++)
-    {
+    for (int i = 0; i < MAX_COLUMNS; i++) {
         heights[i] = (float)GetRandomValue(1, 12);
         positions[i] = (Vector3){ (float)GetRandomValue(-15, 15), heights[i]/2.0f, (float)GetRandomValue(-15, 15) };
         colors[i] = (Color){ GetRandomValue(20, 255), GetRandomValue(10, 55), 30, 255 };
     }
 
-    SetCameraMode(camera, CAMERA_FIRST_PERSON);
-    SetTargetFPS(60);
-    menu_t menu_st;
-    init_menu(&menu_st);
-    while (!WindowShouldClose())
-    {
-        UpdateCamera(&camera);
-        if(menu(&menu_st) != 0);
+    while (1) {
         BeginDrawing();
         ClearBackground(RAYWHITE);
         BeginMode3D(camera);
@@ -80,6 +63,37 @@ int main(void)
         DrawText("- Move with keys: W, A, S, D", 40, 40, 10, DARKGRAY);
         DrawText("- Mouse move to look around", 40, 60, 10, DARKGRAY);
         EndDrawing();
+        if (IsKeyPressed(KEY_ESCAPE)) {
+            break;
+        }
+    }
+    return 0;
+}
+
+int main(void)
+{
+    const int screenWidth = 1920;
+    const int screenHeight = 1080;
+
+    InitWindow(screenWidth, screenHeight, "yeeet");
+
+    Camera camera = { 0 };
+    camera.position = (Vector3){ 4.0f, 2.0f, 4.0f };
+    camera.target = (Vector3){ 0.0f, 1.8f, 0.0f };
+    camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };
+    camera.fovy = 60.0f;
+    camera.projection = CAMERA_PERSPECTIVE;
+
+    SetCameraMode(camera, CAMERA_FIRST_PERSON);
+    SetTargetFPS(60);
+    menu_t *menu_st = malloc(sizeof(menu_t));
+    init_menu(menu_st);
+    while (!WindowShouldClose()) {
+        UpdateCamera(&camera);
+        (menu_st->is_menu == 1) ? menu(menu_st) : 0;
+        if (menu_st->is_menu == 0 && main_loop(camera) == 0) {
+            menu_st->is_menu = 1;
+        }
     }
     CloseWindow();
     return 0;

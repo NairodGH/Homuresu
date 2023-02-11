@@ -39,14 +39,16 @@ static void add_back(menu_t *menu_st)
 int menu(menu_t *menu_st)
 {
     float camera_rotation = 0.0f;
-    while (status) {
+    while (menu_st->is_menu == 1) {
         if (IsKeyPressed(KEY_ENTER))
-            status = 0;
+            menu_st->is_menu = 0;
+        if (IsKeyPressed(KEY_ESCAPE))
+            break;
         add_back(menu_st);
         buttons(menu_st);
         camera_rotation += 0.1f;
         menu_st->camera.target = (Vector3){ 1.0f, 1.8f, camera_rotation };
         //if (camera_rotation >= 15.0f) camera_rotation = 0.0f;
     }
-    return status;
+    return (0);
 }
