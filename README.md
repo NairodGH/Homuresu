@@ -9,8 +9,8 @@
 
 <p align="center">
 
-  [![Wealth](https://github.com/NairodGH/Homuresu/actions/workflows/Wealth/badge.svg)](https://github.com/NairodGH/Homuresu/actions/workflows/Wealth)
-  [![House](https://github.com/NairodGH/Homuresu/actions/workflows/House/badge.svg)](https://github.com/NairodGH/Homuresu/actions/workflows/House)
+  [![Wealth](https://github.com/NairodGH/Homuresu/actions/workflows/wealth.yml/badge.svg)](https://github.com/NairodGH/Homuresu/actions/workflows/wealth.yml)
+  [![House](https://github.com/NairodGH/Homuresu/actions/workflows/house.yml/badge.svg)](https://github.com/NairodGH/Homuresu/actions/workflows/house.yml)
 
 </p>
 
