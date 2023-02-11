@@ -12,6 +12,8 @@ void destroy_list(list_t *list, void (*destroy_data)(void *data))
     list_node_t *node = NULL;
     list_node_t *temp = NULL;
 
+    if (list == NULL)
+        return;
     for (node = list->head; node; node = temp) {
         destroy_node(node, destroy_data);
         temp = node->next;

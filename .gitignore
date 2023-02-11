@@ -6,3 +6,4 @@ build/
 .DS_STORE
 homuresu
 homureserver
+*.exe

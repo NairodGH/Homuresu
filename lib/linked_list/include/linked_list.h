@@ -1,35 +1,33 @@
 /*
 ** EPITECH PROJECT, 2021
-** corewar
+** linked_list
 ** File description:
-** main
+** include
 */
 
 #ifndef LINKED_LIST_H
-#define LINKED_LIST_H
+    #define LINKED_LIST_H
 
-#include <stdio.h>
-#include <stdlib.h>
+    #include <stdio.h>
+    #include <stdlib.h>
 
-#include "blib.h"
+    #define foreach(node, temp)                             \
+        for (temp = node; temp; temp = temp->next)
 
-#define foreach(node, temp) \
-    for (temp = node; temp; temp = temp->next)
-
-#define foreach_safe(node, temp, temp2)                 \
-    for (temp = node, temp2 = temp ? temp->next : NULL; \
-        temp; temp = temp2, temp2 = temp->next)
+    #define foreach_safe(node, temp, temp2)                 \
+        for (temp = node, temp2 = temp ? temp->next : NULL; \
+            temp; temp = temp2, temp2 = temp->next)
 
 typedef struct list_node_s {
     struct list_node_s *next;
-    struct list_node_s *prev;
+    struct list_node_s *last;
     void *data;
 } list_node_t;
 
 typedef struct {
+    size_t lenght;
     list_node_t *head;
     list_node_t *tail;
-    size_t lenght;
 } list_t;
 
 // CREATE LIST

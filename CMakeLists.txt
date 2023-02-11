@@ -10,6 +10,12 @@ if(UNIX)
 else()
     set(CMAKE_CXX_FLAGS "/std:c++20 /Ox /EHsc")
 endif()
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+if (WIN32)
+    set(BUILD_SHARED_LIBS OFF)
+else()
+    set(BUILD_SHARED_LIBS ON)
+endif()
 
 # include fetchcontent
 include(FetchContent)
@@ -21,6 +27,39 @@ FetchContent_Declare(
     URL https://github.com/raysan5/raylib/archive/refs/tags/4.2.0.tar.gz
     GIT_PROGRESS TRUE)
 FetchContent_MakeAvailable(raylib)
+
+# ################# BLIB ##################
+
+#set library name
+set(BLIB BLIB)
+
+#set root path
+set(BLIB_ROOT lib/linked_list)
+
+#fetch include paths
+set(BLIB_INC
+    ${BLIB_ROOT}/include
+)
+
+#fetch source files
+set(BLIB_SRC
+    ${BLIB_ROOT}/src/add_node.c
+    ${BLIB_ROOT}/src/create_list.c
+    ${BLIB_ROOT}/src/create_node.c
+    ${BLIB_ROOT}/src/destroy_list.c
+    ${BLIB_ROOT}/src/destroy_node.c
+    ${BLIB_ROOT}/src/print_list.c
+    ${BLIB_ROOT}/src/remove_node.c
+
+)
+
+#set include paths
+include_directories(
+    ${BLIB_INC}
+)
+
+#set source files (create library/executable)
+add_library(${BLIB} ${BLIB_SRC})
 
 # ################# CLIENT ##################
 
@@ -44,6 +83,7 @@ set(CLIENT_SRC
     ${CLIENT_ROOT}/init/initCamera.c
     ${CLIENT_ROOT}/init/initWall.c
     ${CLIENT_ROOT}/init/initWindow.c
+    ${CLIENT_ROOT}/init/initGame.c
 
     ${CLIENT_ROOT}/draw/drawBullet.c
     ${CLIENT_ROOT}/draw/drawCube.c
@@ -62,7 +102,6 @@ set(CLIENT_SRC
 include_directories(
     ${CMAKE_SOURCE_DIR}/include
     ${CLIENT_INC}
-    ${CMAKE_SOURCE_DIR}/lib/blib/include
 )
 
 # set source files (create library/executable)
@@ -70,6 +109,7 @@ add_executable(${CLIENT} ${CLIENT_SRC})
 
 # link library/executable with deps
 target_link_libraries(${CLIENT} PUBLIC raylib)
+target_link_libraries(${CLIENT} PUBLIC ${BLIB})
 set_target_properties(${CLIENT} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR})
 set_target_properties(${CLIENT} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR})
 
@@ -95,7 +135,6 @@ set(SERVER_SRC
 include_directories(
     ${CMAKE_SOURCE_DIR}/include
     ${SERVER_INC}
-    ${CMAKE_SOURCE_DIR}/lib/blib/include
 )
 
 # set source files (create library/executable)
@@ -103,13 +142,8 @@ add_executable(${SERVER} ${SERVER_SRC})
 
 # link library/executable with deps
 target_link_libraries(${SERVER} PUBLIC raylib)
+target_link_libraries(${SERVER} PUBLIC ${BLIB})
 set_target_properties(${SERVER} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR})
 set_target_properties(${SERVER} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR})
 
 # ################# MISC ###################
-
-# build blib
-execute_process(
-    COMMAND bash -c "make -C lib/blib/"
-    OUTPUT_VARIABLE outVar
-)

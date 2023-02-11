@@ -12,12 +12,12 @@ void remove_node(list_t *list, list_node_t *node)
     if (!node || !list)
         return;
     list->lenght--;
-    if (node->prev)
-        node->prev->next = node->next;
+    if (node->last)
+        node->last->next = node->next;
     else list->head = node->next;
     if (node->next)
-        node->next->prev = node->prev;
-    else list->tail = node->prev;
-    node->prev = NULL;
+        node->next->last = node->last;
+    else list->tail = node->last;
+    node->last = NULL;
     node->next = NULL;
 }

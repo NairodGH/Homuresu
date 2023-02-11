@@ -9,9 +9,9 @@
 
 list_node_t *create_node(void *data)
 {
-    list_node_t *result = bcalloc(sizeof(list_node_t), 1);
+    list_node_t *result = calloc(sizeof(list_node_t), 1);
 
-    if (data) {
+    if (result) {
         result->data = data;
     }
     return result;
