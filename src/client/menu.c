@@ -1,10 +1,4 @@
-#include "raylib.h"
-#include "../include/menu.h"
-
-#define MAX_COLUMNS 20
-#define NUM_FRAMES 3
-
-static int status = 1;
+#include "includes.h"
 
 static void menu_ui(menu_t *menu_st)
 {
@@ -15,7 +9,7 @@ static void menu_ui(menu_t *menu_st)
     DrawCircle(menu_st->mousePoint.x, menu_st->mousePoint.y, 50, RED);
     menu_st->btnStartAction = false;
     menu_st->sourceRec = (Rectangle){ 0, 0, (float)menu_st->button.width / 2, menu_st->button.height};
-    DrawTextureRec(menu_st->button, menu_st->sourceRec, (Vector2){((GetScreenWidth() / 2) - (menu_st->button.width / 4)), (GetScreenHeight() - menu_st->button.height) - 50}, WHITE);
+    DrawTextureRec(menu_st->button, menu_st->sourceRec, (Vector2){((GetMonitorWidth(GetCurrentMonitor()) / 2) - (menu_st->button.width / 3)), (GetMonitorHeight(GetCurrentMonitor()) - menu_st->button.height) - 50}, WHITE);
 
     if (CheckCollisionPointRec(menu_st->mousePoint, menu_st->btnBounds)) {
         menu_st->sourceRec.x += menu_st->button.width / 2;
@@ -24,7 +18,7 @@ static void menu_ui(menu_t *menu_st)
     }
     else menu_st->btnStartState = 0;
 
-    DrawTextureEx(menu_st->title, (Vector2){(GetScreenWidth() - menu_st->title.width) / 2, 50}, 0.0f, 1.0f, WHITE);
+    DrawTextureEx(menu_st->title, (Vector2){(GetMonitorWidth(GetCurrentMonitor()) - menu_st->title.width) / 2, 50}, 0.0f, 1.0f, WHITE);
     EndDrawing();
 }
 
