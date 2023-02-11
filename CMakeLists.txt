@@ -1,50 +1,77 @@
-################# CONFIG ##################
+# ############### CONFIG ##################
 
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.24)
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
 # Project name
-project(kidiot LANGUAGES C)
+project(Homuresu LANGUAGES C VERSION 1.0)
 
-if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-    add_compile_options(-fdiagnostics-color=always)
-elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-    add_compile_options(-fcolor-diagnostics)
+if(UNIX)
+    set(CMAKE_CXX_FLAGS "-std=c++20 -Ofast")
+else()
+    set(CMAKE_CXX_FLAGS "/std:c++20 /Ox /EHsc")
 endif()
 
-################## BUILD ##################
+include(FetchContent)
+set(FETCHCONTENT_QUIET OFF)
 
-set(EXEC_NAME
-  superHeroes
+# ################# FETCH DEPENDENCIES ##################
+# FetchContent_Declare(
+# raylib
+# GIT_REPOSITORY https://github.com/raysan5/raylib/archive/refs/tags/4.2.0.tar.gz
+# GIT_TAG master
+# GIT_PROGRESS TRUE)
+# FetchContent_MakeAvailable(raylib)
+
+# ################# CLIENT ##################
+execute_process(
+    COMMAND bash -c "make -C lib/blib/"
+    OUTPUT_VARIABLE outVar
 )
 
-set(INC
-  include/
+# set executable name
+set(CLIENT homuresu)
+
+# set root path
+set(CLIENT_ROOT src/client)
+
+# fetch include paths
+set(CLIENT_INC
+    ${CLIENT_ROOT}/include
 )
 
-set(SRC
-  src/main.c
+# fetch source files
+set(CLIENT_SRC
+    ${CLIENT_ROOT}/main.c
+    ${CLIENT_ROOT}/mainLoop.c
+
+    ${CLIENT_ROOT}/init/initBullet.c
+    ${CLIENT_ROOT}/init/initCamera.c
+    ${CLIENT_ROOT}/init/initWall.c
+    ${CLIENT_ROOT}/init/initWindow.c
+
+    ${CLIENT_ROOT}/draw/drawBullet.c
+    ${CLIENT_ROOT}/draw/drawObs.c
+
+    ${CLIENT_ROOT}/create/createBullet.c
+
+    ${CLIENT_ROOT}/check/checkCollision.c
 )
 
-set(CMAKE_EXE_LINKER_FLAGS -fexceptions)
-
-add_executable(${EXEC_NAME}
-  ${SRC}
-  src/main.c
+# set include paths
+include_directories(
+    include
+    ${CLIENT_INC}
+    lib/blib/include
 )
 
-target_include_directories(${EXEC_NAME} PUBLIC
-  ${INC}
-)
+# set source files (create library/executable)
+add_executable(${CLIENT} ${CLIENT_SRC})
 
-# link with libs
+# link library/executable with deps
 find_package(raylib REQUIRED)
-target_link_libraries(${EXEC_NAME} PUBLIC raylib)
-################## MISC ###################
+target_link_libraries(${CLIENT} PUBLIC raylib)
+set_target_properties(${CLIENT} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR})
+set_target_properties(${CLIENT} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR})
 
-add_custom_command(
-  TARGET ${EXEC_NAME} POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E copy
-    ${CMAKE_CURRENT_BINARY_DIR}/${EXEC_NAME}
-    ${CMAKE_CURRENT_BINARY_DIR}/../${EXEC_NAME}
-)
+# ################# MISC ###################
