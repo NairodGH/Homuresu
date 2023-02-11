@@ -4,9 +4,6 @@
 static void menu_ui(menu_t *menu_st)
 {
     BeginDrawing();
-    menu_st->mousePoint = GetMousePosition();
-    SetMouseCursor(MOUSE_CURSOR_DEFAULT);
-    DrawCircle(menu_st->mousePoint.x, menu_st->mousePoint.y, 5, BLACK);
 
     menu_st->btnStartAction = false;
     menu_st->sourceRec = (Rectangle){ 0, 0, (float)menu_st->button.width / 2, menu_st->button.height};
@@ -14,13 +11,16 @@ static void menu_ui(menu_t *menu_st)
     (GetMonitorHeight(GetCurrentMonitor()) - menu_st->button.height) - 50}, WHITE);
 
     if (CheckCollisionPointRec(menu_st->mousePoint, menu_st->btnBounds)) {
-        menu_st->sourceRec.x += menu_st->button.width / 2;
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) menu_st->btnStartState = 2;
         else menu_st->btnStartState = 1;
     }
     else menu_st->btnStartState = 0;
 
     DrawTextureEx(menu_st->title, (Vector2){(GetMonitorWidth(GetCurrentMonitor()) - menu_st->title.width) / 2, 50}, 0.0f, 1.0f, WHITE);
+
+    menu_st->mousePoint = GetMousePosition();
+    SetMouseCursor(MOUSE_CURSOR_DEFAULT);
+    DrawCircle(menu_st->mousePoint.x, menu_st->mousePoint.y, 5, BLACK);
     EndDrawing();
 }
 
