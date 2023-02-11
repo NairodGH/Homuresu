@@ -7,6 +7,12 @@
   <img src="https://cdn.discordapp.com/attachments/1073630614860865596/1073665301574590464/grid_0.jpg">
 </p>
 
+<p align="center">
+
+  [![Wealth](https://github.com/NairodGH/Homuresu/actions/workflows/wealth.yml/badge.svg)](https://github.com/NairodGH/Homuresu/actions/workflows/wealth.yml)
+
+</p>
+
 ## 📋 Table of Contents
 <details>
 <summary>Click to reveal</summary>
