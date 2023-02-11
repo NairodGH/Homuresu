@@ -1,13 +1,37 @@
 #include "raylib.h"
+#include "../include/menu.h"
 
 #define MAX_COLUMNS 20
+int menu(menu_t *menu_st);
+
+static void init_menu(menu_t *menu_st)
+{
+    menu_st->button = LoadTexture("./ressources/button.png"); // Load button texture
+    menu_st->button.width *= 5;
+    menu_st->button.height *= 5;
+    menu_st->frameHeight = (float)menu_st->button.height / 3;
+    menu_st->sourceRec = (Rectangle){ 0, 0, (float)menu_st->button.width / 2, menu_st->button.height};
+
+    menu_st->btnBounds = (Rectangle){ ((GetScreenWidth() / 2) - (menu_st->button.width / 4)), (GetScreenHeight() - menu_st->button.height) / 2, menu_st->button.width, menu_st->frameHeight };
+
+    menu_st->btnState = 0;               // Button state: 0-NORMAL, 1-MOUSE_HOVER, 2-PRESSED
+    menu_st->btnAction = false;         // Button action should be activated
+
+    menu_st->mousePoint = (Vector2){ 0.0f, 0.0f };
+    menu_st->camera = (Camera){ 0 };
+    menu_st->camera.position = (Vector3){ 4.0f, 2.0f, 4.0f };
+    menu_st->camera.target = (Vector3){ 0.0f, 1.8f, 0.0f };
+    menu_st->camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };
+    menu_st->camera.fovy = 60.0f;
+    menu_st->camera.projection = CAMERA_PERSPECTIVE;
+}
 
 int main(void)
 {
-    const int screenWidth = 800;
-    const int screenHeight = 450;
+    const int screenWidth = 1920;
+    const int screenHeight = 1080;
 
-    InitWindow(screenWidth, screenHeight, "raylib [core] example - 3d camera first person");
+    InitWindow(screenWidth, screenHeight, "yeeet");
 
     Camera camera = { 0 };
     camera.position = (Vector3){ 4.0f, 2.0f, 4.0f };
@@ -29,9 +53,12 @@ int main(void)
 
     SetCameraMode(camera, CAMERA_FIRST_PERSON);
     SetTargetFPS(60);
+    menu_t menu_st;
+    init_menu(&menu_st);
     while (!WindowShouldClose())
     {
         UpdateCamera(&camera);
+        if(menu(&menu_st) != 0);
         BeginDrawing();
         ClearBackground(RAYWHITE);
         BeginMode3D(camera);
@@ -42,8 +69,7 @@ int main(void)
         DrawCube((Vector3){ 0.0f, 2.5f, 16.0f }, 32.0f, 5.0f, 1.0f, GOLD);      // Draw a yellow wall
 
         // Draw some cubes around
-        for (int i = 0; i < MAX_COLUMNS; i++)
-        {
+        for (int i = 0; i < MAX_COLUMNS; i++) {
             DrawCube(positions[i], 2.0f, heights[i], 2.0f, colors[i]);
             DrawCubeWires(positions[i], 2.0f, heights[i], 2.0f, MAROON);
         }

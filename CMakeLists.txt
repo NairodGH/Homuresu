@@ -24,6 +24,7 @@ set(INC
 
 set(SRC
   src/main.c
+  src/menu.c
 )
 
 set(CMAKE_EXE_LINKER_FLAGS -fexceptions)
