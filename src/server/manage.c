@@ -15,7 +15,7 @@ int manage_tcp_recv_actions(server_tcp_t *server, client_t *client)
                 return 84;
             check = 1;
         }
-        // parse_msg(msg, client);
+        // parse_msg(msg, client); exemple msg : "pos : x y z, dir : x y z, life : x, score : x ..."
     }
     free(msg);
     return check;
