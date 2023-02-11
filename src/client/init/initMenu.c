@@ -9,7 +9,8 @@ void initMenu(game_t *game)
     game->menu->frameHeight = (float)game->menu->button.height / 3;
     game->menu->sourceRec = (Rectangle){ 0, 0, (float)game->menu->button.width / 2, game->menu->button.height};
 
-    game->menu->btnBounds = (Rectangle){ ((GetScreenWidth() / 2) - (game->menu->button.width / 4)), (GetScreenHeight() - game->menu->button.height) / 2, game->menu->button.width, game->menu->frameHeight };
+    game->menu->btnBounds = (Rectangle){ (GetMonitorWidth(GetCurrentMonitor()) / 2) - (game->menu->button.width / 3),
+    (GetMonitorHeight(GetCurrentMonitor()) - game->menu->button.height) - 50, game->menu->button.width / 2, game->menu->button.height};
 
     game->menu->btnStartState = 0;
     game->menu->btnStartAction = false;
