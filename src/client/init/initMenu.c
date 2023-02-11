@@ -15,6 +15,21 @@ void initMenu(game_t *game)
     game->menu->btnStartState = 0;
     game->menu->btnStartAction = false;
 
+    game->menu->quit_button = LoadTexture("./ressources/quit_button.png");
+    game->menu->quit_button.width *= 5;
+    game->menu->quit_button.height *= 5;
+    game->menu->quit_frameHeight = (float)game->menu->quit_button.height / 3;
+    game->menu->quit_sourceRec = (Rectangle){ 0, 0, (float)game->menu->quit_button.width / 2, game->menu->quit_button.height};
+
+    game->menu->quit_position = (Vector2){((GetMonitorWidth(GetCurrentMonitor()) - game->menu->quit_button.width / 2)),
+    0};
+
+    game->menu->quit_btnBounds = (Rectangle){game->menu->quit_position.x,
+    game->menu->quit_position.y, game->menu->quit_button.width / 2, game->menu->quit_button.height};
+
+    game->menu->quit_btnStartState = 0;
+    game->menu->quit_btnStartAction = false;
+
     game->menu->mousePoint = (Vector2){ 0.0f, 0.0f };
     game->menu->camera = (Camera){ 0 };
     game->menu->camera.position = (Vector3){ 4.0f, 2.0f, 4.0f };

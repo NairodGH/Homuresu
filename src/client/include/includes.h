@@ -64,6 +64,14 @@ typedef struct menu_s {
     int btnStartState;
     bool btnStartAction;
 
+    Texture2D quit_button;
+    Rectangle quit_sourceRec;
+    Rectangle quit_btnBounds;
+    int quit_btnStartState;
+    bool quit_btnStartAction;
+    float quit_frameHeight;
+    Vector2 quit_position;
+
     Texture2D title;
 
     int is_menu;
