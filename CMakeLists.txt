@@ -77,7 +77,10 @@ set(CLIENT_INC
 set(CLIENT_SRC
     ${CLIENT_ROOT}/main.c
     ${CLIENT_ROOT}/mainLoop.c
+    ${CLIENT_ROOT}/selection_menu.c
     ${CLIENT_ROOT}/menu.c
+    ${CLIENT_ROOT}/manage.c
+    ${CLIENT_ROOT}/client.c
 
     ${CLIENT_ROOT}/init/initBullet.c
     ${CLIENT_ROOT}/init/initCamera.c
@@ -105,11 +108,13 @@ set(CLIENT_SRC
     ${CLIENT_ROOT}/update/updateEvent.c
     ${CLIENT_ROOT}/update/updateGame.c
 
-    ${CLIENT_ROOT}/network/client.c
-    ${CLIENT_ROOT}/network/get.c
-    ${CLIENT_ROOT}/network/init.c
-    ${CLIENT_ROOT}/network/send.c
-    ${CLIENT_ROOT}/network/memory.c
+    ${CLIENT_ROOT}/network/get_packet.c
+    ${CLIENT_ROOT}/network/init_client.c
+    ${CLIENT_ROOT}/network/send_packet.c
+    ${CLIENT_ROOT}/client.c
+    ${CLIENT_ROOT}/main.c
+    ${CLIENT_ROOT}/memory.c
+    ${CLIENT_ROOT}/manage.c
 )
 
 # set include paths
@@ -168,5 +173,3 @@ target_link_libraries(${SERVER} PUBLIC raylib)
 target_link_libraries(${SERVER} PUBLIC ${BLIB})
 set_target_properties(${SERVER} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR})
 set_target_properties(${SERVER} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR})
-
-# ################# MISC ###################

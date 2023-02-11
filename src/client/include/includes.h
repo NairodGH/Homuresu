@@ -21,9 +21,9 @@
 
 #include "list.h"
 
-#define OBS_NBR 2
+#define OBS_NBR 10
 #define WALL_NBR 4
-#define MAP_SIZE 46.0f
+#define MAP_SIZE 32.0f
 
 typedef enum {
   CROSSHAIR = 0,
@@ -337,6 +337,6 @@ void initMenu(game_t *game);
  * @param menu_st
  * @return int
  */
-int menu(menu_t *menu_st);
+int menu(menu_t *menu_st, float *x);
 
 #endif /* !CLIENT_H_ */
