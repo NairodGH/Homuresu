@@ -87,10 +87,6 @@ int loop_client(client_t *client, game_t *game)
         reset_fd(client);
         if ((check = loop_recv_cli_tcp(client)) != 0)
             return check;
-        reset_fd(client);
-        /* if ((check = loop_send_cli_tcp(client)) != 0)
-            return check;
-        reset_fd(client); */
     }
     CloseWindow();
     return check;

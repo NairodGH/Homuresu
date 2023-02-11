@@ -17,6 +17,21 @@
 #define BUFFER_SIZE 1024
 #define EOF_NETWORK "\r\n"
 
+typedef struct Vector3_s {
+    float x;
+    float y;
+    float z;
+} Vector3_t;
+
+typedef struct infoPlayer_s {
+    char *name;
+    Vector3_t pos;
+    Vector3_t dir;
+    int life;
+    int score;
+    int id;
+} infoPlayer_t;
+
 typedef struct client_s client_t;
 struct client_s
 {
@@ -26,6 +41,8 @@ struct client_s
     struct sockaddr_in addr;
     client_t *next;
     client_t *prev;
+    char message[256];
+    infoPlayer_t *info;
 };
 
 typedef struct server_tcp_s {
