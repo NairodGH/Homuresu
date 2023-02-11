@@ -9,6 +9,8 @@ void initGame(game_t *game)
     initWall(game);
     initItem(game);
     initBullet(game);
+    initSounds(game);
+    initModels(game);
     initSprite(game);
     initStat(game);
     initMenu(game);
