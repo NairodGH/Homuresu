@@ -87,6 +87,8 @@ typedef struct menu_s {
 
     int is_menu;
     Vector2 windowSize;
+    
+    Texture2D building;
 } menu_t;
 
 typedef struct {
