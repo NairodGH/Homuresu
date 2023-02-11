@@ -1,7 +1,0 @@
-*.a
-*.o
-a.out
-blib.a
-main.c
-*.txt
-.vscode

@@ -6,3 +6,5 @@ build/
 .DS_STORE
 homuresu
 homureserver
+*.o
+*.a
