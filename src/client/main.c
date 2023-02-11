@@ -2,6 +2,9 @@
 
 int main(void)
 {
-    mainLoop();
+    game_t *game = calloc(1, sizeof(game_t));
+
+    initGame(game);
+    mainLoop(game);
     return 0;
 }

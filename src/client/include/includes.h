@@ -9,74 +9,87 @@
 #define CLIENT_H_
 
 #define _GNU_SOURCE
+#include "raylib.h"
+#include "raymath.h"
+#include <ctype.h>
+#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h>
 #include <string.h>
 #include <sys/stat.h>
 #include <time.h>
-#include <ctype.h>
-#include "raylib.h"
-#include "raymath.h"
+#include <unistd.h>
 
 #include "linked_list.h"
 
 #define MAX_COLUMNS 20
+#define OBS_NBR 16
+#define WALL_NBR 4
 
 typedef struct bullet_s {
-    Vector3 position;
-    Vector3 direction;
-    Vector3 target;
-    Color colors;
-    float speed;
-    float size;
-    struct bullet_s *next;
-    struct bullet_s *head;
+  Vector3 position;
+  Vector3 direction;
+  Vector3 target;
+  Color colors;
+  float speed;
+  float size;
+  struct bullet_s *next;
+  struct bullet_s *head;
+  bool isAlive;
 } bullet_t;
 
 typedef struct cube_s {
-    Vector3 position;
-    float width;
-    float height;
-    float length;
-    Color color;
+  Vector3 position;
+  float width;
+  float height;
+  float length;
+  Color color;
 } cube_t;
 
 typedef struct sprite_s {
-    Texture2D texture;
-    Vector2 position;
-    Vector2 origin;
-    float scale;
-    Color tint;
+  Texture2D texture;
+  Vector2 position;
+  Vector2 origin;
+  float scale;
+  Color tint;
 } sprite_t;
 
-
 typedef struct {
-    Camera camera;
+  Camera camera;
+  Vector3 cameraLastPosition;
 
+  list_t *cube;
+  list_t *bullet;
 } game_t;
 
 /**
- * @brief Initialize the window
+ * @brief
  *
+ * @param screenWidth
+ * @param screenHeight
  */
-void initWindow(void);
+void initWindow(const int screenWidth, const int screenHeight);
 
 /**
- * @brief Initialize the wall
+ * @brief
  *
- * @param i
- * @param cube
+ * @param game
  */
-void initWall(int i, cube_t cube[MAX_COLUMNS]);
+void initWall(game_t *game);
 
 /**
- * @brief Initialize the camera
+ * @brief
  *
- * @param camera
+ * @param game
  */
-void initCamera(Camera *camera);
+void initCube(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void initCamera(game_t *game);
 
 /**
  * @brief
@@ -86,48 +99,100 @@ void initCamera(Camera *camera);
  * @param camera
  * @return bullet_t*
  */
-bullet_t *initListBullet(float speed, float size, Camera *camera);
+void initBullet(game_t *game);
 
 /**
  * @brief
  *
- * @param head
+ * @param game
  */
-void drawBullet(bullet_t *head);
+void initGame(game_t *game);
 
-/**
- * @brief
- *
- * @param camera
- * @param cube
- * @param head
- * @param sprite
- */
-void drawObs(Camera *camera, cube_t cube[MAX_COLUMNS], bullet_t *head, sprite_t *sprite);
+// CREATE
 
 /**
  * @brief Create a Bullet object
  *
- * @param head
+ * @param game
  * @param speed
  * @param size
- * @param camera
  */
-void createBullet(bullet_t *head, float speed, float size, Camera *camera);
+void createBullet(game_t *game, float speed, float size);
+
+// UPDATE
 
 /**
  * @brief
  *
- * @param camera
- * @param cameraLastPosition
- * @param cube
+ * @param game
  */
-void checkCollision(Camera *camera, Vector3 cameraLastPosition, cube_t cube[MAX_COLUMNS]);
+void updateEnter(game_t *game);
 
 /**
- * @brief Main loop of the game
+ * @brief
  *
+ * @param game
  */
-void mainLoop(void);
+void updateEvent(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void checkCollision(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void updateCollision(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void updateDeadBullet(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void updateGame(game_t *game);
+
+// DRAW
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void drawGame(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void drawCube(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void drawBullet(game_t *game);
+
+// MAIN
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void mainLoop(game_t *game);
 
 #endif /* !CLIENT_H_ */

@@ -1,9 +1,6 @@
 #include "includes.h"
 
-void initWindow(void)
+void initWindow(const int screenWidth, const int screenHeight)
 {
-    const int screenWidth = 1440;
-    const int screenHeight = 720;
-
     InitWindow(screenWidth, screenHeight, "raylib [core] example - 3d camera first person");
 }

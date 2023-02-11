@@ -1,13 +1,14 @@
 #include "includes.h"
 
-void drawBullet(bullet_t *head)
+void drawBullet(game_t *game)
 {
-    bullet_t *tmp = head;
+    list_node_t *node = NULL;
+    bullet_t *temp = NULL;
 
-    while (tmp != NULL) {
-        DrawSphere(tmp->position, tmp->size, tmp->colors);
-        DrawSphereWires(tmp->position, tmp->size, 4, 4, BLACK);
-        tmp->position = Vector3Add(tmp->position, Vector3Scale(tmp->direction, tmp->speed));
-        tmp = tmp->next;
+    foreach(game->bullet->head, node) {
+        temp = (bullet_t *)node->data;
+        DrawSphere(temp->position, temp->size, temp->colors);
+        DrawSphereWires(temp->position, temp->size, 4, 4, BLACK);
+        temp->position = Vector3Add(temp->position, Vector3Scale(temp->direction, temp->speed));
     }
 }

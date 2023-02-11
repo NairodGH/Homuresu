@@ -51,11 +51,16 @@ set(CLIENT_SRC
     ${CLIENT_ROOT}/init/initWindow.c
 
     ${CLIENT_ROOT}/draw/drawBullet.c
-    ${CLIENT_ROOT}/draw/drawObs.c
+    ${CLIENT_ROOT}/draw/drawCube.c
+    ${CLIENT_ROOT}/draw/drawGame.c
 
-    ${CLIENT_ROOT}/create/createBullet.c
+    ${CLIENT_ROOT}/manage/manageBullet.c
 
-    ${CLIENT_ROOT}/check/checkCollision.c
+    ${CLIENT_ROOT}/update/updateKeyboard/updateEnter.c
+    ${CLIENT_ROOT}/update/updateBullet.c
+    ${CLIENT_ROOT}/update/updateCollision.c
+    ${CLIENT_ROOT}/update/updateEvent.c
+    ${CLIENT_ROOT}/update/updateGame.c
 )
 
 # set include paths
