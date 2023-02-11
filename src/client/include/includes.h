@@ -24,6 +24,7 @@
 
 #define OBS_NBR 16
 #define WALL_NBR 4
+#define MAP_SIZE 46.0f
 
 typedef enum {
   CROSSHAIR = 0,
