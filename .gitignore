@@ -7,3 +7,5 @@ build/
 homuresu
 homureserver
 *.exe
+*.o
+*.a
