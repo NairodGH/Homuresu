@@ -22,14 +22,12 @@
 
 #include "list.h"
 
-#define MAX_COLUMNS 20
 #define OBS_NBR 16
 #define WALL_NBR 4
 
 typedef struct bullet_s {
   Vector3 position;
   Vector3 direction;
-  Vector3 target;
   Color colors;
   float speed;
   float size;
