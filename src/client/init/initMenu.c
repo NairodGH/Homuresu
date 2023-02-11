@@ -1,5 +1,9 @@
 #include "includes.h"
 
+static void initSelectionMenu(game_t *game)
+{
+}
+
 void initMenu(game_t *game)
 {
     game->menu = calloc(1, sizeof(menu_t));
@@ -12,9 +16,6 @@ void initMenu(game_t *game)
     game->menu->btnBounds = (Rectangle){ (GetMonitorWidth(GetCurrentMonitor()) / 2) - (game->menu->button.width / 3),
     (GetMonitorHeight(GetCurrentMonitor()) - game->menu->button.height) - 50, game->menu->button.width / 2, game->menu->button.height};
 
-    game->menu->btnStartState = 0;
-    game->menu->btnStartAction = false;
-
     game->menu->quit_button = LoadTexture("./ressources/quit_button.png");
     game->menu->quit_button.width *= 5;
     game->menu->quit_button.height *= 5;
@@ -26,9 +27,6 @@ void initMenu(game_t *game)
 
     game->menu->quit_btnBounds = (Rectangle){game->menu->quit_position.x,
     game->menu->quit_position.y, game->menu->quit_button.width / 2, game->menu->quit_button.height};
-
-    game->menu->quit_btnStartState = 0;
-    game->menu->quit_btnStartAction = false;
 
     game->menu->mousePoint = (Vector2){ 0.0f, 0.0f };
     game->menu->camera = (Camera){ 0 };

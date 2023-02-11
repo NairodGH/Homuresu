@@ -52,6 +52,15 @@ typedef struct sprite_s {
     Color tint;
 } sprite_t;
 
+typedef struct selection_menu_s {
+    list_t *elements;
+
+    Texture2D right_button;
+    Rectangle right_sourceRec;
+    Rectangle right_btnBounds;
+    int right_btnStartState;
+} selection_menu_t;
+
 typedef struct menu_s {
     Camera camera;
     Vector2 mousePoint;
@@ -61,14 +70,10 @@ typedef struct menu_s {
     float frameHeight;
     Rectangle sourceRec;
     Rectangle btnBounds;
-    int btnStartState;
-    bool btnStartAction;
 
     Texture2D quit_button;
     Rectangle quit_sourceRec;
     Rectangle quit_btnBounds;
-    int quit_btnStartState;
-    bool quit_btnStartAction;
     float quit_frameHeight;
     Vector2 quit_position;
 
