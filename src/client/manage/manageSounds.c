@@ -5,10 +5,10 @@ Sound *getSound(game_t *game, sound_e type)
     node_t *node = NULL;
     sound_t *sound = NULL;
 
-    foreach(game->sound, node) {
+    foreach(game->sound->head, node) {
         sound = (sound_t *)node->data;
         if (sound->type == type) {
-            return &sound->sound;
+            return &(sound->sound);
         }
     }
     return NULL;

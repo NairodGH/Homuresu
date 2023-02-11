@@ -3,7 +3,7 @@
 void initGame(game_t *game)
 {
     initWindow(1440, 720);
-    initCamera(&game->camera);
+    initCamera(game);
     initCube(game);
     initWall(game);
     initBullet(game);

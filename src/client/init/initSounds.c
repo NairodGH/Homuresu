@@ -6,7 +6,7 @@ typedef struct {
 } relation_t;
 
 static const relation_t relation[] = {
-    {SOUND_WALK, "assets/sounds/walk.wav"},
+    {SOUND_WALK, "assets/sounds/envil.wav"},
     // {SOUND_HIT, "assets/sounds/hit.wav"},
     // {SOUND_DEATH, "assets/sounds/death.wav"},
     // {SOUND_WIN, "assets/sounds/win.wav"},
@@ -18,10 +18,12 @@ static const relation_t relation[] = {
 
 void initSounds(game_t *game)
 {
+    sound_t *sound = NULL;
+
     InitAudioDevice();
     game->sound = list_create();
     for (int i = 0; i < sizeof(relation) / sizeof(relation_t); i++) {
-        sound_t *sound = calloc(1, sizeof(sound_t));
+        sound = calloc(1, sizeof(sound_t));
         sound->type = relation[i].type;
         sound->sound = LoadSound(relation[i].path);
         SetSoundVolume(sound->sound, 0.2f);
