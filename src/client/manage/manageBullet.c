@@ -9,6 +9,8 @@ void createBullet(game_t *game, float speed, float size)
     new->speed = speed;
     new->size = size;
     new->model = LoadModel("resources/batarang/Batarang.obj");
+
+    new->model.transform = MatrixMultiply(new->model.transform, MatrixRotateY(atan2(new->direction.x, new->direction.z)));
     new->isAlive = true;
     list_push_data(game->bullet, new);
 }
