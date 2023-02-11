@@ -28,7 +28,8 @@
 typedef struct bullet_s {
   Vector3 position;
   Vector3 direction;
-  Color colors;
+  Model model;
+  // Color colors;
   float speed;
   float size;
   struct bullet_s *next;
