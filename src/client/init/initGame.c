@@ -8,4 +8,5 @@ void initGame(game_t *game)
     initWall(game);
     initBullet(game);
     initSprite(game);
+    initStat(game);
 }

@@ -19,7 +19,6 @@
 #include <sys/stat.h>
 #include <time.h>
 
-
 #include "list.h"
 
 #define OBS_NBR 16
@@ -60,6 +59,8 @@ typedef struct {
   int score;
   int life;
   int ammo;
+  int cooldownShoot;
+  int lastShoot;
 } stat_t;
 
 typedef struct {
@@ -124,6 +125,13 @@ void initGame(game_t *game);
  * @param game
  */
 void initSprite(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void initStat(game_t *game);
 
 // CREATE
 

@@ -11,4 +11,6 @@ void createBullet(game_t *game, float speed, float size)
     new->colors = RED;
     new->isAlive = true;
     list_push_data(game->bullet, new);
+    game->stat->lastShoot = time(NULL);
+    game->stat->ammo--;
 }
