@@ -5,3 +5,4 @@ build/
 *.pdb
 .DS_STORE
 homuresu
+*.exe

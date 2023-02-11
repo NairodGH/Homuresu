@@ -9,7 +9,7 @@
 #define BSTRING_H
 
 #include <stdlib.h>
-#include <unistd.h>
+
 #include <stdio.h>
 
 size_t bstrlen(char *str);
