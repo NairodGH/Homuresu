@@ -7,7 +7,7 @@ void initCamera(game_t *game)
     game->camera.target = (Vector3){ 0.0f, 2.0f, 0.0f };
     game->camera.fovy = 60.0f;
     game->camera.projection = CAMERA_PERSPECTIVE;
-    game->jump = 1.0f;
+    game->jump = 0.0f;
     SetCameraAltControl(KEY_LEFT_ALT);
     SetCameraMode(game->camera, CAMERA_FIRST_PERSON);
     SetTargetFPS(60);

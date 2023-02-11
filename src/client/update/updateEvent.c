@@ -32,11 +32,9 @@ static void updateBindings(game_t *game)
 void updateEvent(game_t *game)
 {
     updateBindings(game);
-    // if (game->jump != 1.0f) {
-        
-        // game->jump -= 0.1;
-    // }
-    // if (game->jump < -1.0f)
-    //     game->jump = 1.0f;
-    printf("%f %f %f\n", game->camera.position.x, game->camera.position.y, game->camera.position.z);
+    if (game->jump != 0.0f)
+        game->camera.position.y += 0.1f * game->jump;
+    if (game->jump < -1.0f)
+        game->jump = 1.0f;
+    printf("%f %f %f %f\n", game->camera.position.x, game->camera.position.y, game->camera.position.z, GetFrameTime());
 }
