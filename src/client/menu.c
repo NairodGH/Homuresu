@@ -1,3 +1,4 @@
+#include <math.h>
 #include "includes.h"
 
 static void menu_ui(menu_t *menu_st)
@@ -42,8 +43,8 @@ int menu(menu_t *menu_st)
             break;
         add_back(menu_st);
         menu_ui(menu_st);
-        menu_st->camera.target = (Vector3){ 0.0f, 1.8f, 0.0f};
-        x += 0.1f;
+    menu_st->camera.target = (Vector3){ sinf(x)*15.0f, 1.8f, cosf(x)*15.0f };
+    x += 0.01f;
     }
     return (0);
 }
