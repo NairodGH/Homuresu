@@ -41,7 +41,7 @@ void initMenu(game_t *game)
 
     game->menu->mousePoint = (Vector2){ 0.0f, 0.0f };
     game->menu->camera = (Camera){ 0 };
-    game->menu->camera.position = (Vector3){ 4.0f, 2.0f, 4.0f };
+    game->menu->camera.position = (Vector3){ 0.0f, 1.8f, 0.0f };
     game->menu->camera.target = (Vector3){ 0.0f, 1.8f, 0.0f };
     game->menu->camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };
     game->menu->camera.fovy = 60.0f;
@@ -56,5 +56,11 @@ void initMenu(game_t *game)
     game->menu->windowSize = game->windowSize;
 
     game->menu->building = LoadTexture("./resources/immeuble/immeuble1.png");
+
+
     game->menu->ground = LoadTexture("./resources/menu/grass.png");
+    game->menu->Dorion = LoadModel("resources/dorion/Dorion.glb");
+    game->menu->Dorion.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = LoadTexture("resources/dorion/Dorion2.png");
+    game->menu->Dorion.transform = MatrixMultiply(game->menu->Dorion.transform, MatrixRotateZ(-1.5));
+    game->menu->Dorion_Spin = 0;
 }

@@ -1,6 +1,10 @@
 #include <math.h>
 #include "includes.h"
 
+static void put_Dorion(menu_t *menu_st)
+{
+}
+
 static void menu_ui(menu_t *menu_st)
 {
     BeginDrawing();
@@ -49,6 +53,8 @@ static void add_back(menu_t *menu_st)
     DrawCubeTexture(menu_st->building, (Vector3){ -25.0f, 0.0f, 0.0f }, 0.1f, 20.0f, 50.0f, WHITE);
     DrawCubeTexture(menu_st->building, (Vector3){ 25.0f, 0.0f, 0.0f }, 0.1f, 20.0f, 50.0f, WHITE);
     DrawCubeTexture(menu_st->ground, (Vector3){ 0.0f, 0.0f, 0.0f }, 50.0f, 0.1f, 50.0f, WHITE);
+    //menu_st->Dorion.transform = MatrixMultiply(menu_st->Dorion.transform, MatrixRotateY(0.09));
+    DrawModel(menu_st->Dorion, (Vector3){27.0f, 0.0f, 0.0f}, 4.0f, WHITE);
     EndMode3D();
 }
 
@@ -76,6 +82,7 @@ int menu(menu_t *menu_st)
         check_mouse();
         add_back(menu_st);
         menu_ui(menu_st);
+        put_Dorion(menu_st);
         menu_st->camera.target = (Vector3){sinf(x) * 15.0f, 1.8f, cosf(x) * 15.0f};
         x += 0.01f;
     }

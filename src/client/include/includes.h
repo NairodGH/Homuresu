@@ -90,6 +90,9 @@ typedef struct menu_s {
     selection_menu_t *selection_menu;
     Texture2D building;
     Texture2D ground;
+
+    Model Dorion;
+    float Dorion_Spin;
 } menu_t;
 
 typedef struct {
