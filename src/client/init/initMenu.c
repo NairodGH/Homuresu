@@ -59,7 +59,6 @@ void initMenu(game_t *game)
 
     game->menu->building = LoadTexture("./resources/immeuble/immeuble1.png");
 
-
     game->menu->ground = LoadTexture("./resources/menu/grass.png");
     game->menu->Dorion = LoadModel("resources/dorion/Dorion.glb");
     game->menu->Dorion.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = LoadTexture("resources/dorion/Dorion2.png");
