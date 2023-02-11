@@ -78,6 +78,7 @@ set(CLIENT_SRC
     ${CLIENT_ROOT}/main.c
     ${CLIENT_ROOT}/mainLoop.c
     ${CLIENT_ROOT}/menu.c
+    ${CLIENT_ROOT}/selection_menu.c
 
     ${CLIENT_ROOT}/init/initBullet.c
     ${CLIENT_ROOT}/init/initCamera.c

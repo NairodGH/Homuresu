@@ -15,6 +15,8 @@ static void initSelectionMenu(game_t *game)
     game->menu->selection_menu->left_button.width *= 5;
     game->menu->selection_menu->left_button.height *= 5;
     game->menu->selection_menu->left_btnBounds = (Rectangle){ GetMonitorWidth(GetCurrentMonitor()) - game->menu->selection_menu->left_button.width, (GetMonitorHeight(GetCurrentMonitor()) - game->menu->selection_menu->left_button.height) / 2, game->menu->selection_menu->left_button.width, game->menu->selection_menu->left_button.height};
+
+    game->menu->selection_menu->selection = 0;
 }
 
 void initMenu(game_t *game)
@@ -63,4 +65,6 @@ void initMenu(game_t *game)
     game->menu->Dorion.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = LoadTexture("resources/dorion/Dorion2.png");
     game->menu->Dorion.transform = MatrixMultiply(game->menu->Dorion.transform, MatrixRotateZ(-1.5));
     game->menu->Dorion_Spin = 0;
+
+    initSelectionMenu(game);
 }
