@@ -27,7 +27,7 @@ typedef struct node_s {
     void *data;
 } node_t;
 
-typedef struct {
+typedef struct list_s {
     size_t lenght;
     node_t *head;
     node_t *tail;

@@ -1,10 +1,12 @@
 #include "includes.h"
 
-void sprint(game_t *game)
+void sprint(game_t *game, bool isPressed)
 {
+    game->speed = isPressed;
 }
 
-void jump(game_t *game)
+void jump(game_t *game, bool isPressed)
 {
-    game->jump = 1.0f;
+    if (isPressed)
+        game->height = 0.9f;
 }

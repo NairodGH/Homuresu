@@ -89,10 +89,13 @@ typedef struct menu_s {
     Vector2 windowSize;
 } menu_t;
 
-typedef struct {
-    Camera camera;
+typedef struct game_s {
+    Camera3D camera;
     Vector3 cameraLastPosition;
-    float jump;
+    Vector3 cameraLastTarget;
+    float height;
+    float gravity;
+    float speed;
 
     Vector2 windowSize;
 
@@ -165,22 +168,25 @@ void createBullet(game_t *game, float speed, float size);
  * @brief
  *
  * @param game
+ * @param isPressed
  */
-void shoot(game_t *game);
+void shoot(game_t *game, bool isPressed);
 
 /**
  * @brief
  *
  * @param game
+ * @param isPressed
  */
-void sprint(game_t *game);
+void sprint(game_t *game, bool isPressed);
 
 /**
  * @brief
  *
  * @param game
+ * @param isPressed
  */
-void jump(game_t *game);
+void jump(game_t *game, bool isPressed);
 
 /**
  * @brief
