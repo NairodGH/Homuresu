@@ -26,39 +26,80 @@
 #define WALL_NBR 4
 
 typedef struct bullet_s {
-  Vector3 position;
-  Vector3 direction;
-  Color colors;
-  float speed;
-  float size;
-  struct bullet_s *next;
-  struct bullet_s *head;
-  bool isAlive;
+    Vector3 position;
+    Vector3 direction;
+    Model model;
+    // Color colors;
+    float speed;
+    float size;
+    struct bullet_s *next;
+    struct bullet_s *head;
+    bool isAlive;
 } bullet_t;
 
 typedef struct cube_s {
-  Vector3 position;
-  float width;
-  float height;
-  float length;
-  Color color;
+    Vector3 position;
+    float width;
+    float height;
+    float length;
+    Texture2D texture;
 } cube_t;
 
 typedef struct sprite_s {
-  Texture2D texture;
-  Vector2 position;
-  Vector2 origin;
-  float scale;
-  Color tint;
+    Texture2D texture;
+    Vector2 position;
+    Vector2 origin;
+    float scale;
+    Color tint;
 } sprite_t;
 
-typedef struct {
-  Camera camera;
-  Vector3 cameraLastPosition;
-  float jump;
+typedef struct selection_menu_s {
+    list_t *elements;
 
-  list_t *cube;
-  list_t *bullet;
+    Texture2D right_button;
+    Rectangle right_sourceRec;
+    Rectangle right_btnBounds;
+
+    Texture2D left_button;
+    Rectangle left_sourceRec;
+    Rectangle left_btnBounds;
+
+    Texture2D validate_button;
+    Rectangle validate_sourceRec;
+    Rectangle validate_btnBounds;
+} selection_menu_t;
+
+typedef struct menu_s {
+    Camera camera;
+    Vector2 mousePoint;
+
+    Texture2D button;
+
+    Rectangle sourceRec;
+    Rectangle btnBounds;
+
+    Texture2D quit_button;
+    Rectangle quit_sourceRec;
+    Rectangle quit_btnBounds;
+    Vector2 quit_position;
+
+    Texture2D title;
+
+    int is_menu;
+    Vector2 windowSize;
+} menu_t;
+
+typedef struct {
+    Camera camera;
+    Vector3 cameraLastPosition;
+    float jump;
+
+    Vector2 windowSize;
+
+    list_t *cube;
+    list_t *bullet;
+
+    menu_t *menu;
 } game_t;
 
 /**
@@ -207,5 +248,20 @@ void drawBullet(game_t *game);
  * @param game
  */
 void mainLoop(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param menu_st
+ */
+void initMenu(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param menu_st
+ * @return int
+ */
+int menu(menu_t *menu_st);
 
 #endif /* !CLIENT_H_ */

@@ -6,5 +6,7 @@ int main(void)
 
     initGame(game);
     mainLoop(game);
+
+    free(game);
     return 0;
 }

@@ -77,12 +77,14 @@ set(CLIENT_INC
 set(CLIENT_SRC
     ${CLIENT_ROOT}/main.c
     ${CLIENT_ROOT}/mainLoop.c
+    ${CLIENT_ROOT}/menu.c
 
     ${CLIENT_ROOT}/init/initBullet.c
     ${CLIENT_ROOT}/init/initCamera.c
     ${CLIENT_ROOT}/init/initWall.c
     ${CLIENT_ROOT}/init/initWindow.c
     ${CLIENT_ROOT}/init/initGame.c
+    ${CLIENT_ROOT}/init/initMenu.c
 
     ${CLIENT_ROOT}/draw/drawBullet.c
     ${CLIENT_ROOT}/draw/drawCube.c

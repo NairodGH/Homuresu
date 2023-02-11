@@ -33,7 +33,7 @@ void updateEvent(game_t *game)
 {
     updateBindings(game);
     // if (game->jump != 1.0f) {
-        game->camera.position.y += 0.1f;
+        
         // game->jump -= 0.1;
     // }
     // if (game->jump < -1.0f)
