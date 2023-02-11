@@ -1,15 +1,15 @@
 /*
-** EPITECH PROJECT, 2021
-** corewar
+** EPITECH PROJECT, 2022
+** zappy
 ** File description:
 ** main
 */
 
-#include "linked_list.h"
+#include "list.h"
 
-void print_list(list_t *list, void (*print_data)(void *))
+void list_print_list(list_t *list, void (*print_data)(void *))
 {
-    list_node_t *node_temp = NULL;
+    node_t *node_temp = NULL;
 
     foreach(list->head, node_temp) {
         print_data(node_temp->data);

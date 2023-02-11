@@ -2,5 +2,5 @@
 
 void initBullet(game_t *game)
 {
-    game->bullet = create_list();
+    game->bullet = list_create();
 }

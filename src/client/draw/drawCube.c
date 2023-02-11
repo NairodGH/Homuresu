@@ -2,7 +2,7 @@
 
 void drawCube(game_t *game)
 {
-    list_node_t *node = NULL;
+    node_t *node = NULL;
     cube_t *temp = NULL;
 
     foreach(game->cube->head, node) {

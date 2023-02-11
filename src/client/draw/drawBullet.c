@@ -2,7 +2,7 @@
 
 void drawBullet(game_t *game)
 {
-    list_node_t *node = NULL;
+    node_t *node = NULL;
     bullet_t *temp = NULL;
 
     foreach(game->bullet->head, node) {

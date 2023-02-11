@@ -10,8 +10,10 @@ if(UNIX)
 else()
     set(CMAKE_CXX_FLAGS "/std:c++20 /Ox /EHsc")
 endif()
+
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
-if (WIN32)
+
+if(WIN32)
     set(BUILD_SHARED_LIBS OFF)
 else()
     set(BUILD_SHARED_LIBS ON)
@@ -30,35 +32,32 @@ FetchContent_MakeAvailable(raylib)
 
 # ################# BLIB ##################
 
-#set library name
+# set library name
 set(BLIB BLIB)
 
-#set root path
+# set root path
 set(BLIB_ROOT lib/linked_list)
 
-#fetch include paths
+# fetch include paths
 set(BLIB_INC
     ${BLIB_ROOT}/include
 )
 
-#fetch source files
+# fetch source files
 set(BLIB_SRC
-    ${BLIB_ROOT}/src/add_node.c
-    ${BLIB_ROOT}/src/create_list.c
-    ${BLIB_ROOT}/src/create_node.c
-    ${BLIB_ROOT}/src/destroy_list.c
-    ${BLIB_ROOT}/src/destroy_node.c
+    ${BLIB_ROOT}/src/manage_list.c
+    ${BLIB_ROOT}/src/manage_node.c
     ${BLIB_ROOT}/src/print_list.c
+    ${BLIB_ROOT}/src/push_node.c
     ${BLIB_ROOT}/src/remove_node.c
-
 )
 
-#set include paths
+# set include paths
 include_directories(
     ${BLIB_INC}
 )
 
-#set source files (create library/executable)
+# set source files (create library/executable)
 add_library(${BLIB} ${BLIB_SRC})
 
 # ################# CLIENT ##################

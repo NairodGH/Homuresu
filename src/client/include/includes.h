@@ -20,7 +20,7 @@
 #include <time.h>
 
 
-#include "linked_list.h"
+#include "list.h"
 
 #define MAX_COLUMNS 20
 #define OBS_NBR 16

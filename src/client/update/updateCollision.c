@@ -2,7 +2,7 @@
 
 static void checkCollisionBullet(game_t *game, cube_t *cube)
 {
-    list_node_t *node = NULL;
+    node_t *node = NULL;
     bullet_t *temp = NULL;
 
     foreach(game->bullet->head, node) {
@@ -20,7 +20,7 @@ static void checkCollisionBullet(game_t *game, cube_t *cube)
 
 void checkCollision(game_t *game)
 {
-    list_node_t *node = NULL;
+    node_t *node = NULL;
     cube_t *temp = NULL;
 
     foreach(game->cube->head, node) {

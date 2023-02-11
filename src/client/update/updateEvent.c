@@ -12,8 +12,9 @@ static const binding_t bindings[] = {
 static void updateBinding(game_t *game)
 {
     for (size_t i = 0; i < sizeof(bindings) / sizeof(bindings[0]); i++) {
-        if (IsKeyPressed(bindings[i].key))
+        if (IsKeyPressed(bindings[i].key)) {
             bindings[i].func(game);
+        }
     }
 }
 
