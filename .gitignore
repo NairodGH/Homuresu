@@ -4,4 +4,8 @@ build/
 *.dll
 *.pdb
 .DS_STORE
-superHeroes
+homuresu
+homureserver
+*.exe
+*.o
+*.a
