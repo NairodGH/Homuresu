@@ -46,11 +46,11 @@ Dependencies:
 Launch `homuresu.sh` (linux/MacOS) or `homuresu.bat` (Windows) to start the building of the project.
 It will automatically:
 - Download/build the [Raylib](https://www.raylib.com/)
-- Build the `homuresu` and `homuresu_server` executables (.exe on Windows) using those libraries
+- Build the `homuresu` and `homureserver` executables (.exe on Windows) using those libraries
 
 ## 🎮 Usage
 
-One person has to start `homuresu_server` to be the server host and can also start `homuresu` to be a player.
+One person has to start `homureserver` to be the server host and can also start `homuresu` to be a player.
 The other players just have to start `homuresu` on their end aswell.
 
 ## 🤝 Authors
