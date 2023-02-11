@@ -48,8 +48,20 @@ static void add_back(menu_t *menu_st)
     DrawCubeTexture(menu_st->building, (Vector3){ 0.0f, 0.0f, 25.0f }, 50.0f, 20.0f, 0.1f, WHITE);
     DrawCubeTexture(menu_st->building, (Vector3){ -25.0f, 0.0f, 0.0f }, 0.1f, 20.0f, 50.0f, WHITE);
     DrawCubeTexture(menu_st->building, (Vector3){ 25.0f, 0.0f, 0.0f }, 0.1f, 20.0f, 50.0f, WHITE);
-    DrawCube((Vector3){ 0.0f, 0.0f, 0.0f }, 50.0f, 0.1f, 50.0f, DARKGREEN);
+    DrawCubeTexture(menu_st->ground, (Vector3){ 0.0f, 0.0f, 0.0f }, 50.0f, 0.1f, 50.0f, WHITE);
     EndMode3D();
+}
+
+static void check_mouse(void)
+{
+    if (GetMousePosition().x > GetScreenWidth())
+        SetMousePosition(GetScreenWidth(), GetMousePosition().y);
+    if (GetMousePosition().y > GetScreenHeight())
+        SetMousePosition(GetMousePosition().x, GetScreenHeight());
+    if (GetMousePosition().x < 0)
+        SetMousePosition(0, GetMousePosition().y);
+    if (GetMousePosition().y < 0)
+        SetMousePosition(GetMousePosition().x, 0);
 }
 
 int menu(menu_t *menu_st)
@@ -61,6 +73,7 @@ int menu(menu_t *menu_st)
             menu_st->is_menu = 0;
         if (IsKeyPressed(KEY_ESCAPE))
             break;
+        check_mouse();
         add_back(menu_st);
         menu_ui(menu_st);
         menu_st->camera.target = (Vector3){sinf(x) * 15.0f, 1.8f, cosf(x) * 15.0f};

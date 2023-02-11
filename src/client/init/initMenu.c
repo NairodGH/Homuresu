@@ -41,5 +41,7 @@ void initMenu(game_t *game)
     game->menu->title.height *= 4;
 
     game->menu->windowSize = game->windowSize;
+
     game->menu->building = LoadTexture("./resources/immeuble/immeuble1.png");
+    game->menu->ground = LoadTexture("./resources/menu/grass.png");
 }
