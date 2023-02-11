@@ -7,4 +7,5 @@ void initGame(game_t *game)
     initCube(game);
     initWall(game);
     initBullet(game);
+    initSprite(game);
 }

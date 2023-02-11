@@ -9,10 +9,11 @@ static void checkCollisionBullet(game_t *game, cube_t *cube)
         temp = (bullet_t *)node->data;
         if (temp->isAlive == false)
             continue;
-        if (temp->position.x > cube->position.x - cube->width / 2 &&
+        if ((temp->position.x > cube->position.x - cube->width / 2 &&
             temp->position.x < cube->position.x + cube->width / 2 &&
             temp->position.z > cube->position.z - cube->length / 2 &&
-            temp->position.z < cube->position.z + cube->length / 2) {
+            temp->position.z < cube->position.z + cube->length / 2)
+            || (temp->position.y < 0 || temp->position.y > 32)) {
             temp->isAlive = false;
             printf("Bullet destroyed\n");
         }

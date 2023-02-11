@@ -83,12 +83,15 @@ set(CLIENT_SRC
     ${CLIENT_ROOT}/init/initWall.c
     ${CLIENT_ROOT}/init/initWindow.c
     ${CLIENT_ROOT}/init/initGame.c
+    ${CLIENT_ROOT}/init/initSprite.c
 
     ${CLIENT_ROOT}/draw/drawBullet.c
     ${CLIENT_ROOT}/draw/drawCube.c
     ${CLIENT_ROOT}/draw/drawGame.c
-
+    ${CLIENT_ROOT}/draw/drawTwoD.c
+    
     ${CLIENT_ROOT}/manage/manageBullet.c
+    ${CLIENT_ROOT}/manage/manageSprite.c
 
     ${CLIENT_ROOT}/update/updateKeyboard/updateEnter.c
     ${CLIENT_ROOT}/update/updateBullet.c
@@ -134,6 +137,15 @@ set(SERVER_INC
 # fetch source files
 set(SERVER_SRC
     ${SERVER_ROOT}/main.c
+    ${SERVER_ROOT}/manage.c
+    ${SERVER_ROOT}/server.c
+    ${SERVER_ROOT}/cli_accept.c
+    ${SERVER_ROOT}/network/add_client.c
+    ${SERVER_ROOT}/network/get_packet.c
+    ${SERVER_ROOT}/network/init_srv.c
+    ${SERVER_ROOT}/network/send_packet.c
+    ${SERVER_ROOT}/network/rm_client.c
+    ${SERVER_ROOT}/network/srv_struct.c
 )
 
 # set include paths

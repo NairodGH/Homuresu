@@ -12,7 +12,7 @@ void drawGame(game_t *game)
     // add ...
 
     EndMode3D();
-
+    drawSpriteTwoD(game);
     // 2D
     // add ...
 

@@ -25,18 +25,20 @@
 #define OBS_NBR 16
 #define WALL_NBR 4
 
-typedef struct bullet_s {
+typedef enum {
+  CROSSHAIR = 0,
+} spriteName_t;
+
+typedef struct {
   Vector3 position;
   Vector3 direction;
   Color colors;
   float speed;
   float size;
-  struct bullet_s *next;
-  struct bullet_s *head;
   bool isAlive;
 } bullet_t;
 
-typedef struct cube_s {
+typedef struct {
   Vector3 position;
   float width;
   float height;
@@ -44,13 +46,20 @@ typedef struct cube_s {
   Color color;
 } cube_t;
 
-typedef struct sprite_s {
+typedef struct {
   Texture2D texture;
   Vector2 position;
   Vector2 origin;
   float scale;
   Color tint;
+  char *name;
 } sprite_t;
+
+typedef struct {
+  int score;
+  int life;
+  int ammo;
+} stat_t;
 
 typedef struct {
   Camera camera;
@@ -58,6 +67,8 @@ typedef struct {
 
   list_t *cube;
   list_t *bullet;
+  list_t *sprite;
+  stat_t *stat;
 } game_t;
 
 /**
@@ -106,6 +117,13 @@ void initBullet(game_t *game);
  */
 void initGame(game_t *game);
 
+/**
+ * @brief
+ *
+ * @param game
+ */
+void initSprite(game_t *game);
+
 // CREATE
 
 /**
@@ -118,6 +136,13 @@ void initGame(game_t *game);
 void createBullet(game_t *game, float speed, float size);
 
 // UPDATE
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void setupSprite(game_t *game, spriteName_t name, Vector2 position, Vector2 size, float scale, Color tint);
 
 /**
  * @brief
@@ -183,6 +208,13 @@ void drawCube(game_t *game);
  * @param game
  */
 void drawBullet(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void drawSpriteTwoD(game_t *game);
 
 // MAIN
 
