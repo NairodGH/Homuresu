@@ -11,7 +11,7 @@ void updateDeadBullet(game_t *game)
         temp = (bullet_t *)node->data;
         if (temp->isAlive == false) {
             // UnloadModel(temp->model);
-            list_destroy_data_node(game->bullet, node, free);
+            list_destroy_data_node(game->bullet, node->data, free);
         }
     }
 }
@@ -26,7 +26,7 @@ void updateDeadItem(game_t *game)
         temp = (item_t *)node->data;
         if (temp->isAlive == false) {
             // UnloadTexture(temp->texture);
-            list_destroy_data_node(game->item, node, free);
+            list_destroy_data_node(game->item, node->data, free);
         }
     }
 }
