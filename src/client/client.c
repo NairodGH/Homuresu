@@ -14,7 +14,7 @@ static void reset_fd(client_t *client)
 static int loop_send_cli_tcp(client_t *client)
 {
     int check = 0;
-    struct timeval timeout = {0, 100};
+    struct timeval timeout = {0, 1};
 
     if (select(client->sock_tcp + 1, NULL,
         &client->write_fd, NULL, &timeout) >= 0) {
@@ -77,6 +77,10 @@ int loop_client(client_t *client, game_t *game)
     float x = 0;
 
     while (!WindowShouldClose()) {
+        reset_fd(client);
+        if ((check = loop_recv_cli_tcp(client)) != 0)
+            return check;
+        reset_fd(client);
         if (game->menu->is_menu) {
             if (menu(game->menu, &x) == 1)
                break;
@@ -84,10 +88,6 @@ int loop_client(client_t *client, game_t *game)
             updateGame(game);
             drawGame(game);
         }
-        reset_fd(client);
-        if ((check = loop_recv_cli_tcp(client)) != 0)
-            return check;
-        reset_fd(client);
         /* if ((check = loop_send_cli_tcp(client)) != 0)
             return check;
         reset_fd(client); */
