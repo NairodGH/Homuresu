@@ -1,5 +1,5 @@
-#ifndef CLIENT_H_
-#define CLIENT_H_
+#ifndef IENCLI_H_
+#define IENCLI_H_
 
 #include <arpa/inet.h>
 #include <ctype.h>
@@ -18,10 +18,10 @@
 #define EOF_NETWORK "\r\n"
 
 typedef struct client_s {
-  struct sockaddr_in cliaddr;
   char *ip;
   int port;
   int sock;
+  struct sockaddr_in addr;
   fd_set read_fd;
   fd_set write_fd;
 } client_t;
@@ -40,6 +40,7 @@ int select_manage(client_t *client);
 int send_message(client_t *client, char const *msg, char const *eof);
 
 // network/get.c
-char *get_message(client_t *client);
+char *get_tcp_packet(int sock);
+int send_udp_packet(client_t *client, char const *msg, char const *eof);
 
-#endif /* !CLIENT_H_ */
+#endif /* !IENCLI_H_ */

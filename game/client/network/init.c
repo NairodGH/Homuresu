@@ -1,21 +1,22 @@
-#include "general.h"
+#include "iencli.h"
 
 static int init_client(client_t *client, char *ip, int port)
 {
-    client->sock = socket(AF_INET, SOCK_DGRAM, 0);
+    client->sock = socket(AF_INET, SOCK_STREAM, 0);
     if (client->sock == -1) {
         printf("Error: Socket creation failed\n");
         return 84;
     }
-    client->cliaddr.sin_family = AF_INET;
-    client->cliaddr.sin_port = htons(port);
-    if (inet_pton(AF_INET, ip, &client->cliaddr.sin_addr) == -1) {
+    client->addr.sin_family = AF_INET;
+    client->addr.sin_port = htons(port);
+    if (inet_pton(AF_INET, ip, &client->addr.sin_addr) == -1) {
         printf("Error: Invalid address\n");
         close(client->sock);
         return 84;
     }
-    if (connect(client->sock, (struct sockaddr *)&client->cliaddr,
-        sizeof(client->cliaddr)) == -1) {
+    //! DESACTIVATE TO GET UDP
+    if (connect(client->sock, (struct sockaddr *)&client->addr,
+        sizeof(client->addr)) == -1) {
         printf("Error: Connection failed\n");
         close(client->sock);
         return 84;

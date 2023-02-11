@@ -1,10 +1,10 @@
 #include "general.h"
 
-nom_de_merde_t *gn = NULL;
+homuresu_t *gn = NULL;
 
-static nom_de_merde_t *init_gn_struct()
+static homuresu_t *init_gn_struct()
 {
-    nom_de_merde_t *gn = malloc(sizeof(nom_de_merde_t));
+    homuresu_t *gn = malloc(sizeof(homuresu_t));
 
     if (gn == NULL)
         return NULL;
@@ -15,7 +15,7 @@ static nom_de_merde_t *init_gn_struct()
     return gn;
 }
 
-void free_gn_struct(nom_de_merde_t *gn)
+void free_gn_struct(homuresu_t *gn)
 {
     free_srv_struct_tcp(gn->srv_tcp);
     free_srv_struct_udp(gn->srv_udp);
@@ -42,7 +42,7 @@ int main(int ac, char **av)
     if (gn == NULL)
         return 84;
     gn->srv_tcp->port = DEFAULT_PORT;
-    gn->srv_udp->port = DEFAULT_PORT + 1;
+    gn->srv_udp->port = 4243;
     printf("Server initialization...\n");
     if (init_server_tcp(gn->srv_tcp) != 0)
         return 84;

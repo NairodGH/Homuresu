@@ -8,16 +8,16 @@
 #include <signal.h>
 #include <stdbool.h>
 
-typedef struct nom_de_merde_s {
+typedef struct homuresu_s {
     server_tcp_t *srv_tcp;
     server_udp_t *srv_udp;
-} nom_de_merde_t;
+} homuresu_t;
 
 // general.c
-void free_gn_struct(nom_de_merde_t *gn);
+void free_gn_struct(homuresu_t *gn);
 
 // server.c
-int loop_server(nom_de_merde_t *gn);
+int loop_server(homuresu_t *gn);
 
 // cli_accept.c
 int client_action_manage(server_tcp_t *server);

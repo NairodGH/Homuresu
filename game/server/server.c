@@ -35,21 +35,24 @@ static int loop_recv_srv_tcp(server_tcp_t *server)
     // printf("LOOP TCP END\n");
 }
 
-static int loop_recv_srv_udp(nom_de_merde_t *gn)
+static int loop_recv_srv_udp(homuresu_t *gn)
 {
-    // printf("LOOP UDP BEGIN\n");
-    if (select(FD_SETSIZE, &gn->srv_udp->read_fd,
+    if (select(gn->srv_udp->sock + 1, &gn->srv_udp->read_fd,
         &gn->srv_udp->write_fd, NULL, NULL) >= 0) {
         if (FD_ISSET(gn->srv_udp->sock, &gn->srv_udp->read_fd)) {
-            if (check_client_connected(gn->srv_tcp, gn->srv_udp) != 0)
-                return 84;
+            printf("UDP !\n");
+            // if (check_client_connected(gn->srv_tcp, gn->srv_udp) != 0)
+            //     return 84;
         }
+    } else {
+        perror("ERROR Server : select()\n");
     }
-    // printf("LOOP UDP END\n");
+    // if (check_client_connected(gn->srv_tcp, gn->srv_udp) != 0)
+    //     return 84;
     return 0;
 }
 
-int loop_server(nom_de_merde_t *gn)
+int loop_server(homuresu_t *gn)
 {
     gn->srv_tcp->clients = init_clients(gn->srv_tcp->sock);
     if (gn->srv_tcp->clients == NULL)

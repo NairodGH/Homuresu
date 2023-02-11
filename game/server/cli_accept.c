@@ -51,6 +51,8 @@ int check_client_connected(server_tcp_t *server, server_udp_t *server_udp)
 
     recvfrom(server_udp->sock, NULL, 0, 0,
         (struct sockaddr *)&con_addr, &addrlen);
+    printf("UDP %s:%i\n", inet_ntoa(con_addr.sin_addr),
+        ntohs(con_addr.sin_port));
     for (client_t *tmp = server->clients->next; tmp != NULL; tmp = tmp->next) {
         if (tmp->ip == inet_ntoa(con_addr.sin_addr) &&
             tmp->port == ntohs(con_addr.sin_port))

@@ -40,10 +40,6 @@ int init_server_udp(server_udp_t *server)
         printf("Error: UDP Bind failed\n");
         return 84;
     }
-    // if (fcntl(server->sock, F_SETFL, O_NONBLOCK) == -1) {
-    //     printf("Error: UDP fcntl failed\n");
-    //     return 84;
-    // }
     return 0;
 }
 

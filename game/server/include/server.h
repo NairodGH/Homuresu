@@ -9,6 +9,7 @@
 #include <stdbool.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <sys/time.h>
 
 #define DEFAULT_PORT 4242
 #define MAX_CLIENTS 20
@@ -22,6 +23,7 @@ struct client_s
     int sock;
     char *ip;
     int port;
+    struct sockaddr_in addr;
     client_t *next;
     client_t *prev;
 };

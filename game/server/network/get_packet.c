@@ -40,7 +40,7 @@ char *get_udp_packet(int sock)
     ssize_t size = 0;
 
     while (true) {
-        if ((size_read = recvfrom(sock, buffer, BUFFER_SIZE, 0,
+        if ((size_read = recvfrom(sock, buffer, BUFFER_SIZE, MSG_DONTWAIT,
             NULL, NULL)) <= 0) {
             printf("Warning : Client read intterupted\n");
             return NULL;

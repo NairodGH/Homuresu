@@ -1,4 +1,4 @@
-#include "general.h"
+#include "iencli.h"
 
 static int check_eof(char *msg, ssize_t size)
 {
@@ -9,7 +9,7 @@ static int check_eof(char *msg, ssize_t size)
     return 0;
 }
 
-char *get_message(client_t *client)
+char *get_tcp_packet(int sock)
 {
     char *msg = NULL;
     char buffer[BUFFER_SIZE];
@@ -17,8 +17,8 @@ char *get_message(client_t *client)
     ssize_t size = 0;
 
     while (true) {
-        if ((size_read = read(client->sock, buffer, BUFFER_SIZE)) <= 0) {
-            printf("Client %s read intterupted\n", client->ip);
+        if ((size_read = read(sock, buffer, BUFFER_SIZE)) <= 0) {
+            printf("Warning : Client read intterupted\n");
             return NULL;
         }
         if ((msg = realloc(msg, size + size_read + 1)) == NULL)
