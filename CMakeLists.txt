@@ -1,33 +1,29 @@
 # ############### CONFIG ##################
 
+#init Cmake
 cmake_minimum_required(VERSION 3.24)
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
-
-# Project name
 project(Homuresu LANGUAGES C VERSION 1.0)
 
+#set flags
 if(UNIX)
     set(CMAKE_CXX_FLAGS "-std=c++20 -Ofast")
 else()
     set(CMAKE_CXX_FLAGS "/std:c++20 /Ox /EHsc")
 endif()
 
+#include fetchcontent
 include(FetchContent)
 set(FETCHCONTENT_QUIET OFF)
 
 # ################# FETCH DEPENDENCIES ##################
-# FetchContent_Declare(
-# raylib
-# GIT_REPOSITORY https://github.com/raysan5/raylib/archive/refs/tags/4.2.0.tar.gz
-# GIT_TAG master
-# GIT_PROGRESS TRUE)
-# FetchContent_MakeAvailable(raylib)
+
+FetchContent_Declare(
+raylib
+URL https://github.com/raysan5/raylib/archive/refs/tags/4.2.0.tar.gz
+GIT_PROGRESS TRUE)
+FetchContent_MakeAvailable(raylib)
 
 # ################# CLIENT ##################
-execute_process(
-    COMMAND bash -c "make -C lib/blib/"
-    OUTPUT_VARIABLE outVar
-)
 
 # set executable name
 set(CLIENT homuresu)
@@ -60,18 +56,56 @@ set(CLIENT_SRC
 
 # set include paths
 include_directories(
-    include
+    ${CMAKE_SOURCE_DIR}/include
     ${CLIENT_INC}
-    lib/blib/include
+    ${CMAKE_SOURCE_DIR}/lib/blib/include
 )
 
 # set source files (create library/executable)
 add_executable(${CLIENT} ${CLIENT_SRC})
 
 # link library/executable with deps
-find_package(raylib REQUIRED)
 target_link_libraries(${CLIENT} PUBLIC raylib)
 set_target_properties(${CLIENT} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR})
 set_target_properties(${CLIENT} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR})
 
+# ################# SERVER ###################
+
+# set executable name
+set(SERVER homureserver)
+
+# set root path
+set(SERVER_ROOT src/server)
+
+# fetch include paths
+set(SERVER_INC
+    ${SERVER_ROOT}/include
+)
+
+# fetch source files
+set(SERVER_SRC
+    ${SERVER_ROOT}/main.c
+)
+
+# set include paths
+include_directories(
+    ${CMAKE_SOURCE_DIR}/include
+    ${SERVER_INC}
+    ${CMAKE_SOURCE_DIR}/lib/blib/include
+)
+
+# set source files (create library/executable)
+add_executable(${SERVER} ${SERVER_SRC})
+
+# link library/executable with deps
+target_link_libraries(${SERVER} PUBLIC raylib)
+set_target_properties(${SERVER} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR})
+set_target_properties(${SERVER} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR})
+
 # ################# MISC ###################
+
+# build blib
+execute_process(
+    COMMAND bash -c "make -C lib/blib/"
+    OUTPUT_VARIABLE outVar
+)
