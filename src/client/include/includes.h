@@ -89,6 +89,7 @@ typedef struct menu_s {
     Vector2 windowSize;
     selection_menu_t *selection_menu;
     Texture2D building;
+    Texture2D ground;
 } menu_t;
 
 typedef struct {
