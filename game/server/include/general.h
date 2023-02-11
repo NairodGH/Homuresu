@@ -22,7 +22,7 @@ int loop_server(homuresu_t *gn);
 // cli_accept.c
 int client_action_manage(server_tcp_t *server);
 int assign_fd_connection(server_tcp_t *server, int con_fd);
-int check_client_connected(server_tcp_t *server, server_udp_t *server_udp);
+int check_client_connected(homuresu_t *gn);
 
 // manage.c
 int manage_tcp_recv_actions(server_tcp_t *server, client_t *client);

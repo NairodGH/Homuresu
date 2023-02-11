@@ -44,17 +44,17 @@ int client_action_manage(server_tcp_t *server)
     return 0;
 }
 
-int check_client_connected(server_tcp_t *server, server_udp_t *server_udp)
+int check_client_connected(homuresu_t *gn)
 {
     struct sockaddr_in con_addr;
     socklen_t addrlen = sizeof(con_addr);
 
-    recvfrom(server_udp->sock, NULL, 0, 0,
+    recvfrom(gn->srv_udp->sock, NULL, 0, 0,
         (struct sockaddr *)&con_addr, &addrlen);
-    for (client_t *tmp = server->clients->next; tmp != NULL; tmp = tmp->next) {
+    for (client_t *tmp = gn->srv_tcp->clients->next; tmp != NULL; tmp = tmp->next) {
         if (tmp->ip == inet_ntoa(con_addr.sin_addr) &&
             tmp->port == ntohs(con_addr.sin_port))
-            return manage_udp_recv_actions(server_udp, tmp);
+            return manage_udp_recv_actions(gn->srv_udp, tmp);
     }
     printf("Warning : Client %s:%i is not connected to TCP\n",
         inet_ntoa(con_addr.sin_addr), ntohs(con_addr.sin_port));

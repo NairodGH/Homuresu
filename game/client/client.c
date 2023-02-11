@@ -1,5 +1,15 @@
 #include "iencli.h"
 
+static void reset_fd(client_t *client)
+{
+    FD_ZERO(&client->read_fd);
+    FD_ZERO(&client->write_fd);
+    FD_SET(client->sock_tcp, &client->read_fd);
+    FD_SET(client->sock_udp, &client->read_fd);
+    FD_SET(client->sock_tcp, &client->write_fd);
+    FD_SET(client->sock_udp, &client->write_fd);
+}
+
 static int loop_send_cli_tcp(client_t *client)
 {
     int check = 0;
@@ -12,6 +22,7 @@ static int loop_send_cli_tcp(client_t *client)
                 return check;
         }
     }
+    return check;
 }
 
 static int loop_send_cli_udp(client_t *client)
@@ -21,11 +32,12 @@ static int loop_send_cli_udp(client_t *client)
 
     if (select(client->sock_udp + 1, NULL,
         &client->write_fd, NULL, &timeout) >= 0) {
-        if (FD_ISSET(client->sock_tcp, &client->read_fd)) {
+        if (FD_ISSET(client->sock_udp, &client->read_fd)) {
             if ((check = manage_udp_send_actions(client)) != 0)
                 return check;
         }
     }
+    return check;
 }
 
 static int loop_recv_cli_tcp(client_t *client)
@@ -40,6 +52,7 @@ static int loop_recv_cli_tcp(client_t *client)
                 return check;
         }
     }
+    return check;
 }
 
 static int loop_recv_cli_udp(client_t *client)
@@ -49,11 +62,12 @@ static int loop_recv_cli_udp(client_t *client)
 
     if (select(client->sock_udp + 1, &client->read_fd,
         NULL, NULL, &timeout) >= 0) {
-        if (FD_ISSET(client->sock_tcp, &client->read_fd)) {
+        if (FD_ISSET(client->sock_udp, &client->read_fd)) {
             if ((check = manage_udp_recv_actions(client)) != 0)
                 return check;
         }
     }
+    return check;
 }
 
 int loop_client(client_t *client)
@@ -61,20 +75,18 @@ int loop_client(client_t *client)
     int check = 0;
 
     while (true) {
-        FD_ZERO(&client->read_fd);
-        FD_ZERO(&client->write_fd);
-        FD_SET(client->sock_tcp, &client->read_fd);
-        FD_SET(client->sock_tcp, &client->write_fd);
-        FD_SET(client->sock_udp, &client->read_fd);
-        FD_SET(client->sock_udp, &client->write_fd);
+        reset_fd(client);
         if ((check = loop_recv_cli_tcp(client)) != 0)
             return check;
-        // if ((check = loop_recv_cli_udp(client)) != 0)
-        //     return check;
-        // if ((check = loop_send_cli_tcp(client)) != 0)
-        //     return check;
-        // if ((check = loop_send_cli_udp(client)) != 0)
-        //     return check;
+        reset_fd(client);
+        if ((check = loop_recv_cli_udp(client)) != 0)
+            return check;
+        reset_fd(client);
+        if ((check = loop_send_cli_tcp(client)) != 0)
+            return check;
+        reset_fd(client);
+        if ((check = loop_send_cli_udp(client)) != 0)
+            return check;
     }
     return check;
 }

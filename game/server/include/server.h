@@ -69,5 +69,6 @@ char *get_udp_packet(int sock);
 
 // send_packet.c
 int send_tcp_packet(int sock, char const *msg, char const *eof);
+int send_udp_packet(int sock, char const *msg, char const *eof, client_t *client);
 
 #endif /* !SERVER_H_ */
