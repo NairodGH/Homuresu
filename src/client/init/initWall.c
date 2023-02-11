@@ -1,6 +1,6 @@
 #include "includes.h"
 
-static cube_t *createWall(Vector3 pos, float width, float height, float length, Color color)
+static cube_t *createWall(Vector3 pos, float width, float height, float length)
 {
     cube_t *temp = calloc(1, sizeof(cube_t));
 
@@ -8,16 +8,16 @@ static cube_t *createWall(Vector3 pos, float width, float height, float length, 
     temp->width = width;
     temp->height = height;
     temp->length = length;
-    temp->color = color;
+    temp->texture = LoadTexture("resources/immeuble/immeuble2.png");
     return temp;
 }
 
 void initWall(game_t *game)
 {
-    list_push_data(game->cube, createWall((Vector3){ 0.0f, 0.0f, -(MAP_SIZE / 2) }, MAP_SIZE, 16.0f, 0.1f, GRAY));
-    list_push_data(game->cube, createWall((Vector3){ 0.0f, 0.0f, MAP_SIZE / 2 }, MAP_SIZE, 16.0f, 0.1f, GRAY));
-    list_push_data(game->cube, createWall((Vector3){ MAP_SIZE / 2, 0.0f, 0.0f }, 0.1f, 16.0f, MAP_SIZE, GRAY));
-    list_push_data(game->cube, createWall((Vector3){ -(MAP_SIZE / 2), 0.0f, 0.0f }, 0.1f, 16.0f, MAP_SIZE, GRAY));
+    list_push_data(game->cube, createWall((Vector3){ 0.0f, 0.0f, -(MAP_SIZE / 2) }, MAP_SIZE, 16.0f, 0.1f));
+    list_push_data(game->cube, createWall((Vector3){ 0.0f, 0.0f, MAP_SIZE / 2 }, MAP_SIZE, 16.0f, 0.1f));
+    list_push_data(game->cube, createWall((Vector3){ MAP_SIZE / 2, 0.0f, 0.0f }, 0.1f, 16.0f, MAP_SIZE));
+    list_push_data(game->cube, createWall((Vector3){ -(MAP_SIZE / 2), 0.0f, 0.0f }, 0.1f, 16.0f, MAP_SIZE));
 }
 
 void initCube(game_t *game)
@@ -33,7 +33,7 @@ void initCube(game_t *game)
         temp->height = (float)GetRandomValue(8, 12);
         temp->position = (Vector3){(float)GetRandomValue(-(MAP_SIZE / 2 - 1), MAP_SIZE / 2 - 1),
             temp->height/2.0f, (float)GetRandomValue(-(MAP_SIZE / 2 - 1), MAP_SIZE / 2 - 1)};
-        temp->color = BLUE;
+        temp->texture = LoadTexture("resources/immeuble/immeuble3.png");
         list_push_data(game->cube, temp);
     }
 }

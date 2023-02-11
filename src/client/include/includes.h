@@ -21,30 +21,13 @@
 
 #include "list.h"
 
-#define OBS_NBR 16
+#define OBS_NBR 2
 #define WALL_NBR 4
 #define MAP_SIZE 46.0f
 
 typedef enum {
   CROSSHAIR = 0,
 } spriteName_t;
-
-typedef struct {
-  Vector3 position;
-  Vector3 direction;
-  Color colors;
-  float speed;
-  float size;
-  bool isAlive;
-} bullet_t;
-
-typedef struct {
-  Vector3 position;
-  float width;
-  float height;
-  float length;
-  Color color;
-} cube_t;
 
 typedef struct {
   Texture2D texture;
@@ -63,14 +46,81 @@ typedef struct {
   int lastShoot;
 } stat_t;
 
-typedef struct {
-  Camera camera;
-  Vector3 cameraLastPosition;
+typedef struct bullet_s {
+    Vector3 position;
+    Vector3 direction;
+    Model model;
+    float speed;
+    float size;
+    bool isAlive;
+} bullet_t;
 
-  list_t *cube;
-  list_t *bullet;
-  list_t *sprite;
-  stat_t *stat;
+typedef struct {
+    Vector3 position;
+    float width;
+    float height;
+    float length;
+    Texture2D texture;
+} cube_t;
+
+typedef struct {
+    Vector3 position;
+    float width;
+    float height;
+    float length;
+    Texture2D texture;
+    char *name;
+    bool isAlive;
+} item_t;
+
+typedef struct selection_menu_s {
+    list_t *elements;
+
+    Texture2D right_button;
+    Rectangle right_sourceRec;
+    Rectangle right_btnBounds;
+
+    Texture2D left_button;
+    Rectangle left_sourceRec;
+    Rectangle left_btnBounds;
+
+    Texture2D validate_button;
+    Rectangle validate_sourceRec;
+    Rectangle validate_btnBounds;
+} selection_menu_t;
+
+typedef struct menu_s {
+    Camera camera;
+    Vector2 mousePoint;
+
+    Texture2D button;
+
+    Rectangle sourceRec;
+    Rectangle btnBounds;
+
+    Texture2D quit_button;
+    Rectangle quit_sourceRec;
+    Rectangle quit_btnBounds;
+    Vector2 quit_position;
+
+    Texture2D title;
+
+    int is_menu;
+    Vector2 windowSize;
+} menu_t;
+
+typedef struct {
+    Camera camera;
+    Vector3 cameraLastPosition;
+
+    Vector2 windowSize;
+
+    list_t *cube;
+    list_t *bullet;
+    list_t *sprite;
+    list_t *item;
+    stat_t *stat;
+    menu_t *menu;
 } game_t;
 
 /**
@@ -133,6 +183,13 @@ void initSprite(game_t *game);
  */
 void initStat(game_t *game);
 
+/**
+ * @brief
+ *
+ * @param game
+ */
+void initItem(game_t *game);
+
 // CREATE
 
 /**
@@ -143,6 +200,18 @@ void initStat(game_t *game);
  * @param size
  */
 void createBullet(game_t *game, float speed, float size);
+
+/**
+ * @brief Create a Cube object
+ *
+ * @param game
+ * @param position
+ * @param width
+ * @param height
+ * @param length
+ * @param texture
+ */
+void createAmmoBox(game_t *game);
 
 // UPDATE
 
@@ -159,6 +228,13 @@ void setupSprite(game_t *game, spriteName_t name, Vector2 position, Vector2 size
  * @param game
  */
 void updateEnter(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void updateR(game_t *game);
 
 /**
  * @brief
@@ -187,6 +263,13 @@ void updateCollision(game_t *game);
  * @param game
  */
 void updateDeadBullet(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void updateDeadItem(game_t *game);
 
 /**
  * @brief
@@ -223,6 +306,13 @@ void drawBullet(game_t *game);
  *
  * @param game
  */
+void drawItem(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
 void drawSpriteTwoD(game_t *game);
 
 // MAIN
@@ -233,5 +323,20 @@ void drawSpriteTwoD(game_t *game);
  * @param game
  */
 void mainLoop(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param menu_st
+ */
+void initMenu(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param menu_st
+ * @return int
+ */
+int menu(menu_t *menu_st);
 
 #endif /* !CLIENT_H_ */

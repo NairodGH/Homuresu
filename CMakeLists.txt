@@ -77,6 +77,7 @@ set(CLIENT_INC
 set(CLIENT_SRC
     ${CLIENT_ROOT}/main.c
     ${CLIENT_ROOT}/mainLoop.c
+    ${CLIENT_ROOT}/menu.c
 
     ${CLIENT_ROOT}/init/initBullet.c
     ${CLIENT_ROOT}/init/initCamera.c
@@ -85,6 +86,9 @@ set(CLIENT_SRC
     ${CLIENT_ROOT}/init/initGame.c
     ${CLIENT_ROOT}/init/initSprite.c
     ${CLIENT_ROOT}/init/initStat.c
+    ${CLIENT_ROOT}/init/initMenu.c
+    ${CLIENT_ROOT}/init/initStat.c
+    ${CLIENT_ROOT}/init/initItem.c
 
     ${CLIENT_ROOT}/draw/drawBullet.c
     ${CLIENT_ROOT}/draw/drawCube.c
@@ -95,6 +99,7 @@ set(CLIENT_SRC
     ${CLIENT_ROOT}/manage/manageSprite.c
 
     ${CLIENT_ROOT}/update/updateKeyboard/updateEnter.c
+    ${CLIENT_ROOT}/update/updateKeyboard/updateR.c
     ${CLIENT_ROOT}/update/updateBullet.c
     ${CLIENT_ROOT}/update/updateCollision.c
     ${CLIENT_ROOT}/update/updateEvent.c

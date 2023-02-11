@@ -3,8 +3,12 @@
 void mainLoop(game_t *game)
 {
     while (!WindowShouldClose()) {
-        updateGame(game);
-        drawGame(game);
+        if (game->menu->is_menu) {
+            menu(game->menu);
+        } else {
+            updateGame(game);
+            drawGame(game);
+        }
     }
     CloseWindow();
 }
