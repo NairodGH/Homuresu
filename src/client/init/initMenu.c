@@ -10,7 +10,6 @@ void initMenu(game_t *game)
     game->menu->button = LoadTexture("./ressources/button.png");
     game->menu->button.width *= 5;
     game->menu->button.height *= 5;
-    game->menu->frameHeight = (float)game->menu->button.height / 3;
     game->menu->sourceRec = (Rectangle){ 0, 0, (float)game->menu->button.width / 2, game->menu->button.height};
 
     game->menu->btnBounds = (Rectangle){ (GetMonitorWidth(GetCurrentMonitor()) / 2) - (game->menu->button.width / 3),
@@ -19,7 +18,6 @@ void initMenu(game_t *game)
     game->menu->quit_button = LoadTexture("./ressources/quit_button.png");
     game->menu->quit_button.width *= 5;
     game->menu->quit_button.height *= 5;
-    game->menu->quit_frameHeight = (float)game->menu->quit_button.height / 3;
     game->menu->quit_sourceRec = (Rectangle){ 0, 0, (float)game->menu->quit_button.width / 2, game->menu->quit_button.height};
 
     game->menu->quit_position = (Vector2){((GetMonitorWidth(GetCurrentMonitor()) - game->menu->quit_button.width / 2)),

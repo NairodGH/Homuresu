@@ -67,14 +67,12 @@ typedef struct menu_s {
 
     Texture2D button;
 
-    float frameHeight;
     Rectangle sourceRec;
     Rectangle btnBounds;
 
     Texture2D quit_button;
     Rectangle quit_sourceRec;
     Rectangle quit_btnBounds;
-    float quit_frameHeight;
     Vector2 quit_position;
 
     Texture2D title;
