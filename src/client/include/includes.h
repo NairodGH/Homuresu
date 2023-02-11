@@ -58,7 +58,14 @@ typedef struct selection_menu_s {
     Texture2D right_button;
     Rectangle right_sourceRec;
     Rectangle right_btnBounds;
-    int right_btnStartState;
+
+    Texture2D left_button;
+    Rectangle left_sourceRec;
+    Rectangle left_btnBounds;
+
+    Texture2D validate_button;
+    Rectangle validate_sourceRec;
+    Rectangle validate_btnBounds;
 } selection_menu_t;
 
 typedef struct menu_s {
