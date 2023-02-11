@@ -27,15 +27,18 @@ static void add_back(menu_t *menu_st)
 {
     BeginMode3D(menu_st->camera);
     ClearBackground(RAYWHITE);
-    DrawCube((Vector3){ -16.0f, 2.5f, -15.0f }, 1.0f, 5.0f, 32.0f, BLUE);   // Draw a blue wall
-    DrawCube((Vector3){ 16.0f, 2.5f, 0.0f }, 1.0f, 5.0f, 32.0f, LIME);      // Draw a green wall
-    DrawCube((Vector3){ 0.0f, 2.5f, 16.0f }, 32.0f, 5.0f, 1.0f, GOLD);      // Draw a yellow wall
+
+    //Draw Walls
+    DrawCube((Vector3){ -16.0f, 2.5f, -15.0f }, 1.0f, 5.0f, 32.0f, BLUE);
+    DrawCube((Vector3){ 16.0f, 2.5f, 0.0f }, 1.0f, 5.0f, 32.0f, LIME);
+    DrawCube((Vector3){ 0.0f, 2.5f, 16.0f }, 32.0f, 5.0f, 1.0f, GOLD);
     EndMode3D();
 }
 
 int menu(menu_t *menu_st)
 {
     float x = 0;
+
     while (menu_st->is_menu == 1) {
         if (IsKeyPressed(KEY_ENTER))
             menu_st->is_menu = 0;
@@ -43,8 +46,8 @@ int menu(menu_t *menu_st)
             break;
         add_back(menu_st);
         menu_ui(menu_st);
-    menu_st->camera.target = (Vector3){sinf(x) * 15.0f, 1.8f, cosf(x) * 15.0f};
-    x += 0.01f;
+        menu_st->camera.target = (Vector3){sinf(x) * 15.0f, 1.8f, cosf(x) * 15.0f};
+        x += 0.01f;
     }
     return (0);
 }
