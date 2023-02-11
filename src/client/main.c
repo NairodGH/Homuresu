@@ -26,6 +26,10 @@ int main(int ac, char **av)
         printf("Error: Client structure initialization failed\n");
         return 84;
     }
+    if (ac != 3) {
+        printf("Usage: ./homuresu ip port\n");
+        return 84;
+    }
     client->ip = strdup(av[1]);
     client->port_tcp = atoi(av[2]);
     client->port_udp = client->port_udp + 1;
