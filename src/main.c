@@ -13,6 +13,7 @@ int main(void)
 
     Model model = LoadModel("resources/Maxwell.glb");
     Model model2 = LoadModel("resources/Dorion.glb");
+    Model model3 = LoadModel("resources/Batarang.obj");
     Texture2D texture = LoadTexture("resources/Whiskers.png");
     Texture2D texture2 = LoadTexture("resources/Maxwell.png");
     Texture2D texture3 = LoadTexture("resources/Dorion.png");
@@ -44,6 +45,7 @@ int main(void)
 
         DrawModel(model, (Vector3){0.0f, 2.0f, 0.0f}, 1.0f, WHITE); // Draw 3d model with texture
         DrawModel(model2, (Vector3){3.0f, 0.0f, 0.0f}, 1.0f, WHITE); // Draw 3d model with texture
+        DrawModel(model3, (Vector3){-5.0f, 1.0f, 0.0f}, 5.0f, WHITE); // Draw 3d model with texture
 
         EndMode3D();
         EndDrawing();
