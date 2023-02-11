@@ -15,7 +15,7 @@ static void menu_ui(menu_t *menu_st)
     DrawCircle(menu_st->mousePoint.x, menu_st->mousePoint.y, 50, RED);
     menu_st->btnStartAction = false;
     menu_st->sourceRec = (Rectangle){ 0, 0, (float)menu_st->button.width / 2, menu_st->button.height};
-    DrawTextureRec(menu_st->button, menu_st->sourceRec, (Vector2){((GetScreenWidth() / 2) - (menu_st->button.width / 4)), (GetScreenHeight() - menu_st->button.height) / 2}, WHITE);
+    DrawTextureRec(menu_st->button, menu_st->sourceRec, (Vector2){((GetScreenWidth() / 2) - (menu_st->button.width / 4)), (GetScreenHeight() - menu_st->button.height) - 50}, WHITE);
 
     if (CheckCollisionPointRec(menu_st->mousePoint, menu_st->btnBounds)) {
         menu_st->sourceRec.x += menu_st->button.width / 2;
@@ -40,7 +40,7 @@ static void add_back(menu_t *menu_st)
 
 int menu(menu_t *menu_st)
 {
-    float camera_rotation = 0.0f;
+    float x = 0;
     while (menu_st->is_menu == 1) {
         if (IsKeyPressed(KEY_ENTER))
             menu_st->is_menu = 0;
@@ -48,9 +48,8 @@ int menu(menu_t *menu_st)
             break;
         add_back(menu_st);
         menu_ui(menu_st);
-        camera_rotation += 0.1f;
-        menu_st->camera.target = (Vector3){ 1.0f, 1.8f, camera_rotation };
-        //if (camera_rotation >= 15.0f) camera_rotation = 0.0f;
+        menu_st->camera.target = (Vector3){ 0.0f, 1.8f, 0.0f};
+        x += 0.1f;
     }
     return (0);
 }

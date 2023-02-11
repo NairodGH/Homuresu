@@ -92,11 +92,13 @@ int main(void)
     SetTargetFPS(60);
     menu_t *menu_st = malloc(sizeof(menu_t));
     init_menu(menu_st);
-    while (!WindowShouldClose()) {
+    while (1) {
         UpdateCamera(&camera);
         (menu_st->is_menu == 1) ? menu(menu_st) : 0;
-        if (menu_st->is_menu == 0 && main_loop(camera) == 0) {
+        if (menu_st->is_menu == 0 && main_loop(camera) == 0)
             menu_st->is_menu = 1;
+        if (IsKeyPressed(KEY_ESCAPE)) {
+            break;
         }
     }
     CloseWindow();
