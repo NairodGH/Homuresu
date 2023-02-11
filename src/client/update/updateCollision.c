@@ -14,6 +14,7 @@ static void checkCollisionBullet(game_t *game, cube_t *cube)
             temp->position.z > cube->position.z - cube->length / 2 &&
             temp->position.z < cube->position.z + cube->length / 2) {
             temp->isAlive = false;
+            printf("Bullet destroyed\n");
         }
     }
 }

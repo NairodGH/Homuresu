@@ -95,6 +95,12 @@ set(CLIENT_SRC
     ${CLIENT_ROOT}/update/updateCollision.c
     ${CLIENT_ROOT}/update/updateEvent.c
     ${CLIENT_ROOT}/update/updateGame.c
+
+    ${CLIENT_ROOT}/network/client.c
+    ${CLIENT_ROOT}/network/get.c
+    ${CLIENT_ROOT}/network/init.c
+    ${CLIENT_ROOT}/network/send.c
+    ${CLIENT_ROOT}/network/memory.c
 )
 
 # set include paths
