@@ -82,6 +82,7 @@ set(CLIENT_SRC
     ${CLIENT_ROOT}/init/initCamera.c
     ${CLIENT_ROOT}/init/initWall.c
     ${CLIENT_ROOT}/init/initWindow.c
+    ${CLIENT_ROOT}/init/initSounds.c
     ${CLIENT_ROOT}/init/initGame.c
 
     ${CLIENT_ROOT}/draw/drawBullet.c
@@ -89,8 +90,10 @@ set(CLIENT_SRC
     ${CLIENT_ROOT}/draw/drawGame.c
 
     ${CLIENT_ROOT}/manage/manageBullet.c
+    ${CLIENT_ROOT}/manage/manageSounds.c
 
     ${CLIENT_ROOT}/update/updateKeyboard/updateEnter.c
+    ${CLIENT_ROOT}/update/updateKeyboard/updateWalk.c
     ${CLIENT_ROOT}/update/updateBullet.c
     ${CLIENT_ROOT}/update/updateCollision.c
     ${CLIENT_ROOT}/update/updateEvent.c

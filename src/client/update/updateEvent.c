@@ -7,6 +7,7 @@ typedef struct {
 
 static const binding_t bindings[] = {
     {KEY_ENTER, updateEnter},
+
 };
 
 static void updateBinding(game_t *game)

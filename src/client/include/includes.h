@@ -52,12 +52,24 @@ typedef struct sprite_s {
   Color tint;
 } sprite_t;
 
+
+typedef enum {
+  SOUND_WALK,
+  SOUND_SHOOT,
+} sound_e;
+
+typedef struct {
+  sound_e type;
+  Sound sound;
+} sound_t;
+
 typedef struct {
   Camera camera;
   Vector3 cameraLastPosition;
 
   list_t *cube;
   list_t *bullet;
+  list_t *sound;
 } game_t;
 
 /**
@@ -104,9 +116,16 @@ void initBullet(game_t *game);
  *
  * @param game
  */
+void initSounds(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
 void initGame(game_t *game);
 
-// CREATE
+// MANAGE
 
 /**
  * @brief Create a Bullet object
@@ -117,6 +136,23 @@ void initGame(game_t *game);
  */
 void createBullet(game_t *game, float speed, float size);
 
+/**
+ * @brief Get the Sound object
+ *
+ * @param game
+ * @param type
+ * @return Sound*
+ */
+Sound *getSound(game_t *game, sound_e type);
+
+/**
+ * @brief
+ *
+ * @param game
+ * @param type
+ */
+void playSound(game_t *game, sound_e type);
+
 // UPDATE
 
 /**
@@ -125,6 +161,13 @@ void createBullet(game_t *game, float speed, float size);
  * @param game
  */
 void updateEnter(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void updateWalk(game_t *game);
 
 /**
  * @brief
