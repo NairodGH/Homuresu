@@ -28,7 +28,8 @@
 typedef struct bullet_s {
     Vector3 position;
     Vector3 direction;
-    Color colors;
+    Model model;
+    // Color colors;
     float speed;
     float size;
     struct bullet_s *next;
@@ -41,7 +42,7 @@ typedef struct cube_s {
     float width;
     float height;
     float length;
-    Color color;
+    Texture2D texture;
 } cube_t;
 
 typedef struct sprite_s {
@@ -52,24 +53,34 @@ typedef struct sprite_s {
     Color tint;
 } sprite_t;
 
+typedef struct selection_menu_s {
+    list_t *elements;
+
+    Texture2D right_button;
+    Rectangle right_sourceRec;
+    Rectangle right_btnBounds;
+
+    Texture2D left_button;
+    Rectangle left_sourceRec;
+    Rectangle left_btnBounds;
+
+    Texture2D validate_button;
+    Rectangle validate_sourceRec;
+    Rectangle validate_btnBounds;
+} selection_menu_t;
+
 typedef struct menu_s {
     Camera camera;
     Vector2 mousePoint;
 
     Texture2D button;
 
-    float frameHeight;
     Rectangle sourceRec;
     Rectangle btnBounds;
-    int btnStartState;
-    bool btnStartAction;
 
     Texture2D quit_button;
     Rectangle quit_sourceRec;
     Rectangle quit_btnBounds;
-    int quit_btnStartState;
-    bool quit_btnStartAction;
-    float quit_frameHeight;
     Vector2 quit_position;
 
     Texture2D title;
