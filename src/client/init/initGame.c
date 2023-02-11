@@ -2,10 +2,16 @@
 
 void initGame(game_t *game)
 {
-    initWindow(1440, 720);
+    game->windowSize = (Vector2){GetMonitorWidth(GetCurrentMonitor()), GetMonitorHeight(GetCurrentMonitor())};
+    initWindow(game->windowSize.x, game->windowSize.y);
     initCamera(game);
     initCube(game);
     initWall(game);
+    initItem(game);
     initBullet(game);
     initSounds(game);
+    initModels(game);
+    initSprite(game);
+    initStat(game);
+    initMenu(game);
 }

@@ -76,28 +76,49 @@ set(CLIENT_INC
 # fetch source files
 set(CLIENT_SRC
     ${CLIENT_ROOT}/main.c
-    ${CLIENT_ROOT}/mainLoop.c
+    ${CLIENT_ROOT}/selection_menu.c
+    ${CLIENT_ROOT}/menu.c
+    ${CLIENT_ROOT}/manage.c
+    ${CLIENT_ROOT}/client.c
 
     ${CLIENT_ROOT}/init/initBullet.c
     ${CLIENT_ROOT}/init/initCamera.c
     ${CLIENT_ROOT}/init/initWall.c
     ${CLIENT_ROOT}/init/initWindow.c
     ${CLIENT_ROOT}/init/initSounds.c
+    ${CLIENT_ROOT}/init/initModels.c
     ${CLIENT_ROOT}/init/initGame.c
+    ${CLIENT_ROOT}/init/initSprite.c
+    ${CLIENT_ROOT}/init/initStat.c
+    ${CLIENT_ROOT}/init/initMenu.c
+    ${CLIENT_ROOT}/init/initStat.c
+    ${CLIENT_ROOT}/init/initItem.c
 
     ${CLIENT_ROOT}/draw/drawBullet.c
     ${CLIENT_ROOT}/draw/drawCube.c
     ${CLIENT_ROOT}/draw/drawGame.c
+    ${CLIENT_ROOT}/draw/drawTwoD.c
 
     ${CLIENT_ROOT}/manage/manageBullet.c
     ${CLIENT_ROOT}/manage/manageSounds.c
 
-    ${CLIENT_ROOT}/update/updateKeyboard/updateEnter.c
     ${CLIENT_ROOT}/update/updateKeyboard/updateWalk.c
+    ${CLIENT_ROOT}/manage/manageSprite.c
+
+    ${CLIENT_ROOT}/update/updateKeyboard/updateEnter.c
+    ${CLIENT_ROOT}/update/updateKeyboard/updateR.c
     ${CLIENT_ROOT}/update/updateBullet.c
     ${CLIENT_ROOT}/update/updateCollision.c
     ${CLIENT_ROOT}/update/updateEvent.c
     ${CLIENT_ROOT}/update/updateGame.c
+
+    ${CLIENT_ROOT}/network/get_packet.c
+    ${CLIENT_ROOT}/network/init_client.c
+    ${CLIENT_ROOT}/network/send_packet.c
+    ${CLIENT_ROOT}/client.c
+    ${CLIENT_ROOT}/main.c
+    ${CLIENT_ROOT}/memory.c
+    ${CLIENT_ROOT}/manage.c
 )
 
 # set include paths
@@ -131,6 +152,15 @@ set(SERVER_INC
 # fetch source files
 set(SERVER_SRC
     ${SERVER_ROOT}/main.c
+    ${SERVER_ROOT}/manage.c
+    ${SERVER_ROOT}/server.c
+    ${SERVER_ROOT}/cli_accept.c
+    ${SERVER_ROOT}/network/add_client.c
+    ${SERVER_ROOT}/network/get_packet.c
+    ${SERVER_ROOT}/network/init_srv.c
+    ${SERVER_ROOT}/network/send_packet.c
+    ${SERVER_ROOT}/network/rm_client.c
+    ${SERVER_ROOT}/network/srv_struct.c
 )
 
 # set include paths
@@ -147,5 +177,3 @@ target_link_libraries(${SERVER} PUBLIC raylib)
 target_link_libraries(${SERVER} PUBLIC ${BLIB})
 set_target_properties(${SERVER} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR})
 set_target_properties(${SERVER} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR})
-
-# ################# MISC ###################
