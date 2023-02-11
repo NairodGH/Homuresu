@@ -31,7 +31,7 @@ void initCube(game_t *game)
         temp->width = 2.0f;
         temp->length = 2.0f;
         temp->height = (float)GetRandomValue(8, 12);
-        temp->position = (Vector3){(float)GetRandomValue(-15, 15), temp->height/2.0f, (float)GetRandomValue(-15, 15)};
+        temp->position = (Vector3){(float)GetRandomValue(-15, 15), temp->height / 2.0f, (float)GetRandomValue(-15, 15)};
         temp->color = BLUE;
         list_push_data(game->cube, temp);
     }

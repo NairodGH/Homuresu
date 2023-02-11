@@ -90,7 +90,8 @@ set(CLIENT_SRC
 
     ${CLIENT_ROOT}/manage/manageBullet.c
 
-    ${CLIENT_ROOT}/update/updateKeyboard/updateEnter.c
+    ${CLIENT_ROOT}/update/updateKeyboard.c
+    ${CLIENT_ROOT}/update/updateMouse.c
     ${CLIENT_ROOT}/update/updateBullet.c
     ${CLIENT_ROOT}/update/updateCollision.c
     ${CLIENT_ROOT}/update/updateEvent.c

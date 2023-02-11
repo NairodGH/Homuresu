@@ -55,6 +55,7 @@ typedef struct sprite_s {
 typedef struct {
   Camera camera;
   Vector3 cameraLastPosition;
+  float jump;
 
   list_t *cube;
   list_t *bullet;
@@ -124,7 +125,21 @@ void createBullet(game_t *game, float speed, float size);
  *
  * @param game
  */
-void updateEnter(game_t *game);
+void shoot(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void sprint(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void jump(game_t *game);
 
 /**
  * @brief
