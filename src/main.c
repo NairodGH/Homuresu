@@ -15,8 +15,8 @@ static void init_menu(menu_t *menu_st)
 
     menu_st->btnBounds = (Rectangle){ ((GetScreenWidth() / 2) - (menu_st->button.width / 4)), (GetScreenHeight() - menu_st->button.height) / 2, menu_st->button.width, menu_st->frameHeight };
 
-    menu_st->btnState = 0;               // Button state: 0-NORMAL, 1-MOUSE_HOVER, 2-PRESSED
-    menu_st->btnAction = false;         // Button action should be activated
+    menu_st->btnStartState = 0;               // Button state: 0-NORMAL, 1-MOUSE_HOVER, 2-PRESSED
+    menu_st->btnStartAction = false;         // Button action should be activated
 
     menu_st->mousePoint = (Vector2){ 0.0f, 0.0f };
     menu_st->camera = (Camera){ 0 };
@@ -27,6 +27,10 @@ static void init_menu(menu_t *menu_st)
     menu_st->camera.projection = CAMERA_PERSPECTIVE;
 
     menu_st->is_menu = 1;
+
+    menu_st->title = LoadTexture("./ressources/title_homuresu.png");
+    menu_st->title.width *= 4;
+    menu_st->title.height *= 4;
 }
 
 int main_loop(Camera camera)

@@ -19,8 +19,10 @@
         float frameHeight;
         Rectangle sourceRec;
         Rectangle btnBounds;
-        int btnState;
-        bool btnAction;
+        int btnStartState;
+        bool btnStartAction;
+
+        Texture2D title;
 
         int is_menu;
     } menu_t;
