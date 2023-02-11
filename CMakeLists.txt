@@ -32,12 +32,13 @@ set(CLIENT_SRC
 set(CMAKE_EXE_LINKER_FLAGS -fexceptions)
 
 add_executable(${CLIENT_EXEC}
-  ${CLIENT_SRC}/network/client.c
-  ${CLIENT_SRC}/network/get.c
-  ${CLIENT_SRC}/network/init.c
-  ${CLIENT_SRC}/network/send.c
+  ${CLIENT_SRC}/network/get_packet.c
+  ${CLIENT_SRC}/network/init_client.c
+  ${CLIENT_SRC}/network/send_packet.c
+  ${CLIENT_SRC}/client.c
   ${CLIENT_SRC}/main.c
   ${CLIENT_SRC}/memory.c
+  ${CLIENT_SRC}/manage.c
 )
 
 target_include_directories(${CLIENT_EXEC} PUBLIC
@@ -85,6 +86,9 @@ target_include_directories(${SERVER_EXEC} PUBLIC
 # link with libs
 find_package(raylib REQUIRED)
 target_link_libraries(${SERVER_EXEC} PUBLIC raylib)
+
+# target_compile_options(${SERVER_EXEC} PUBLIC -lasan -fsanitize=address,leak,undefined)
+# set(CMAKE_C_FLAGS "-fsanitize=address,leak,undefined -g3")
 
 ################## MISC ##################
 

@@ -6,9 +6,11 @@ client_t *init_struct()
 
     if (client == NULL)
         return NULL;
-    client->sock = 0;
+    client->sock_tcp = 0;
+    client->sock_udp = 0;
     client->ip = NULL;
-    client->port = 0;
+    client->port_tcp = 0;
+    client->port_udp = 0;
     return client;
 }
 

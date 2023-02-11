@@ -11,7 +11,7 @@ static char *set_send_opt(char const *msg, char const *eof)
     return message;
 }
 
-int send_message(client_t *client, char const *msg, char const *eof)
+int send_tcp_packet(int sock, char const *msg, char const *eof)
 {
     char *message = NULL;
     ssize_t write_size = 0;
@@ -24,7 +24,7 @@ int send_message(client_t *client, char const *msg, char const *eof)
         return 84;
     size = strlen(message);
     do {
-        write_size = write(client->sock, message + current, size - current);
+        write_size = write(sock, message + current, size - current);
         if (write_size == -1) {
             printf("Error: write failed\n");
             return 84;
@@ -35,7 +35,7 @@ int send_message(client_t *client, char const *msg, char const *eof)
     return 0;
 }
 
-int send_udp_packet(client_t *client, char const *msg, char const *eof)
+int send_udp_packet(int sock, char const *msg, char const *eof, client_t *client)
 {
     char *message = NULL;
     ssize_t write_size = 0;
@@ -48,7 +48,7 @@ int send_udp_packet(client_t *client, char const *msg, char const *eof)
         return 84;
     size = strlen(message);
     do {
-        write_size = sendto(client->sock, message + current, size - current, 0, (struct sockaddr *)&client->addr, sizeof(client->addr));
+        write_size = sendto(sock, message + current, size - current, 0, (struct sockaddr *)&client->addr_udp, sizeof(client->addr_udp));
         if (write_size == -1) {
             printf("Error: write failed\n");
             return 84;
