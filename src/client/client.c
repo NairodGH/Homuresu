@@ -77,10 +77,6 @@ int loop_client(client_t *client, game_t *game)
     float x = 0;
 
     while (!WindowShouldClose()) {
-        reset_fd(client);
-        if ((check = loop_recv_cli_tcp(client)) != 0)
-            return check;
-        reset_fd(client);
         if (game->menu->is_menu) {
             if (menu(game->menu, &x) == 1)
                break;
@@ -88,9 +84,14 @@ int loop_client(client_t *client, game_t *game)
             updateGame(game);
             drawGame(game);
         }
+        reset_fd(client);
+        if ((check = loop_recv_cli_tcp(client)) != 0)
+            return check;
+        reset_fd(client);
         /* if ((check = loop_send_cli_tcp(client)) != 0)
             return check;
         reset_fd(client); */
     }
+    CloseWindow();
     return check;
 }
