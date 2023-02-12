@@ -38,14 +38,4 @@ static void updateBindings(game_t *game)
 void updateEvent(game_t *game)
 {
     updateBindings(game);
-    if (game->height != 1.0f) {
-        game->camera.position.y += game->height;
-        game->camera.target.y = game->camera.position.y;
-        game->height += (game->gravity -= 0.1f);
-        if (game->gravity < -1.0f)
-            game->height = game->gravity = 1.0f;
-    }
-    game->camera.position.x += (game->camera.position.x - game->cameraLastPosition.x) * game->speed * 1.5;
-    game->camera.position.z += (game->camera.position.z - game->cameraLastPosition.z) * game->speed * 1.5;
-    printf("%f %f %f %f %f %f\n", game->camera.position.x, game->camera.position.y, game->camera.position.z, game->camera.target.x, game->camera.target.y, game->camera.target.z);
 }

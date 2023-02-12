@@ -25,11 +25,11 @@ void checkCollision(game_t *game)
 
     foreach(game->cube->head, node) {
         temp = (cube_t *)node->data;
-        // if (game->camera.position.x > temp->position.x - temp->width / 2 &&
-        //     game->camera.position.x < temp->position.x + temp->width / 2 &&
-        //     game->camera.position.z > temp->position.z - temp->length / 2 &&
-        //     game->camera.position.z < temp->position.z + temp->length / 2)
-        //     game->camera.position = game->cameraLastPosition;
+        if (game->camera.position.x > temp->position.x - temp->width / 2 &&
+            game->camera.position.x < temp->position.x + temp->width / 2 &&
+            game->camera.position.z > temp->position.z - temp->length / 2 &&
+            game->camera.position.z < temp->position.z + temp->length / 2)
+            game->camera.position = game->cameraLastPosition;
         checkCollisionBullet(game, temp);
     }
 }

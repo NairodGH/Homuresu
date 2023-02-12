@@ -18,6 +18,7 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <time.h>
+#include <float.h>
 
 
 #include "list.h"
@@ -92,7 +93,6 @@ typedef struct menu_s {
 typedef struct game_s {
     Camera3D camera;
     Vector3 cameraLastPosition;
-    Vector3 cameraLastTarget;
     float height;
     float gravity;
     float speed;
