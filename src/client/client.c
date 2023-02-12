@@ -92,9 +92,11 @@ int loop_client(client_t *client, game_t *game)
 
     while (!WindowShouldClose()) {
         if (game->menu->is_menu) {
-            if (menu(game->menu, &x) == 1)
-               break;
+            if (menu(game->menu, &x) == 1) {
+                break;
+            }
         } else {
+            StopSound(game->menu->music);
             updateGame(game);
             drawGame(game);
             if (game->id != -1) {

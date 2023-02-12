@@ -4,7 +4,7 @@
 void selection_menu_loop(menu_t *menu);
 
 static void put_dorian(menu_t *menu_st)
-{   
+{
     DrawModelEx(menu_st->Dorion, (Vector3){-5.0f, 0.0f, -5.0f}, (Vector3){-1.0f , 1.0f, -1.0f}, menu_st->Spin_Dorion, (Vector3){1.0f , 1.0f, 1.0f}, WHITE);
     DrawModelEx(menu_st->Dorion, (Vector3){-5.0f, 0.0f, -27.0f}, (Vector3){-1.0f, 1.0f, -1.0f}, 105.0f, (Vector3){4.0f , 4.0f, 4.0f}, WHITE);
     DrawModelEx(menu_st->Dorion, (Vector3){-5.0f, 25.0f, 10.0f}, (Vector3){-2.0f , -2.0f, -2.0f}, 270.0f, (Vector3){5.0f , 5.0f, 5.0f}, WHITE);
@@ -72,10 +72,18 @@ static void check_mouse(void)
         SetMousePosition(GetMousePosition().x, 0);
 }
 
+static void loopMusic(menu_t *menu_st)
+{
+    if (IsSoundPlaying(menu_st->music) == 0) {
+        PlaySound(menu_st->music);
+    }
+}
+
 int menu(menu_t *menu_st, float *x)
 {
     check_mouse();
 
+    loopMusic(menu_st);
     if (menu_st->selection_menu->selection == 0) {
         BeginMode3D(menu_st->camera);
         add_back(menu_st);
