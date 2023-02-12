@@ -1,6 +1,6 @@
 #include "general.h"
 
-static int send_death(server_tcp_t *server, client_t *client)
+static void send_death(server_tcp_t *server, client_t *client)
 {
     char *msg = malloc(sizeof(char) * 100);
 

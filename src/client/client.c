@@ -87,17 +87,20 @@ int loop_client(client_t *client, game_t *game)
 {
     int check = 0;
     float x = 0;
+    int time = 0;
     char *msg = NULL;
     game->socket = client->sock_tcp;
 
     while (!WindowShouldClose()) {
         if (game->menu->is_menu) {
-            if (menu(game->menu, &x) == 1)
-               break;
+            if (menu(game->menu, &x) == 1) {
+                break;
+            }
         } else {
+            StopSound(game->menu->music);
             updateGame(game);
             drawGame(game);
-            if (game->id != -1) {
+            if (game->id != -1 && time % 3 == 0) {
                 msg = sendInfoServer(game, msg);
                 send_tcp_packet(client->sock_tcp, msg, EOF_NETWORK);
             }
@@ -105,6 +108,7 @@ int loop_client(client_t *client, game_t *game)
         reset_fd(client);
         if ((check = loop_recv_cli_tcp(client, game)) != 0)
             break;
+        time++;
     }
     if (msg)
         free(msg);

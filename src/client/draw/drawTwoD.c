@@ -30,6 +30,8 @@ void drawTextTwoD(game_t *game)
     DrawText(score, 10, y + 100, 40, BLUE);
     y += 200;
     foreach(game->player->head, node) {
+        bzero(life, 10);
+        bzero(score, 12);
         temp = (player_t *)node->data;
         if (temp->isAlive == false)
             continue;

@@ -25,10 +25,11 @@ void initCube(game_t *game)
     cube_t *temp = NULL;
     char *line = NULL;
     size_t len = 0;
-    ssize_t read;
+    int read;
     int i = 0;
 
     game->cube = list_create();
+    #ifndef _WIN32
     FILE *file = fopen("assets/map/map.txt", "r");
     if (file == NULL) {
         printf("Error: can't open file map.txt\n");
@@ -53,4 +54,15 @@ void initCube(game_t *game)
         }
         i++;
     }
+    #else
+    for (int i = 0; i < OBS_NBR; i++) {
+        temp = calloc(1, sizeof(cube_t));
+        temp->width = 2.0f;
+        temp->length = 2.0f;
+        temp->height = (float)GetRandomValue(8, 12);
+        temp->position = (Vector3){(float)GetRandomValue(-15, 15), temp->height/2.0f, (float)GetRandomValue(-15, 15)};
+        temp->texture = LoadTexture("resources/immeuble/immeuble3.png");
+        list_push_data(game->cube, temp);
+    }
+    #endif
 }
