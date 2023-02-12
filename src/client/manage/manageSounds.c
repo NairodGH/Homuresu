@@ -20,5 +20,16 @@ void playSound(game_t *game, sound_e type)
 
     if (sound != NULL) {
         PlaySound(*sound);
+        // TODO
+    }
+}
+
+void playSoundMulti(game_t *game, sound_e type)
+{
+    Sound *sound = getSound(game, type);
+
+    if (sound != NULL) {
+        PlaySoundMulti(*sound);
+        // TODO
     }
 }

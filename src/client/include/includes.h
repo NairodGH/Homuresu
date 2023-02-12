@@ -44,7 +44,9 @@ typedef struct
 typedef enum
 {
   SOUND_WALK,
-  SOUND_SHOOT,
+  SOUND_SHOT,
+  SOUND_HIT,
+  SOUND_JUMP,
 } sound_e;
 
 typedef struct
@@ -153,20 +155,21 @@ typedef struct
 {
     Camera camera;
     Vector3 cameraLastPosition;
+    Sound music;
 
-  Vector2 windowSize;
-  int id;
-  int socket;
+    Vector2 windowSize;
+    int id;
+    int socket;
 
-  list_t *cube;
-  list_t *sound;
-  list_t *model;
-  list_t *bullet;
-  list_t *sprite;
-  list_t *item;
-  list_t *player;
-  stat_t *stat;
-  menu_t *menu;
+    list_t *cube;
+    list_t *sound;
+    list_t *model;
+    list_t *bullet;
+    list_t *sprite;
+    list_t *item;
+    list_t *player;
+    stat_t *stat;
+    menu_t *menu;
 } game_t;
 
 /**
@@ -214,6 +217,13 @@ void initBullet(game_t *game);
  * @param game
  */
 void initSounds(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void initMusic(game_t *game);
 
 /**
  * @brief
@@ -309,6 +319,19 @@ Model *getModel(game_t *game, model_e type);
  */
 void playSound(game_t *game, sound_e type);
 
+/**
+ * @brief
+ *
+ * @param game
+ * @param type
+ */
+void playSoundMulti(game_t *game, sound_e type);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
 void createAmmoBox(game_t *game, Vector3 pos);
 
 // UPDATE
