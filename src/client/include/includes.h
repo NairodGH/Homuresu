@@ -47,6 +47,7 @@ typedef enum
   SOUND_SHOT,
   SOUND_HIT,
   SOUND_JUMP,
+  SOUND_AMMO,
 } sound_e;
 
 typedef struct
