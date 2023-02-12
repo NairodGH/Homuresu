@@ -315,7 +315,7 @@ Sound *getSound(game_t *game, sound_e type);
  * @param type
  * @return Model*
  */
-Model *getModel(game_t *game, model_e type);
+Model *getModel(list_t *game, model_e type);
 
 /**
  * @brief

@@ -16,18 +16,42 @@ static const relation_t relation[] = {
     {MODEL_MAXWELL, "resources/maxwell/Maxwell.obj"},
 };
 
-Model *getModel(game_t *game, model_e type)
+Model *getModel(list_t *list, model_e type)
 {
     node_t *node = NULL;
     model_t *model = NULL;
 
-    foreach(game->model->head, node) {
+    foreach(list->head, node) {
         model = (model_t *)node->data;
         if (model->type == type) {
             return &(model->model);
         }
     }
     return NULL;
+}
+
+Model getModelbyModel_t(list_t *list, model_t *model)
+{
+    node_t *node = NULL;
+    model_t *tmp = NULL;
+
+    foreach(list->head, node) {
+        tmp = (model_t *)node->data;
+        if (tmp == model) {
+            return tmp->model;
+        }
+    }
+    return (Model){0};
+}
+
+bool isModel(node_t *node, model_e type)
+{
+    model_t *model = (model_t *)node->data;
+
+    if (model->type == type) {
+        return true;
+    }
+    return false;
 }
 
 void initModels(game_t *game)

@@ -4,14 +4,7 @@ static void initSelectionMenu(game_t *game)
 {
     game->menu->selection_menu = calloc(1, sizeof(selection_menu_t));
 
-    game->menu->selection_menu->elements = list_create();
-    for (int i = 0; i < 10; i++) {
-        Model *temp = calloc(1, sizeof(Model));
-        *temp = LoadModelFromMesh(GenMeshCube(1.0f, 1.0f, 1.0f));
-        temp->materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = rand() % 2 ? LoadTexture("resources/immeuble/immeuble2.png") : LoadTexture("resources/immeuble/immeuble3.png");
-        list_push_data(game->menu->selection_menu->elements, temp);
-    }
-
+    game->menu->selection_menu->elements = game->model;
     game->menu->selection_menu->current = game->menu->selection_menu->elements->head;
 
     game->menu->selection_menu->selection = 0;

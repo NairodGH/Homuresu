@@ -9,7 +9,7 @@ void createBullet(game_t *game, float speed, float size)
     new->direction = Vector3Normalize(Vector3Subtract((Vector3){game->camera.target.x, game->camera.target.y, game->camera.target.z}, new->position));
     new->speed = speed;
     new->size = size;
-    new->model = *getModel(game, MODEL_BATARANG);
+    new->model = *getModel(game->model, MODEL_BATARANG);
     new->model.transform = MatrixMultiply(new->model.transform, MatrixRotateY(atan2(new->direction.x, new->direction.z)));
     new->isAlive = true;
     list_push_data(game->bullet, new);
@@ -25,7 +25,7 @@ void createAmmoBox(game_t *game, Vector3 pos)
     item_t *new = calloc(1, sizeof(item_t));
 
     new->position = pos;
-    new->model = *getModel(game, MODEL_AMMO_BOX);
+    new->model = *getModel(game->model, MODEL_AMMO_BOX);
     new->height = 1.0f;
     new->width = 1.0f;
     new->length = 1.0f;
@@ -44,7 +44,7 @@ void addBulletToGame(game_t *game, char *msg)
     new->direction = (Vector3){atof(tab[4]), atof(tab[5]), atof(tab[6])};
     new->speed = atof(tab[7]);
     new->size = atof(tab[8]);
-    new->model = *getModel(game, MODEL_BATARANG);
+    new->model = *getModel(game->model, MODEL_BATARANG);
     new->model.transform = MatrixMultiply(new->model.transform, MatrixRotateY(atan2(new->direction.x, new->direction.z)));
     new->isAlive = true;
     list_push_data(game->bullet, new);

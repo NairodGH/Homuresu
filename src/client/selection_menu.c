@@ -1,6 +1,8 @@
 #include "includes.h"
 
 void add_back(menu_t *menu_st);
+Model getModelbyModel_t(list_t *list, model_t *model);
+bool isModel(node_t *node, model_e type);
 
 void selection_menu_loop(menu_t *menu)
 {
@@ -20,10 +22,19 @@ void selection_menu_loop(menu_t *menu)
     DrawCircle(menu->mousePoint.x, menu->mousePoint.y, 5, BLACK);
     EndDrawing();
 
+    if (isModel(menu->selection_menu->current, MODEL_BATARANG)
+        || isModel(menu->selection_menu->current, MODEL_AMMO_BOX)) {
+        if (menu->selection_menu->current->next != NULL)
+            menu->selection_menu->current = menu->selection_menu->current->next;
+        else
+            menu->selection_menu->current = menu->selection_menu->elements->head;
+    }
+
     menu->camera.target = (Vector3){ 20.0f, 0.0f, 0.0f };
     BeginMode3D(menu->camera);
     add_back(menu);
-    DrawModelEx(*(Model *)menu->selection_menu->current->data, (Vector3){ 10.0f, 0.0f, 0.0f }, (Vector3){ 0.0f, 1.0f, 0.0f }, 90.0f, (Vector3){ 1.0f, 1.0f, 1.0f }, WHITE);
+    Model model = getModelbyModel_t(menu->selection_menu->elements, ((model_t *)menu->selection_menu->current->data));
+    DrawModelEx(model, (Vector3){ 10.0f, 0.0f, 0.0f }, (Vector3){ 0.0f, 1.0f, 0.0f }, 90.0f, (Vector3){ 1.0f, 1.0f, 1.0f }, WHITE);
     EndMode3D();
 
     if (IsKeyPressed(KEY_RIGHT)) {

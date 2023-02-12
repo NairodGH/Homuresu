@@ -31,7 +31,7 @@ static player_t * createPlayer(int id, game_t *game)
     player->direction = (Vector3){0, 0, 0};
     player->isAlive = true;
     player->model.type = MODEL_DORION;
-    player->model.model = *getModel(game, player->model.type);
+    player->model.model = *getModel(game->model, player->model.type);
     player->id = id;
     player->stat.life = 100;
     player->stat.score = 0;
