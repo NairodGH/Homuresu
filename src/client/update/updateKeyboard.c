@@ -10,3 +10,9 @@ void jump(game_t *game, bool isPressed)
     if (isPressed && game->height == 1.0f)
         game->height -= 0.1f;
 }
+
+void reload(game_t *game, bool isPressed)
+{
+    if (isPressed)
+        createAmmoBox(game);
+}

@@ -11,3 +11,14 @@ void drawProjectile(game_t *game)
         temp->position = Vector3Add(temp->position, Vector3Scale(temp->direction, temp->speed));
     }
 }
+
+void drawItem(game_t *game)
+{
+    node_t *node = NULL;
+    item_t *temp = NULL;
+
+    foreach(game->item->head, node) {
+        temp = (item_t *)node->data;
+        DrawCubeV(temp->position, (Vector3){ 1, 1, 1 }, BLUE);
+    }
+}

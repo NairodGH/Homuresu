@@ -12,7 +12,8 @@ typedef struct {
 
 static const keybind_t keybinds[] = {
     {KEY_LEFT_SHIFT, sprint},
-    {KEY_SPACE, jump}
+    {KEY_SPACE, jump},
+    {KEY_R, reload},
 };
 
 static const mousebind_t mousebinds[] = {
@@ -32,6 +33,9 @@ static void updateBindings(game_t *game)
             mousebinds[i].func(game, true);
         if (IsMouseButtonReleased(mousebinds[i].button))
             mousebinds[i].func(game, false);
+    }
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        updateEnter(game);
     }
 }
 

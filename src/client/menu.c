@@ -48,18 +48,16 @@ static void add_back(menu_t *menu_st)
     EndMode3D();
 }
 
-int menu(menu_t *menu_st)
+int menu(menu_t *menu_st, float *x)
 {
-    float x = 0;
-    while (menu_st->is_menu == 1) {
-        if (IsKeyPressed(KEY_ENTER))
-            menu_st->is_menu = 0;
-        if (IsKeyPressed(KEY_ESCAPE))
-            break;
-        add_back(menu_st);
-        menu_ui(menu_st);
-        menu_st->camera.target = (Vector3){sinf(x) * 15.0f, 1.8f, cosf(x) * 15.0f};
-        x += 0.01f;
+    if (IsKeyPressed(KEY_ENTER)) {
+        menu_st->is_menu = 0;
     }
+    if (IsKeyPressed(KEY_ESCAPE))
+        return (1);
+    add_back(menu_st);
+    menu_ui(menu_st);
+    menu_st->camera.target = (Vector3){sinf(*x) * 15.0f, 1.8f, cosf(*x) * 15.0f};
+    (*x) += 0.01f;
     return (0);
 }

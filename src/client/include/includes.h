@@ -20,11 +20,11 @@
 #include <time.h>
 #include <float.h>
 
-
 #include "list.h"
 
-#define OBS_NBR 16
+#define OBS_NBR 10
 #define WALL_NBR 4
+#define MAP_SIZE 32.0f
 
 typedef struct projectile_s {
     Vector3 position;
@@ -37,71 +37,143 @@ typedef struct projectile_s {
     bool isAlive;
 } projectile_t;
 
-typedef struct cube_s {
-    Vector3 position;
-    float width;
-    float height;
-    float length;
-    Texture2D texture;
-} cube_t;
+typedef enum
+{
+  CROSSHAIR = 0,
+} spriteName_t;
 
-typedef struct sprite_s {
-    Texture2D texture;
-    Vector2 position;
-    Vector2 origin;
-    float scale;
-    Color tint;
+typedef struct
+{
+  Texture2D texture;
+  Vector2 position;
+  Vector2 origin;
+  float scale;
+  Color tint;
+  char *name;
 } sprite_t;
 
-typedef struct selection_menu_s {
-    list_t *elements;
+typedef enum
+{
+  SOUND_WALK,
+  SOUND_SHOOT,
+} sound_e;
 
-    Texture2D right_button;
-    Rectangle right_sourceRec;
-    Rectangle right_btnBounds;
+typedef struct
+{
+  sound_e type;
+  Sound sound;
+} sound_t;
 
-    Texture2D left_button;
-    Rectangle left_sourceRec;
-    Rectangle left_btnBounds;
+typedef enum
+{
+  MODEL_BATARANG,
+  MODEL_DORION,
+  MODEL_DORION2,
+} model_e;
 
-    Texture2D validate_button;
-    Rectangle validate_sourceRec;
-    Rectangle validate_btnBounds;
+typedef struct
+{
+  model_e type;
+  Model model;
+} model_t;
+
+typedef struct
+{
+  int score;
+  int life;
+  int ammo;
+  int cooldownShoot;
+  int lastShoot;
+} stat_t;
+    
+typedef struct {
+  int id;
+  Vector3 position;
+  Vector3 direction;
+  model_t model;
+  stat_t stat;
+  bool isAlive;
+} player_t;
+
+typedef struct
+{
+  Vector3 position;
+  float width;
+  float height;
+  float length;
+  Texture2D texture;
+} cube_t;
+
+typedef struct
+{
+  Vector3 position;
+  float width;
+  float height;
+  float length;
+  Texture2D texture;
+  char *name;
+  bool isAlive;
+} item_t;
+
+typedef struct selection_menu_s
+{
+  list_t *elements;
+
+  Texture2D right_button;
+  Rectangle right_sourceRec;
+  Rectangle right_btnBounds;
+
+  Texture2D left_button;
+  Rectangle left_sourceRec;
+  Rectangle left_btnBounds;
+
+  Texture2D validate_button;
+  Rectangle validate_sourceRec;
+  Rectangle validate_btnBounds;
 } selection_menu_t;
 
-typedef struct menu_s {
-    Camera camera;
-    Vector2 mousePoint;
+typedef struct menu_s
+{
+  Camera camera;
+  Vector2 mousePoint;
 
-    Texture2D button;
+  Texture2D button;
 
-    Rectangle sourceRec;
-    Rectangle btnBounds;
+  Rectangle sourceRec;
+  Rectangle btnBounds;
 
-    Texture2D quit_button;
-    Rectangle quit_sourceRec;
-    Rectangle quit_btnBounds;
-    Vector2 quit_position;
+  Texture2D quit_button;
+  Rectangle quit_sourceRec;
+  Rectangle quit_btnBounds;
+  Vector2 quit_position;
 
-    Texture2D title;
+  Texture2D title;
 
-    int is_menu;
-    Vector2 windowSize;
+  int is_menu;
+  Vector2 windowSize;
 } menu_t;
 
-typedef struct game_s {
-    Camera3D camera;
-    Vector3 cameraLastPosition;
+typedef struct
+{
+  Camera camera;
+  Vector3 cameraLastPosition;
     float height;
     float gravity;
     float speed;
 
-    Vector2 windowSize;
+  Vector2 windowSize;
+  int id;
 
-    list_t *cube;
-    list_t *projectile;
-
-    menu_t *menu;
+  list_t *cube;
+  list_t *sound;
+  list_t *model;
+  list_t *projectile;
+  list_t *sprite;
+  list_t *item;
+  list_t *player;
+  stat_t *stat;
+  menu_t *menu;
+  void *client;
 } game_t;
 
 /**
@@ -148,7 +220,64 @@ void initProjectile(game_t *game);
  *
  * @param game
  */
+void initSounds(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void initModels(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
 void initGame(game_t *game);
+
+// MANAGE
+/**
+ * @brief
+ *
+ * @param game
+ */
+void initSprite(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void initStat(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void initItem(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void initPlayer(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void addInfoPlayerToGame(game_t *game, char *msg);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void addProjectileToGame(game_t *game, char *msg);
 
 // CREATE
 
@@ -161,6 +290,34 @@ void initGame(game_t *game);
  */
 void createProjectile(game_t *game, float speed, float size);
 
+/**
+ * @brief Get the Sound object
+ *
+ * @param game
+ * @param type
+ * @return Sound*
+ */
+Sound *getSound(game_t *game, sound_e type);
+
+/**
+ * @brief Get the Sound object
+ *
+ * @param game
+ * @param type
+ * @return Model*
+ */
+Model *getModel(game_t *game, model_e type);
+
+/**
+ * @brief
+ *
+ * @param game
+ * @param type
+ */
+void playSound(game_t *game, sound_e type);
+
+void createAmmoBox(game_t *game);
+
 // UPDATE
 
 /**
@@ -170,6 +327,13 @@ void createProjectile(game_t *game, float speed, float size);
  * @param isPressed
  */
 void shoot(game_t *game, bool isPressed);
+
+/**
+ * @brief
+ *
+ * @param nsm
+ */
+void setupSprite(game_t *game, spriteName_t name, Vector2 position, Vector2 size, float scale, Color tint);
 
 /**
  * @brief
@@ -186,6 +350,13 @@ void sprint(game_t *game, bool isPressed);
  * @param isPressed
  */
 void jump(game_t *game, bool isPressed);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void reload(game_t *game, bool isPressed);
 
 /**
  * @brief
@@ -220,6 +391,13 @@ void updateDeadProjectile(game_t *game);
  *
  * @param game
  */
+void updateDeadItem(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
 void updateGame(game_t *game);
 
 // DRAW
@@ -245,6 +423,34 @@ void drawCube(game_t *game);
  */
 void drawProjectile(game_t *game);
 
+/**
+ * @brief
+ *
+ * @param game
+ */
+void drawPlayer(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void drawItem(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void drawSpriteTwoD(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void drawTextTwoD(game_t *game);
+
 // MAIN
 
 /**
@@ -267,6 +473,22 @@ void initMenu(game_t *game);
  * @param menu_st
  * @return int
  */
-int menu(menu_t *menu_st);
+int menu(menu_t *menu_st, float *x);
+
+/**
+ * @brief
+ *
+ * @param menu_st
+ */
+char **splitMsg(char *msg, char *delim);
+
+/**
+ * @brief
+ *
+ * @param menu_st
+ */
+void freeDoubleTab(char **tab);
+
+int send_tcp_packet(int sock, char const *msg, char const *eof);
 
 #endif /* !CLIENT_H_ */
