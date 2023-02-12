@@ -40,7 +40,6 @@ typedef struct
   char *name;
 } sprite_t;
 
-
 typedef enum
 {
   SOUND_WALK,
@@ -61,6 +60,10 @@ typedef enum
   MODEL_DORION,
   MODEL_DORION2,
   MODEL_AMMO_BOX,
+  MODEL_DEADPOOL,
+  MODEL_MIDORIYA,
+  MODEL_BALD_MIDORIYA,
+  MODEL_MAXWELL,
 } model_e;
 
 typedef struct
@@ -78,7 +81,8 @@ typedef struct
   int lastShoot;
 } stat_t;
 
-typedef struct {
+typedef struct
+{
   int id;
   Vector3 position;
   Vector3 direction;
@@ -117,59 +121,60 @@ typedef struct
   bool isAlive;
 } item_t;
 
-typedef struct selection_menu_s {
-    list_t *elements;
-    node_t *current;
+typedef struct selection_menu_s
+{
+  list_t *elements;
+  node_t *current;
 
-    int selection;
+  int selection;
 } selection_menu_t;
 
 typedef struct menu_s
 {
-    Camera camera;
-    Vector2 mousePoint;
+  Camera camera;
+  Vector2 mousePoint;
 
-    Texture2D button;
+  Texture2D button;
 
-    Rectangle sourceRec;
-    Rectangle btnBounds;
+  Rectangle sourceRec;
+  Rectangle btnBounds;
 
-    Texture2D quit_button;
-    Rectangle quit_sourceRec;
-    Rectangle quit_btnBounds;
-    Vector2 quit_position;
+  Texture2D quit_button;
+  Rectangle quit_sourceRec;
+  Rectangle quit_btnBounds;
+  Vector2 quit_position;
 
-    Texture2D title;
+  Texture2D title;
 
-    int is_menu;
-    Vector2 windowSize;
-    selection_menu_t *selection_menu;
-    Texture2D building;
-    Texture2D ground;
+  int is_menu;
+  Vector2 windowSize;
+  selection_menu_t *selection_menu;
+  Texture2D building;
+  Texture2D ground;
 
-    Model Dorion;
-    float Spin_Dorion;
+  Model Dorion;
+  float Spin_Dorion;
 } menu_t;
 
 typedef struct
 {
-    Camera camera;
-    Vector3 cameraLastPosition;
-    Sound music;
+  Camera camera;
+  Vector3 cameraLastPosition;
+  Sound music;
 
-    Vector2 windowSize;
-    int id;
-    int socket;
+  Vector2 windowSize;
+  int id;
+  int socket;
 
-    list_t *cube;
-    list_t *sound;
-    list_t *model;
-    list_t *bullet;
-    list_t *sprite;
-    list_t *item;
-    list_t *player;
-    stat_t *stat;
-    menu_t *menu;
+  list_t *cube;
+  list_t *sound;
+  list_t *model;
+  list_t *bullet;
+  list_t *sprite;
+  list_t *item;
+  list_t *player;
+  stat_t *stat;
+  menu_t *menu;
 } game_t;
 
 /**
