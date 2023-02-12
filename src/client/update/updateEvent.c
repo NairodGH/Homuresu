@@ -12,7 +12,11 @@ typedef struct {
 
 static const keybind_t keybinds[] = {
     {KEY_LEFT_SHIFT, sprint},
-    {KEY_SPACE, jump}
+    {KEY_SPACE, jump},
+    {KEY_W, walk},
+    {KEY_A, walk},
+    {KEY_S, walk},
+    {KEY_D, walk}
 };
 
 static const mousebind_t mousebinds[] = {

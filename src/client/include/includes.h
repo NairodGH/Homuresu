@@ -382,6 +382,14 @@ void jump(game_t *game, bool isPressed);
  * @brief
  *
  * @param game
+ * @param isPressed
+ */
+void walk(game_t *game, bool isPressed);
+
+/**
+ * @brief
+ *
+ * @param game
  */
 void updateEvent(game_t *game);
 
