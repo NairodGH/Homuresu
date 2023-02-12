@@ -96,9 +96,11 @@ static void checkDeath(game_t *game, int id)
         game->camera.position = (Vector3){0, 0, 0};
         game->stat->life = 100;
         game->stat->score = 0;
+        #ifndef _WIN32
         msg = calloc(1, 20);
         sprintf(msg, "DEAD %d", id);
         send_tcp_packet(game->socket, msg, EOF_NETWORK);
+        #endif
     }
 }
 
