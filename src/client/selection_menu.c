@@ -15,8 +15,14 @@ void selection_menu_loop(menu_t *menu)
     DrawText("Press SPACE to select", 70, 140, 20, WHITE);
     DrawText("Press ESC to go back", 70, 160, 20, WHITE);
 
+    menu->mousePoint = GetMousePosition();
+    SetMouseCursor(MOUSE_CURSOR_DEFAULT);
+    DrawCircle(menu->mousePoint.x, menu->mousePoint.y, 5, BLACK);
+    EndDrawing();
+
     menu->camera.target = (Vector3){ 20.0f, 0.0f, 0.0f };
     BeginMode3D(menu->camera);
+    add_back(menu);
     DrawModelEx(*(Model *)menu->selection_menu->current->data, (Vector3){ 10.0f, 0.0f, 0.0f }, (Vector3){ 0.0f, 1.0f, 0.0f }, 90.0f, (Vector3){ 1.0f, 1.0f, 1.0f }, WHITE);
     EndMode3D();
 
@@ -27,9 +33,4 @@ void selection_menu_loop(menu_t *menu)
         if (menu->selection_menu->current->prev != NULL)
             menu->selection_menu->current = menu->selection_menu->current->prev;
     }
-
-    menu->mousePoint = GetMousePosition();
-    SetMouseCursor(MOUSE_CURSOR_DEFAULT);
-    DrawCircle(menu->mousePoint.x, menu->mousePoint.y, 5, BLACK);
-    EndDrawing();
 }

@@ -13,7 +13,6 @@ static void put_dorian(menu_t *menu_st)
 
     DrawModel(menu_st->Dorion[3], (Vector3){5.0f, 0.0f, 6.0f}, 1.0f, WHITE);
     DrawModel(menu_st->Dorion[4], (Vector3){5.0f, 0.0f, 5.0f}, 1.0f, WHITE);
-    EndMode3D();
 }
 
 static void menu_ui(menu_t *menu_st)
@@ -74,37 +73,30 @@ static void check_mouse(void)
         SetMousePosition(GetMousePosition().x, 0);
 }
 
-int menu(menu_t *menu_st)
+int menu(menu_t *menu_st, float *x)
 {
-    float x = 0;
+    check_mouse();
 
-    while (menu_st->is_menu == 1) {
-
-        check_mouse();
+    if (menu_st->selection_menu->selection == 0) {
         BeginMode3D(menu_st->camera);
         add_back(menu_st);
-
-        if (menu_st->selection_menu->selection == 0) {
-            put_dorian(menu_st);
-            menu_ui(menu_st);
-            if (IsKeyPressed(KEY_ESCAPE))
-                menu_st->is_menu = 0;
+        put_dorian(menu_st);
+        EndMode3D();
+        menu_ui(menu_st);
+        if (IsKeyPressed(KEY_ESCAPE)) {
+            menu_st->is_menu = 0;
+            return (1);
         }
-        else {
-            selection_menu_loop(menu_st);
-            if (IsKeyPressed(KEY_ESCAPE))
-                menu_st->selection_menu->selection = 0;
-            continue;
-        }
-
-        if (IsKeyPressed(KEY_ENTER))
+        if (IsKeyPressed(KEY_SPACE))
             menu_st->selection_menu->selection = 1;
-
-        menu_st->camera.target = (Vector3){sinf(x) * 15.0f, 1.8f, cosf(x) * 15.0f};
-        x += 0.01f;
+        menu_st->camera.target = (Vector3){sinf(*x) * 15.0f, 1.8f, cosf(*x) * 15.0f};
+        (*x) += 0.01f;
+    } else {
+        selection_menu_loop(menu_st);
+        if (IsKeyPressed(KEY_BACKSPACE))
+            menu_st->selection_menu->selection = 0;
+        if (IsKeyPressed(KEY_SPACE))
+            menu_st->is_menu = 0;
     }
-    for (int i = 0; i < 5; i++)
-        UnloadModel(menu_st->Dorion[i]);
-    free(menu_st->Dorion);
     return (0);
 }

@@ -9,10 +9,11 @@ void drawGame(game_t *game)
     BeginMode3D(game->camera);
     drawCube(game);
     drawBullet(game);
+    drawItem(game);
     // add ...
 
     EndMode3D();
-
+    drawSpriteTwoD(game);
     // 2D
     // add ...
 
