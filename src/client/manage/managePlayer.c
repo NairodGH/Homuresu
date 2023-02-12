@@ -1,4 +1,5 @@
 #include "includes.h"
+#include "iencli.h"
 
 char **splitMsg(char *msg, char *delim)
 {
@@ -84,7 +85,27 @@ void removePlayerFromGame(game_t *game, int id)
     }
 }
 
+static void checkDeath(game_t *game, int id)
+{
+    char *msg = NULL;
+
+    if (game->stat->life <= 0) {
+        game->camera.position = (Vector3){0, 0, 0};
+        game->stat->life = 100;
+        game->stat->score = 0;
+        msg = calloc(1, 20);
+        sprintf(msg, "DEAD %d", id);
+        send_tcp_packet(game->socket, msg, EOF_NETWORK);
+    }
+}
+
+void updateKillPlayer(game_t *game, int id)
+{
+    game->stat->score += 1;
+}
+
 void updateLifePlayer(game_t *game, int id, int life)
 {
-    game->stat->life = life;
+    game->stat->life = game->stat->life + life;
+    checkDeath(game, id);
 }

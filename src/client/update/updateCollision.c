@@ -39,7 +39,7 @@ static void checkCollisionBullet(game_t *game, cube_t *cube)
         }
         foreach(game->player->head, node2) {
             player = (player_t *)node2->data;
-            if (player->isAlive == false)
+            if (player->isAlive == false || player->id == temp->id)
                 continue;
             if (temp->position.x > player->position.x - 0.5 &&
                 temp->position.x < player->position.x + 0.5 &&
@@ -47,9 +47,9 @@ static void checkCollisionBullet(game_t *game, cube_t *cube)
                 temp->position.z < player->position.z + 0.5) {
                 temp->isAlive = false;
                 game->stat->score += 1;
-                player->stat.life -= 20;
-                sprintf(msg, "LIFE %d %d", player->id, player->stat.life);
+                sprintf(msg, "LIFE %d %d", player->id, -20);
                 send_tcp_packet(game->socket, msg, EOF_NETWORK);
+                return;
             }
         }
     }

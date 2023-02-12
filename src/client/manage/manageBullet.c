@@ -12,6 +12,7 @@ void createBullet(game_t *game, float speed, float size)
     new->model = *getModel(game, MODEL_BATARANG);
     new->model.transform = MatrixMultiply(new->model.transform, MatrixRotateY(atan2(new->direction.x, new->direction.z)));
     new->isAlive = true;
+    new->id = game->id;
     list_push_data(game->bullet, new);
     game->stat->lastShoot = time(NULL);
     game->stat->ammo--;
@@ -40,6 +41,7 @@ void addBulletToGame(game_t *game, char *msg)
     int id = atoi(tab[0]);
     bullet_t *new = calloc(1, sizeof(bullet_t));
 
+    new->id = id;
     new->position = (Vector3){atof(tab[1]), atof(tab[2]), atof(tab[3])};
     new->direction = (Vector3){atof(tab[4]), atof(tab[5]), atof(tab[6])};
     new->speed = atof(tab[7]);

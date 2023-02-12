@@ -14,6 +14,8 @@ int client_action_mng(server_tcp_t *server, client_t *client, char *msg)
         send_msg_to_all_cli_exepct_cli(server, client, msg);
     } else if (strncmp(msg, "ITEM", 4) == 0) {
         send_msg_to_all_cli_exepct_cli(server, client, msg);
+    } else if (strncmp(msg, "KILL", 4) == 0) {
+        send_tcp_packet(atof(msg + 5), msg, EOF_NETWORK);
     }
     return 0;
 }

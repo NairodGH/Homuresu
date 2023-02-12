@@ -100,6 +100,7 @@ typedef struct bullet_s
   float speed;
   float size;
   bool isAlive;
+  int id;
 } bullet_t;
 
 typedef struct
@@ -502,5 +503,7 @@ void removePlayerFromGame(game_t *game, int id);
 void removeItemFromGame(game_t *game, float x, float z);
 
 void updateLifePlayer(game_t *game, int id, int life);
+
+void updateKillPlayer(game_t *game, int id);
 
 #endif /* !CLIENT_H_ */
