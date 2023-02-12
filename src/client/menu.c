@@ -97,6 +97,9 @@ int menu(menu_t *menu_st)
             continue;
         }
 
+        if (IsKeyPressed(KEY_ENTER))
+            menu_st->selection_menu->selection = 1;
+
         menu_st->camera.target = (Vector3){sinf(x) * 15.0f, 1.8f, cosf(x) * 15.0f};
         x += 0.01f;
     }

@@ -55,14 +55,7 @@ typedef struct sprite_s {
 
 typedef struct selection_menu_s {
     list_t *elements;
-
-    Texture2D right_button;
-    Rectangle right_sourceRec;
-    Rectangle right_btnBounds;
-
-    Texture2D left_button;
-    Rectangle left_sourceRec;
-    Rectangle left_btnBounds;
+    node_t *current;
 
     int selection;
 } selection_menu_t;
