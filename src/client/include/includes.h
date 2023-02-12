@@ -19,64 +19,148 @@
 #include <sys/stat.h>
 #include <time.h>
 
-
 #include "list.h"
 
-#define OBS_NBR 16
+#define OBS_NBR 10
 #define WALL_NBR 4
+#define MAP_SIZE 32.0f
 
-typedef struct bullet_s {
-  Vector3 position;
-  Vector3 direction;
-  Color colors;
-  float speed;
-  float size;
-  struct bullet_s *next;
-  struct bullet_s *head;
-  bool isAlive;
-} bullet_t;
+typedef enum
+{
+  CROSSHAIR = 0,
+} spriteName_t;
 
-typedef struct cube_s {
-  Vector3 position;
-  float width;
-  float height;
-  float length;
-  Color color;
-} cube_t;
-
-typedef struct sprite_s {
+typedef struct
+{
   Texture2D texture;
   Vector2 position;
   Vector2 origin;
   float scale;
   Color tint;
+  char *name;
 } sprite_t;
 
-
-typedef enum {
+typedef enum
+{
   SOUND_WALK,
   SOUND_SHOT,
   SOUND_HIT,
   SOUND_JUMP,
 } sound_e;
 
-typedef struct {
+typedef struct
+{
   sound_e type;
   Sound sound;
 } sound_t;
 
-typedef struct {
-    bool isWalking;
-} player_t;
+typedef enum
+{
+  MODEL_BATARANG,
+  MODEL_DORION,
+  MODEL_DORION2,
+  MODEL_AMMO_BOX,
+} model_e;
 
-typedef struct {
+typedef struct
+{
+  model_e type;
+  Model model;
+} model_t;
+
+typedef struct
+{
+  int score;
+  int life;
+  int ammo;
+  int cooldownShoot;
+  int lastShoot;
+} stat_t;
+
+typedef struct bullet_s
+{
+  Vector3 position;
+  Vector3 direction;
+  Model model;
+  float speed;
+  float size;
+  bool isAlive;
+} bullet_t;
+
+typedef struct
+{
+  Vector3 position;
+  float width;
+  float height;
+  float length;
+  Texture2D texture;
+} cube_t;
+
+typedef struct
+{
+  Vector3 position;
+  float width;
+  float height;
+  float length;
+  Model model;
+  char *name;
+  bool isAlive;
+} item_t;
+
+typedef struct selection_menu_s
+{
+  list_t *elements;
+
+  Texture2D right_button;
+  Rectangle right_sourceRec;
+  Rectangle right_btnBounds;
+
+  Texture2D left_button;
+  Rectangle left_sourceRec;
+  Rectangle left_btnBounds;
+
+  Texture2D validate_button;
+  Rectangle validate_sourceRec;
+  Rectangle validate_btnBounds;
+} selection_menu_t;
+
+typedef struct menu_s
+{
+  Camera camera;
+  Vector2 mousePoint;
+
+  Texture2D button;
+
+  Rectangle sourceRec;
+  Rectangle btnBounds;
+
+  Texture2D quit_button;
+  Rectangle quit_sourceRec;
+  Rectangle quit_btnBounds;
+  Vector2 quit_position;
+
+  Texture2D title;
+
+  int is_menu;
+  Vector2 windowSize;
+} menu_t;
+
+typedef struct
+{
   Camera camera;
   Sound music;
   Vector3 cameraLastPosition;
-  player_t *player;
+
+  Vector2 windowSize;
+
   list_t *cube;
-  list_t *bullet;
   list_t *sound;
+  list_t *model;
+  list_t *bullet;
+  list_t *sprite;
+  list_t *item;
+  stat_t *stat;
+  menu_t *menu;
 } game_t;
 
 /**
@@ -137,9 +221,38 @@ void initMusic(game_t *game);
  *
  * @param game
  */
+void initModels(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
 void initGame(game_t *game);
 
 // MANAGE
+/**
+ * @brief
+ *
+ * @param game
+ */
+void initSprite(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void initStat(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void initItem(game_t *game);
+
+// CREATE
 
 /**
  * @brief Create a Bullet object
@@ -160,6 +273,15 @@ void createBullet(game_t *game, float speed, float size);
 Sound *getSound(game_t *game, sound_e type);
 
 /**
+ * @brief Get the Sound object
+ *
+ * @param game
+ * @param type
+ * @return Model*
+ */
+Model *getModel(game_t *game, model_e type);
+
+/**
  * @brief
  *
  * @param game
@@ -175,7 +297,21 @@ void playSound(game_t *game, sound_e type);
  */
 void playSoundMulti(game_t *game, sound_e type);
 
+/**
+ * @brief
+ *
+ * @param game
+ */
+void createAmmoBox(game_t *game);
+
 // UPDATE
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void setupSprite(game_t *game, spriteName_t name, Vector2 position, Vector2 size, float scale, Color tint);
 
 /**
  * @brief
@@ -190,6 +326,7 @@ void updateEnter(game_t *game);
  * @param game
  */
 void updateWalk(game_t *game);
+void updateR(game_t *game);
 
 /**
  * @brief
@@ -224,6 +361,13 @@ void updateDeadBullet(game_t *game);
  *
  * @param game
  */
+void updateDeadItem(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
 void updateGame(game_t *game);
 
 // DRAW
@@ -249,6 +393,20 @@ void drawCube(game_t *game);
  */
 void drawBullet(game_t *game);
 
+/**
+ * @brief
+ *
+ * @param game
+ */
+void drawItem(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void drawSpriteTwoD(game_t *game);
+
 // MAIN
 
 /**
@@ -257,5 +415,20 @@ void drawBullet(game_t *game);
  * @param game
  */
 void mainLoop(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param menu_st
+ */
+void initMenu(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param menu_st
+ * @return int
+ */
+int menu(menu_t *menu_st, float *x);
 
 #endif /* !CLIENT_H_ */

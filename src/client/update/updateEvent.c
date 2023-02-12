@@ -11,6 +11,7 @@ static const binding_t bindings[] = {
     {KEY_A, updateWalk},
     {KEY_S, updateWalk},
     {KEY_D, updateWalk},
+    {KEY_R, updateR},
 };
 
 static void updateBinding(game_t *game)
