@@ -4,7 +4,7 @@ static int send_death(server_tcp_t *server, client_t *client)
 {
     char *msg = malloc(sizeof(char) * 100);
 
-    sprintf(msg, "DEATH %i", client->sock);
+    sprintf(msg, "DEAD %i", client->sock);
     send_msg_to_all_cli_exepct_cli(server, client, msg);
     free(msg);
 }
@@ -16,6 +16,7 @@ int manage_tcp_recv_actions(server_tcp_t *server, client_t *client)
 
     if (msg == NULL) {
         printf("-? %s:%i\n", client->ip, client->port);
+        send_death(server, client);
         return 1;
     } else {
         printf("Message from %s:%i : %s\n", client->ip, client->port, msg);
