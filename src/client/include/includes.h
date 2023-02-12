@@ -89,8 +89,7 @@ typedef struct menu_s {
     Texture2D building;
     Texture2D ground;
 
-    Model Dorion;
-    float Dorion_Spin;
+    Model *Dorion;
 } menu_t;
 
 typedef struct {

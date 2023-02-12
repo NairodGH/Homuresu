@@ -3,8 +3,17 @@
 
 void selection_menu_loop(menu_t *menu);
 
-static void put_Dorion(menu_t *menu_st)
+static void put_dorian(menu_t *menu_st)
 {
+    menu_st->Dorion[0].transform = MatrixMultiply(menu_st->Dorion[0].transform, MatrixRotateY(0.05));
+    DrawModel(menu_st->Dorion[0], (Vector3){-5.0f, 0.0f, 5.0f}, 0.8f, WHITE);
+    DrawModel(menu_st->Dorion[1], (Vector3){0.0f, 0.0f, -27.0f}, 4.0f, WHITE);
+
+    DrawModel(menu_st->Dorion[2], (Vector3){-15.0f, 23.0f, -10.0f}, 5.0f, WHITE);
+
+    DrawModel(menu_st->Dorion[3], (Vector3){5.0f, 0.0f, 6.0f}, 1.0f, WHITE);
+    DrawModel(menu_st->Dorion[4], (Vector3){5.0f, 0.0f, 5.0f}, 1.0f, WHITE);
+    EndMode3D();
 }
 
 static void menu_ui(menu_t *menu_st)
@@ -49,12 +58,10 @@ void add_back(menu_t *menu_st)
 
     DrawCubeTexture(menu_st->building, (Vector3){ 0.0f, 0.0f, -25.0f }, 50.0f, 20.0f, 0.1f, WHITE);
     DrawCubeTexture(menu_st->building, (Vector3){ 0.0f, 0.0f, 25.0f }, 50.0f, 20.0f, 0.1f, WHITE);
-    DrawCubeTexture(menu_st->building, (Vector3){ -25.0f, 0.0f, 0.0f }, 0.1f, 20.0f, 50.0f, WHITE);
+    DrawCubeTexture(menu_st->building, (Vector3){ -20.0f, 0.0f, 0.0f }, 0.1f, 20.0f, 50.0f, WHITE);
     DrawCubeTexture(menu_st->building, (Vector3){ 25.0f, 0.0f, 0.0f }, 0.1f, 20.0f, 50.0f, WHITE);
     DrawCubeTexture(menu_st->ground, (Vector3){ 0.0f, 0.0f, 0.0f }, 50.0f, 0.1f, 50.0f, WHITE);
-    //menu_st->Dorion.transform = MatrixMultiply(menu_st->Dorion.transform, MatrixRotateY(0.09));
-    DrawModel(menu_st->Dorion, (Vector3){27.0f, 0.0f, 0.0f}, 4.0f, WHITE);
-    EndMode3D();
+    put_dorian(menu_st);
 }
 
 static void check_mouse(void)
@@ -80,7 +87,6 @@ int menu(menu_t *menu_st)
 
         if (menu_st->selection_menu->selection == 0) {
             menu_ui(menu_st);
-            put_Dorion(menu_st);
             if (IsKeyPressed(KEY_ESCAPE))
                 menu_st->is_menu = 0;
         }
@@ -94,5 +100,8 @@ int menu(menu_t *menu_st)
         menu_st->camera.target = (Vector3){sinf(x) * 15.0f, 1.8f, cosf(x) * 15.0f};
         x += 0.01f;
     }
+    for (int i = 0; i < 5; i++)
+        UnloadModel(menu_st->Dorion[i]);
+    free(menu_st->Dorion);
     return (0);
 }
