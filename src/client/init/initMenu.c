@@ -50,7 +50,7 @@ void initMenu(game_t *game)
     game->menu->camera.fovy = 60.0f;
     game->menu->camera.projection = CAMERA_PERSPECTIVE;
 
-    game->menu->is_menu = 0;
+    game->menu->is_menu = 1;
 
     game->menu->title = LoadTexture("./resources/menu/title_homuresu.png");
     game->menu->title.width *= 4;
