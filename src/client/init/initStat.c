@@ -6,6 +6,6 @@ void initStat(game_t *game)
     game->stat->ammo = 10;
     game->stat->life = 100;
     game->stat->score = 0;
-    game->stat->cooldownShoot = 0.5f;
+    game->stat->cooldownShoot = 1;
     game->stat->lastShoot = 0;
 }

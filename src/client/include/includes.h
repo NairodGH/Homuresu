@@ -74,6 +74,15 @@ typedef struct
   int lastShoot;
 } stat_t;
 
+typedef struct {
+  int id;
+  Vector3 position;
+  Vector3 direction;
+  model_t model;
+  stat_t stat;
+  bool isAlive;
+} player_t;
+
 typedef struct bullet_s
 {
   Vector3 position;
@@ -148,6 +157,7 @@ typedef struct
   Vector3 cameraLastPosition;
 
   Vector2 windowSize;
+  int id;
 
   list_t *cube;
   list_t *sound;
@@ -155,6 +165,7 @@ typedef struct
   list_t *bullet;
   list_t *sprite;
   list_t *item;
+  list_t *player;
   stat_t *stat;
   menu_t *menu;
 } game_t;
@@ -240,6 +251,20 @@ void initStat(game_t *game);
  * @param game
  */
 void initItem(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void initPlayer(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void addInfoPlayerToGame(game_t *game, char *msg);
 
 // CREATE
 
@@ -374,6 +399,13 @@ void drawBullet(game_t *game);
  *
  * @param game
  */
+void drawPlayer(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
 void drawItem(game_t *game);
 
 /**
@@ -382,6 +414,13 @@ void drawItem(game_t *game);
  * @param game
  */
 void drawSpriteTwoD(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void drawTextTwoD(game_t *game);
 
 // MAIN
 

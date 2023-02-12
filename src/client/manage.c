@@ -1,6 +1,6 @@
 #include "iencli.h"
 
-int manage_tcp_recv_actions(client_t *client)
+int manage_tcp_recv_actions(client_t *client, game_t *game)
 {
     int check = 0;
     char *msg = get_tcp_packet(client->sock_tcp);
@@ -10,6 +10,11 @@ int manage_tcp_recv_actions(client_t *client)
         return 0;
     } else {
         printf("Message from %s:%i (tcp) : %s\n", client->ip, client->port_tcp, msg);
+        if (strncmp(msg, "HELLO", 5) == 0) {
+            game->id = atoi(msg + 6);
+        }
+        else
+            addInfoPlayerToGame(game, msg);
     }
     free(msg);
     return check;

@@ -93,14 +93,17 @@ set(CLIENT_SRC
     ${CLIENT_ROOT}/init/initMenu.c
     ${CLIENT_ROOT}/init/initStat.c
     ${CLIENT_ROOT}/init/initItem.c
+    ${CLIENT_ROOT}/init/initPlayer.c
 
     ${CLIENT_ROOT}/draw/drawBullet.c
+    ${CLIENT_ROOT}/draw/drawPlayer.c
     ${CLIENT_ROOT}/draw/drawCube.c
     ${CLIENT_ROOT}/draw/drawGame.c
     ${CLIENT_ROOT}/draw/drawTwoD.c
 
     ${CLIENT_ROOT}/manage/manageBullet.c
     ${CLIENT_ROOT}/manage/manageSounds.c
+    ${CLIENT_ROOT}/manage/managePlayer.c
 
     ${CLIENT_ROOT}/update/updateKeyboard/updateWalk.c
     ${CLIENT_ROOT}/manage/manageSprite.c

@@ -47,7 +47,7 @@ int send_tcp_packet(int sock, char const *msg, char const *eof);
 int send_udp_packet(int sock, char const *msg, char const *eof, client_t *client);
 
 // manage.c
-int manage_tcp_recv_actions(client_t *client);
+int manage_tcp_recv_actions(client_t *client, game_t *game);
 int manage_udp_recv_actions(client_t *client);
 int manage_tcp_send_actions(client_t *client);
 int manage_udp_send_actions(client_t *client);

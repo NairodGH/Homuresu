@@ -96,7 +96,7 @@ static int loop_recv_srv_udp(homuresu_t *gn)
 
 void send_message_to_all_clients(server_tcp_t *server)
 {
-    client_t *tmp = server->clients;
+    client_t *tmp = server->clients->next;
     char *tempMessage = NULL;
 
     for (; tmp != NULL; tmp = tmp->next) {
@@ -105,6 +105,7 @@ void send_message_to_all_clients(server_tcp_t *server)
         if (send(tmp->sock, tmp->message, strlen(tmp->message) ,0) == -1) {
             printf("Error : Fail to send message to client\n");
         }
+        strcpy(tmp->message, "");
     }
 }
 

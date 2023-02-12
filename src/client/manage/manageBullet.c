@@ -8,7 +8,7 @@ void createBullet(game_t *game, float speed, float size)
     new->direction = Vector3Normalize(Vector3Subtract((Vector3){game->camera.target.x, game->camera.target.y, game->camera.target.z}, new->position));
     new->speed = speed;
     new->size = size;
-    new->model = *getModel(game, MODEL_DORION2);
+    new->model = *getModel(game, MODEL_BATARANG);
     new->model.transform = MatrixMultiply(new->model.transform, MatrixRotateY(atan2(new->direction.x, new->direction.z)));
     new->isAlive = true;
     list_push_data(game->bullet, new);

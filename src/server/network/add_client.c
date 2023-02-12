@@ -9,6 +9,7 @@ client_t *init_clients(int sock)
     clients->sock = sock;
     clients->ip = NULL;
     clients->port = 0;
+    strcpy(clients->message, "");
     clients->next = NULL;
     clients->prev = NULL;
     return clients;
