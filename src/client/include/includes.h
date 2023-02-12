@@ -26,17 +26,16 @@
 #define OBS_NBR 16
 #define WALL_NBR 4
 
-typedef struct bullet_s {
+typedef struct projectile_s {
     Vector3 position;
     Vector3 direction;
     Model model;
-    // Color colors;
     float speed;
     float size;
-    struct bullet_s *next;
-    struct bullet_s *head;
+    struct projectile_s *next;
+    struct projectile_s *head;
     bool isAlive;
-} bullet_t;
+} projectile_t;
 
 typedef struct cube_s {
     Vector3 position;
@@ -100,7 +99,7 @@ typedef struct game_s {
     Vector2 windowSize;
 
     list_t *cube;
-    list_t *bullet;
+    list_t *projectile;
 
     menu_t *menu;
 } game_t;
@@ -140,9 +139,9 @@ void initCamera(game_t *game);
  * @param speed
  * @param size
  * @param camera
- * @return bullet_t*
+ * @return projectile_t*
  */
-void initBullet(game_t *game);
+void initProjectile(game_t *game);
 
 /**
  * @brief
@@ -154,13 +153,13 @@ void initGame(game_t *game);
 // CREATE
 
 /**
- * @brief Create a Bullet object
+ * @brief Create a projectile object
  *
  * @param game
  * @param speed
  * @param size
  */
-void createBullet(game_t *game, float speed, float size);
+void createProjectile(game_t *game, float speed, float size);
 
 // UPDATE
 
@@ -214,7 +213,7 @@ void updateCollision(game_t *game);
  *
  * @param game
  */
-void updateDeadBullet(game_t *game);
+void updateDeadProjectile(game_t *game);
 
 /**
  * @brief
@@ -244,7 +243,7 @@ void drawCube(game_t *game);
  *
  * @param game
  */
-void drawBullet(game_t *game);
+void drawProjectile(game_t *game);
 
 // MAIN
 

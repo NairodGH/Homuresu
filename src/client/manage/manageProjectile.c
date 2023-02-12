@@ -1,10 +1,10 @@
 #include "includes.h"
 
-void createBullet(game_t *game, float speed, float size)
+void createProjectile(game_t *game, float speed, float size)
 {
-    bullet_t *new = calloc(1, sizeof(bullet_t));
+    projectile_t *new = calloc(1, sizeof(projectile_t));
 
-    new->position = (Vector3){game->camera.position.x, game->camera.position.y, game->camera.position.z};
+    new->position = game->camera.position;
     new->direction = Vector3Normalize(Vector3Subtract((Vector3){game->camera.target.x, game->camera.target.y, game->camera.target.z}, new->position));
     new->speed = speed;
     new->size = size;
@@ -12,5 +12,5 @@ void createBullet(game_t *game, float speed, float size)
 
     new->model.transform = MatrixMultiply(new->model.transform, MatrixRotateY(atan2(new->direction.x, new->direction.z)));
     new->isAlive = true;
-    list_push_data(game->bullet, new);
+    list_push_data(game->projectile, new);
 }

@@ -79,22 +79,22 @@ set(CLIENT_SRC
     ${CLIENT_ROOT}/mainLoop.c
     ${CLIENT_ROOT}/menu.c
 
-    ${CLIENT_ROOT}/init/initBullet.c
+    ${CLIENT_ROOT}/init/initProjectile.c
     ${CLIENT_ROOT}/init/initCamera.c
     ${CLIENT_ROOT}/init/initWall.c
     ${CLIENT_ROOT}/init/initWindow.c
     ${CLIENT_ROOT}/init/initGame.c
     ${CLIENT_ROOT}/init/initMenu.c
 
-    ${CLIENT_ROOT}/draw/drawBullet.c
+    ${CLIENT_ROOT}/draw/drawProjectile.c
     ${CLIENT_ROOT}/draw/drawCube.c
     ${CLIENT_ROOT}/draw/drawGame.c
 
-    ${CLIENT_ROOT}/manage/manageBullet.c
+    ${CLIENT_ROOT}/manage/manageProjectile.c
 
     ${CLIENT_ROOT}/update/updateKeyboard.c
     ${CLIENT_ROOT}/update/updateMouse.c
-    ${CLIENT_ROOT}/update/updateBullet.c
+    ${CLIENT_ROOT}/update/updateProjectile.c
     ${CLIENT_ROOT}/update/updateCollision.c
     ${CLIENT_ROOT}/update/updateEvent.c
     ${CLIENT_ROOT}/update/updateGame.c

@@ -8,7 +8,7 @@ void drawGame(game_t *game)
     // 3D
     BeginMode3D(game->camera);
     drawCube(game);
-    drawBullet(game);
+    drawProjectile(game);
     // add ...
 
     EndMode3D();

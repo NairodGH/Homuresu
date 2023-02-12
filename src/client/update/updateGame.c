@@ -14,5 +14,5 @@ void updateGame(game_t *game)
     game->camera.position.z += (game->camera.position.z - game->cameraLastPosition.z) * game->speed * 1.5;
     updateCollision(game);
     updateEvent(game);
-    updateDeadBullet(game);
+    updateDeadProjectile(game);
 }

@@ -1,12 +1,12 @@
 #include "includes.h"
 
-static void checkCollisionBullet(game_t *game, cube_t *cube)
+static void checkCollisionprojectile(game_t *game, cube_t *cube)
 {
     node_t *node = NULL;
-    bullet_t *temp = NULL;
+    projectile_t *temp = NULL;
 
-    foreach(game->bullet->head, node) {
-        temp = (bullet_t *)node->data;
+    foreach(game->projectile->head, node) {
+        temp = (projectile_t *)node->data;
         if (temp->isAlive == false)
             continue;
         if (temp->position.x > cube->position.x - cube->width / 2 &&
@@ -30,7 +30,7 @@ void checkCollision(game_t *game)
             game->camera.position.z > temp->position.z - temp->length / 2 &&
             game->camera.position.z < temp->position.z + temp->length / 2)
             game->camera.position = game->cameraLastPosition;
-        checkCollisionBullet(game, temp);
+        checkCollisionprojectile(game, temp);
     }
 }
 

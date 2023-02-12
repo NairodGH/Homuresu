@@ -7,6 +7,6 @@ void initGame(game_t *game)
     initCamera(game);
     initCube(game);
     initWall(game);
-    initBullet(game);
+    initProjectile(game);
     initMenu(game);
 }
