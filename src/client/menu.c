@@ -4,15 +4,14 @@
 void selection_menu_loop(menu_t *menu);
 
 static void put_dorian(menu_t *menu_st)
-{
-    menu_st->Dorion[0].transform = MatrixMultiply(menu_st->Dorion[0].transform, MatrixRotateY(0.05));
-    DrawModel(menu_st->Dorion[0], (Vector3){-5.0f, 0.0f, 5.0f}, 0.8f, WHITE);
-    DrawModel(menu_st->Dorion[1], (Vector3){0.0f, 0.0f, -27.0f}, 4.0f, WHITE);
+{   
+    DrawModelEx(menu_st->Dorion, (Vector3){-5.0f, 0.0f, -5.0f}, (Vector3){-1.0f , 1.0f, -1.0f}, menu_st->Spin_Dorion, (Vector3){1.0f , 1.0f, 1.0f}, WHITE);
+    DrawModelEx(menu_st->Dorion, (Vector3){-5.0f, 0.0f, -27.0f}, (Vector3){-1.0f, 1.0f, -1.0f}, 105.0f, (Vector3){4.0f , 4.0f, 4.0f}, WHITE);
+    DrawModelEx(menu_st->Dorion, (Vector3){-5.0f, 25.0f, 10.0f}, (Vector3){-2.0f , -2.0f, -2.0f}, 270.0f, (Vector3){5.0f , 5.0f, 5.0f}, WHITE);
+    DrawModelEx(menu_st->Dorion, (Vector3){4.0f, 0.0f, 7.0f}, (Vector3){1.0f , -2.0f, -1.0f}, 80.0f, (Vector3){1.0f , 1.0f, 1.0f}, WHITE);
+    DrawModelEx(menu_st->Dorion, (Vector3){5.0f, 0.0f, 5.0f}, (Vector3){0.0f , 0.0f, 0.0f}, 0.8f, (Vector3){1.0f , 1.0f, 1.0f}, WHITE);
 
-    DrawModel(menu_st->Dorion[2], (Vector3){-15.0f, 23.0f, -10.0f}, 5.0f, WHITE);
-
-    DrawModel(menu_st->Dorion[3], (Vector3){5.0f, 0.0f, 6.0f}, 1.0f, WHITE);
-    DrawModel(menu_st->Dorion[4], (Vector3){5.0f, 0.0f, 5.0f}, 1.0f, WHITE);
+    menu_st->Spin_Dorion += 1.0f;
 }
 
 static void menu_ui(menu_t *menu_st)

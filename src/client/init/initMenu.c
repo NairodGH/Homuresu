@@ -59,16 +59,8 @@ void initMenu(game_t *game)
 
     game->menu->ground = LoadTexture("./resources/menu/grass.png");
 
-    game->menu->Dorion = malloc(sizeof(Model) * 5);
-    
-    for (int i = 0; i < 5; i++) {
-        game->menu->Dorion[i] = LoadModel("resources/dorion/Dorion.glb");
-        game->menu->Dorion[i].materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = LoadTexture("resources/dorion/Dorion2.png");
-    }
-    for (int i = 0; i < 2; i++)
-        game->menu->Dorion[i].transform = MatrixMultiply(game->menu->Dorion[i].transform, MatrixRotateZ(-1.5));
-    game->menu->Dorion[1].transform = MatrixMultiply(game->menu->Dorion[1].transform, MatrixRotateY(1.5));
-    game->menu->Dorion[2].transform = MatrixMultiply(game->menu->Dorion[2].transform, MatrixRotateZ(2));
-    game->menu->Dorion[4].transform = MatrixMultiply(game->menu->Dorion[0].transform, MatrixRotateZ(0.5));
+    game->menu->Dorion = LoadModel("resources/dorion/Dorion.glb");
+    game->menu->Dorion.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = LoadTexture("resources/dorion/Dorion2.png");
+    game->menu->Spin_Dorion = 0.0f;
     initSelectionMenu(game);
 }
