@@ -19,6 +19,9 @@ void drawItem(game_t *game)
 
     foreach(game->item->head, node) {
         temp = (item_t *)node->data;
-        DrawCubeV(temp->position, (Vector3){ 1, 1, 1 }, BLUE);
+        Vector3 pos = temp->position;
+        temp->model.transform = MatrixRotateX(270.0f * DEG2RAD);
+        temp->model.transform = MatrixMultiply(temp->model.transform, MatrixScale(0.03, 0.1, 0.03));
+        DrawModel(temp->model, temp->position, 1, WHITE);
     }
 }
