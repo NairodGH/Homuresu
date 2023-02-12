@@ -17,6 +17,7 @@ static const relation_t relation[] = {
     {MODEL_BALD_MIDORIYA, "resources/midoriya/bald_Midoriya.glb", {0, 180, 0}, {0.013, 0.013, 0.013}},
     {MODEL_AMOGUS, "resources/amogus.glb", {0, 180, 0}, {0.7, 0.7, 0.7}},
     {MODEL_KNIGHT, "resources/evilKnight.glb", {0, 180, 0}, {1, 1, 1}},
+    {MODEL_TRACTOR, "resources/tractor.glb", {0, 90, 90}, {0.7, 0.7, 0.7}},
 };
 
 Model *getModel(list_t *list, model_e type)

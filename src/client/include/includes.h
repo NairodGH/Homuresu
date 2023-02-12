@@ -77,6 +77,7 @@ typedef enum
   MODEL_BALD_MIDORIYA,
   MODEL_AMOGUS,
   MODEL_KNIGHT,
+  MODEL_TRACTOR,
 } model_e;
 
 typedef struct
@@ -93,7 +94,7 @@ typedef struct
   int cooldownShoot;
   int lastShoot;
 } stat_t;
-    
+
 typedef struct {
   int id;
   Vector3 position;
