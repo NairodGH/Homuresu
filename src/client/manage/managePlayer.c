@@ -1,6 +1,6 @@
 #include "includes.h"
 
-static char **splitMsg(char *msg, char *delim)
+char **splitMsg(char *msg, char *delim)
 {
     char **tab = NULL;
     char *token = strtok(msg, delim);
@@ -16,7 +16,7 @@ static char **splitMsg(char *msg, char *delim)
     return (tab);
 }
 
-static void freeDoubleTab(char **tab)
+void freeDoubleTab(char **tab)
 {
     for (int i = 0; tab[i] != NULL; i++)
         free(tab[i]);

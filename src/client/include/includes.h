@@ -168,6 +168,7 @@ typedef struct
   list_t *player;
   stat_t *stat;
   menu_t *menu;
+  void *client;
 } game_t;
 
 /**
@@ -265,6 +266,13 @@ void initPlayer(game_t *game);
  * @param game
  */
 void addInfoPlayerToGame(game_t *game, char *msg);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void addBulletToGame(game_t *game, char *msg);
 
 // CREATE
 
@@ -445,5 +453,21 @@ void initMenu(game_t *game);
  * @return int
  */
 int menu(menu_t *menu_st, float *x);
+
+/**
+ * @brief
+ *
+ * @param menu_st
+ */
+char **splitMsg(char *msg, char *delim);
+
+/**
+ * @brief
+ *
+ * @param menu_st
+ */
+void freeDoubleTab(char **tab);
+
+int send_tcp_packet(int sock, char const *msg, char const *eof);
 
 #endif /* !CLIENT_H_ */

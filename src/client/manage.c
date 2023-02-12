@@ -12,9 +12,11 @@ int manage_tcp_recv_actions(client_t *client, game_t *game)
         printf("Message from %s:%i (tcp) : %s\n", client->ip, client->port_tcp, msg);
         if (strncmp(msg, "HELLO", 5) == 0) {
             game->id = atoi(msg + 6);
+        } else if (strncmp(msg, "BULLET", 6) == 0) {
+            addBulletToGame(game, msg + 7);
+        } else if (strncmp(msg, "PLAYER", 6) == 0) {
+            addInfoPlayerToGame(game, msg + 7);
         }
-        else
-            addInfoPlayerToGame(game, msg);
     }
     free(msg);
     return check;
