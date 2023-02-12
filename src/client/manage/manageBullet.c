@@ -26,7 +26,7 @@ void createAmmoBox(game_t *game)
 
     new->position = (Vector3){GetRandomValue(-(MAP_SIZE / 2) + 1, (MAP_SIZE / 2) - 1),
                               0, GetRandomValue(-(MAP_SIZE / 2) + 1, (MAP_SIZE / 2) - 1)};
-    new->texture = LoadTexture("resources/ammoBox.png");
+    new->model = *getModel(game, MODEL_AMMO_BOX);
     new->height = 1.0f;
     new->width = 1.0f;
     new->length = 1.0f;
