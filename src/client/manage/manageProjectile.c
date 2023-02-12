@@ -3,7 +3,7 @@
 void createProjectile(game_t *game, float speed, float size)
 {
     projectile_t *new = calloc(1, sizeof(projectile_t));
-    char msg[100];
+    char *msg = calloc(300, sizeof(char));
 
     new->position = game->camera.position;
     new->direction = Vector3Normalize(Vector3Subtract((Vector3){game->camera.target.x, game->camera.target.y, game->camera.target.z}, new->position));
@@ -16,19 +16,18 @@ void createProjectile(game_t *game, float speed, float size)
     game->stat->lastShoot = time(NULL);
     game->stat->ammo--;
     #ifndef _WIN32
-    sprintf(msg, "BULLET %d pos %f %f %f dir %f %f %f speed %f size %f", game->id, new->position.x, new->position.y, new->position.z,
+    sprintf(msg, "BULLET %d %f %f %f %f %f %f %f %f", game->id, new->position.x, new->position.y, new->position.z,
                     new->direction.x, new->direction.y, new->direction.z, new->speed, new->size);
-    send_tcp_packet(((client_t *)game->client)->sock_tcp, msg, EOF_NETWORK);
+    send_tcp_packet(game->socket, msg, EOF_NETWORK);
     #endif
 }
 
-void createAmmoBox(game_t *game)
+void createAmmoBox(game_t *game, Vector3 pos)
 {
     item_t *new = calloc(1, sizeof(item_t));
 
-    new->position = (Vector3){GetRandomValue(-(MAP_SIZE / 2) + 1, (MAP_SIZE / 2) - 1),
-                              0, GetRandomValue(-(MAP_SIZE / 2) + 1, (MAP_SIZE / 2) - 1)};
-    new->texture = LoadTexture("resources/ammoBox.png");
+    new->position = pos;
+    new->model = *getModel(game, MODEL_AMMO_BOX);
     new->height = 1.0f;
     new->width = 1.0f;
     new->length = 1.0f;

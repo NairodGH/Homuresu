@@ -4,5 +4,7 @@ void initWindow(const int screenWidth, const int screenHeight)
 {
     SetTraceLogLevel(LOG_NONE);
     InitWindow(screenWidth, screenHeight, "Homuresu");
+    #ifndef _WIN32
     ToggleFullscreen();
+    #endif
 }

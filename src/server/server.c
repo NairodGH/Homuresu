@@ -94,21 +94,6 @@ static int loop_recv_srv_udp(homuresu_t *gn)
     return check;
 }
 
-void send_message_to_all_clients(server_tcp_t *server)
-{
-    client_t *tmp = server->clients->next;
-    char *tempMessage = NULL;
-
-    for (; tmp != NULL; tmp = tmp->next) {
-        if (tmp->message == "")
-            continue;
-        if (send(tmp->sock, tmp->message, strlen(tmp->message) ,0) == -1) {
-            printf("Error : Fail to send message to client\n");
-        }
-        strcpy(tmp->message, "");
-    }
-}
-
 int loop_server(homuresu_t *gn)
 {
     gn->srv_tcp->clients = init_clients(gn->srv_tcp->sock);
@@ -118,7 +103,6 @@ int loop_server(homuresu_t *gn)
         reset_fd(gn);
         if (loop_recv_srv_tcp(gn) != 0)
             return 84;
-        send_message_to_all_clients(gn->srv_tcp);
     }
     return 0;
 }

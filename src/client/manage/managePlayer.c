@@ -57,21 +57,34 @@ void addInfoPlayerToGame(game_t *game, char *msg)
         player = createPlayer(id, game);
         list_push_data(game->player, player);
     }
-    for (int i = 1; tab[i] != NULL; i++) {
-        if (strcmp(tab[i], "pos") == 0) {
-            player->position.x = atof(tab[i + 1]);
-            player->position.y = atof(tab[i + 2]);
-            player->position.z = atof(tab[i + 3]);
-        }
-        if (strcmp(tab[i], "dir") == 0) {
-            player->direction.x = atof(tab[i + 1]);
-            player->direction.y = atof(tab[i + 2]);
-            player->direction.z = atof(tab[i + 3]);
-        }
-        if (strcmp(tab[i], "life") == 0)
-            player->stat.life = atoi(tab[i + 1]);
-        if (strcmp(tab[i], "score") == 0)
-            player->stat.score = atoi(tab[i + 1]);
-    }
+    player->position.x = atof(tab[1]);
+    player->position.y = atof(tab[2]);
+    player->position.z = atof(tab[3]);
+    player->direction.x = atof(tab[4]);
+    player->direction.y = atof(tab[5]);
+    player->direction.z = atof(tab[6]);
+    player->stat.life = atoi(tab[7]);
+    player->stat.score = atoi(tab[8]);
     freeDoubleTab(tab);
+}
+
+void removePlayerFromGame(game_t *game, int id)
+{
+    node_t *node = NULL;
+    player_t *player = NULL;
+    node_t *tmp = NULL;
+
+    foreach_safe(game->player->head, node, tmp) {
+        player = (player_t *)node->data;
+        if (player->id == id) {
+            list_remove_node(game->player, node);
+            free(player);
+            break;
+        }
+    }
+}
+
+void updateLifePlayer(game_t *game, int id, int life)
+{
+    game->stat->life = life;
 }

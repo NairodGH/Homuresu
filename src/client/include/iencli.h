@@ -55,5 +55,8 @@ int manage_udp_send_actions(client_t *client);
 
 // client.c
 int loop_client(client_t *client, game_t *game);
+
+// action.c
+int client_action_mng(client_t *client, game_t *game, char *msg);
 #endif
 #endif /* !IENCLI_H_ */

@@ -81,6 +81,7 @@ set(CLIENT_UNIX_SRC
     ${CLIENT_ROOT}/memory.c
     ${CLIENT_ROOT}/manage.c
     ${CLIENT_ROOT}/client.c
+    ${CLIENT_ROOT}/action.c
 )
 endif()
 
@@ -96,10 +97,10 @@ set(CLIENT_SRC
     ${CLIENT_ROOT}/init/initWall.c
     ${CLIENT_ROOT}/init/initWindow.c
     ${CLIENT_ROOT}/init/initSounds.c
+    ${CLIENT_ROOT}/init/initMusic.c
     ${CLIENT_ROOT}/init/initModels.c
     ${CLIENT_ROOT}/init/initGame.c
     ${CLIENT_ROOT}/init/initSprite.c
-    ${CLIENT_ROOT}/init/initStat.c
     ${CLIENT_ROOT}/init/initMenu.c
     ${CLIENT_ROOT}/init/initStat.c
     ${CLIENT_ROOT}/init/initItem.c
@@ -122,7 +123,7 @@ set(CLIENT_SRC
     ${CLIENT_ROOT}/update/updateCollision.c
     ${CLIENT_ROOT}/update/updateEvent.c
     ${CLIENT_ROOT}/update/updateGame.c
-
+    
     ${CLIENT_ROOT}/main.c
 )
 
@@ -161,6 +162,7 @@ set(SERVER_SRC
     ${SERVER_ROOT}/manage.c
     ${SERVER_ROOT}/server.c
     ${SERVER_ROOT}/cli_accept.c
+    ${SERVER_ROOT}/action.c
     ${SERVER_ROOT}/network/add_client.c
     ${SERVER_ROOT}/network/get_packet.c
     ${SERVER_ROOT}/network/init_srv.c

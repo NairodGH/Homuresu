@@ -76,8 +76,8 @@ static char *sendInfoServer(game_t *game, char *msg)
     if (msg)
         free(msg);
     msg = malloc(sizeof(char) * 100);
-    sprintf(msg, "%d pos : %f %f %f, dir : %f %f %f, life : %d, score : %d", game->id,
-        game->camera.position.x, game->camera.position.y, game->camera.position.z,
+    sprintf(msg, "INFO %i %f %f %f %f %f %f %d %d", game->id,
+        game->camera.position.x, game->camera.position.y - 2, game->camera.position.z,
         game->camera.target.x, game->camera.target.y, game->camera.target.z,
         game->stat->life, game->stat->score);
     return msg;
@@ -88,6 +88,7 @@ int loop_client(client_t *client, game_t *game)
     int check = 0;
     float x = 0;
     char *msg = NULL;
+    game->socket = client->sock_tcp;
 
     while (!WindowShouldClose()) {
         if (game->menu->is_menu) {

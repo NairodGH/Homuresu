@@ -7,6 +7,13 @@ void drawPlayer(game_t *game)
 
     foreach(game->player->head, node) {
         temp = (player_t *)node->data;
-        DrawModel(temp->model.model, temp->position, 1, WHITE);
+        if (temp->isAlive) {
+            temp->model.model.transform = MatrixRotateZ(270 * DEG2RAD);
+            temp->model.model.transform = MatrixMultiply(
+                temp->model.model.transform, MatrixScale(0.6, 0.6, 0.6));
+            temp->model.model.transform = MatrixMultiply(
+                temp->model.model.transform, MatrixRotateY(atan2(temp->direction.x, temp->direction.z) * RAD2DEG));
+            DrawModel(temp->model.model, temp->position, 1, WHITE);
+        }
     }
 }

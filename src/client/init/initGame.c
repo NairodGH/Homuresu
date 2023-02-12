@@ -10,12 +10,13 @@ void initGame(game_t *game)
     #endif
     game->id = -1;
     initCamera(game);
-    initCube(game);
-    initWall(game);
+    initModels(game);
     initItem(game);
     initProjectile(game);
+    initCube(game);
+    initWall(game);
+    initMusic(game);
     initSounds(game);
-    initModels(game);
     initSprite(game);
     initStat(game);
     initPlayer(game);

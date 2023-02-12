@@ -58,3 +58,24 @@ int send_udp_packet(int sock, char const *msg, char const *eof, client_t *client
     free(message);
     return 0;
 }
+
+void send_message_to_all_clients(server_tcp_t *server, char *msg)
+{
+    client_t *tmp = server->clients->next;
+
+    for (; tmp != NULL; tmp = tmp->next)
+        if (send_tcp_packet(tmp->sock, msg, EOF_NETWORK) != 0)
+            printf("Error : Fail to send message to client\n");
+}
+
+void send_msg_to_all_cli_exepct_cli(server_tcp_t *server, client_t *client, char *msg)
+{
+    client_t *tmp = server->clients->next;
+
+    for (; tmp != NULL; tmp = tmp->next) {
+        if (tmp == client)
+            continue;
+        if (send_tcp_packet(tmp->sock, msg, EOF_NETWORK) != 0)
+            printf("Error : Fail to send message to client\n");
+    }
+}
