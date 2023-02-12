@@ -101,6 +101,7 @@ typedef struct {
   model_t model;
   stat_t stat;
   bool isAlive;
+  model_e idModel;
 } player_t;
 
 typedef struct
@@ -528,5 +529,7 @@ void removeItemFromGame(game_t *game, float x, float z);
 void updateLifePlayer(game_t *game, int id, int life);
 
 void updateKillPlayer(game_t *game, int id);
+
+model_e getModelType(list_t *list, model_t *model);
 
 #endif /* !CLIENT_H_ */
