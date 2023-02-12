@@ -15,6 +15,8 @@ static const relation_t relation[] = {
     {MODEL_DEADPOOL, "resources/deadpool/Deadpool.glb", {90, 180, 0}, {0.65, 0.65, 0.65}},
     {MODEL_MIDORIYA, "resources/midoriya/Midoriya.glb", {0, 180, 0}, {0.013, 0.013, 0.013}},
     {MODEL_BALD_MIDORIYA, "resources/midoriya/bald_Midoriya.glb", {0, 180, 0}, {0.013, 0.013, 0.013}},
+    {MODEL_AMOGUS, "resources/amogus.glb", {0, 180, 0}, {0.7, 0.7, 0.7}},
+    {MODEL_KNIGHT, "resources/evilKnight.glb", {0, 180, 0}, {1, 1, 1}},
 };
 
 Model *getModel(list_t *list, model_e type)
