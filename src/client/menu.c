@@ -85,7 +85,7 @@ int menu(menu_t *menu_st)
                 menu_st->is_menu = 0;
         }
         else {
-            selection_menu_loop(menu_st->selection_menu);
+            selection_menu_loop(menu_st);
             if (IsKeyPressed(KEY_ESCAPE))
                 menu_st->selection_menu->selection = 0;
             continue;
