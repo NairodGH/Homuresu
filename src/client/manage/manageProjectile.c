@@ -15,9 +15,9 @@ void createProjectile(game_t *game, float speed, float size)
     list_push_data(game->projectile, new);
     game->stat->lastShoot = time(NULL);
     game->stat->ammo--;
+    #ifndef _WIN32
     sprintf(msg, "BULLET %d pos %f %f %f dir %f %f %f speed %f size %f", game->id, new->position.x, new->position.y, new->position.z,
                     new->direction.x, new->direction.y, new->direction.z, new->speed, new->size);
-    #ifndef _WIN32
     send_tcp_packet(((client_t *)game->client)->sock_tcp, msg, EOF_NETWORK);
     #endif
 }
