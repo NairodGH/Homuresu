@@ -10,6 +10,10 @@ static const relation_t relation[] = {
     {MODEL_DORION, "resources/dorion/Dorion.glb"},
     {MODEL_DORION2, "resources/dorion/Dorion2.glb"},
     {MODEL_AMMO_BOX, "resources/ammo_box.glb"},
+    {MODEL_DEADPOOL, "resources/deadpool/Deadpool.glb"},
+    {MODEL_MIDORIYA, "resources/midoriya/Midoriya.glb"},
+    {MODEL_BALD_MIDORIYA, "resources/midoriya/bald_Midoriya.glb"},
+    {MODEL_MAXWELL, "resources/maxwell/Maxwell.obj"},
 };
 
 Model *getModel(game_t *game, model_e type)
