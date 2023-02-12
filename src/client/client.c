@@ -41,7 +41,7 @@ static int loop_send_cli_udp(client_t *client)
     return check;
 }
 
-static int loop_recv_cli_tcp(client_t *client)
+static int loop_recv_cli_tcp(client_t *client, game_t *game)
 {
     int check = 0;
     struct timeval timeout = {0, 100};
@@ -49,7 +49,7 @@ static int loop_recv_cli_tcp(client_t *client)
     if (select(client->sock_tcp + 1, &client->read_fd,
         NULL, NULL, &timeout) >= 0) {
         if (FD_ISSET(client->sock_tcp, &client->read_fd)) {
-            if ((check = manage_tcp_recv_actions(client)) != 0)
+            if ((check = manage_tcp_recv_actions(client, game)) != 0)
                 return check;
         }
     }
@@ -71,10 +71,24 @@ static int loop_recv_cli_udp(client_t *client)
     return check;
 }
 
+static char *sendInfoServer(game_t *game, char *msg)
+{
+    if (msg)
+        free(msg);
+    msg = malloc(sizeof(char) * 100);
+    sprintf(msg, "INFO %i %f %f %f %f %f %f %d %d", game->id,
+        game->camera.position.x, game->camera.position.y - 2, game->camera.position.z,
+        game->camera.target.x, game->camera.target.y, game->camera.target.z,
+        game->stat->life, game->stat->score);
+    return msg;
+}
+
 int loop_client(client_t *client, game_t *game)
 {
     int check = 0;
     float x = 0;
+    char *msg = NULL;
+    game->socket = client->sock_tcp;
 
     while (!WindowShouldClose()) {
         if (game->menu->is_menu) {
@@ -83,15 +97,17 @@ int loop_client(client_t *client, game_t *game)
         } else {
             updateGame(game);
             drawGame(game);
+            if (game->id != -1) {
+                msg = sendInfoServer(game, msg);
+                send_tcp_packet(client->sock_tcp, msg, EOF_NETWORK);
+            }
         }
         reset_fd(client);
-        if ((check = loop_recv_cli_tcp(client)) != 0)
-            return check;
-        reset_fd(client);
-        /* if ((check = loop_send_cli_tcp(client)) != 0)
-            return check;
-        reset_fd(client); */
+        if ((check = loop_recv_cli_tcp(client, game)) != 0)
+            break;
     }
+    if (msg)
+        free(msg);
     CloseWindow();
     return check;
 }

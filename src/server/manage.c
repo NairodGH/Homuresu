@@ -1,5 +1,14 @@
 #include "general.h"
 
+static int send_death(server_tcp_t *server, client_t *client)
+{
+    char *msg = malloc(sizeof(char) * 100);
+
+    sprintf(msg, "DEATH %i", client->sock);
+    send_msg_to_all_cli_exepct_cli(server, client, msg);
+    free(msg);
+}
+
 int manage_tcp_recv_actions(server_tcp_t *server, client_t *client)
 {
     int check = 0;
@@ -10,12 +19,7 @@ int manage_tcp_recv_actions(server_tcp_t *server, client_t *client)
         return 1;
     } else {
         printf("Message from %s:%i : %s\n", client->ip, client->port, msg);
-        //! ACTION EN FONCTION DU MESSAGE TCP
-        if (strcmp(msg, "exit") == 0) {
-            if (send_tcp_packet(client->sock, "Hello World from TCP", EOF_NETWORK) != 0)
-                return 84;
-            check = 1;
-        }
+        check = client_action_mng(server, client, msg);
     }
     free(msg);
     return check;

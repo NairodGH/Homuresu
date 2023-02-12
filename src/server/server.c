@@ -99,23 +99,9 @@ int loop_server(homuresu_t *gn)
     gn->srv_tcp->clients = init_clients(gn->srv_tcp->sock);
     if (gn->srv_tcp->clients == NULL)
         return 84;
-
     while (true) {
-        // printf("recv_tcp\n");
         reset_fd(gn);
         if (loop_recv_srv_tcp(gn) != 0)
-            return 84;
-        // printf("recv_udp\n");
-        reset_fd(gn);
-        if (loop_recv_srv_udp(gn) != 0)
-            return 84;
-        // printf("send_tcp\n");
-        reset_fd(gn);
-        if (loop_send_srv_tcp(gn) != 0)
-            return 84;
-        // printf("send_udp\n");
-        reset_fd(gn);
-        if (loop_send_srv_udp(gn) != 0)
             return 84;
     }
     return 0;

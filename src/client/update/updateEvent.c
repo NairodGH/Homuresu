@@ -18,6 +18,9 @@ static void updateBinding(game_t *game)
             bindings[i].func(game);
         }
     }
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        updateEnter(game);
+    }
 }
 
 void updateEvent(game_t *game)

@@ -21,7 +21,7 @@
 
 #include "list.h"
 
-#define OBS_NBR 10
+#define OBS_NBR 0
 #define WALL_NBR 4
 #define MAP_SIZE 32.0f
 
@@ -75,6 +75,15 @@ typedef struct
   int cooldownShoot;
   int lastShoot;
 } stat_t;
+
+typedef struct {
+  int id;
+  Vector3 position;
+  Vector3 direction;
+  model_t model;
+  stat_t stat;
+  bool isAlive;
+} player_t;
 
 typedef struct bullet_s
 {
@@ -145,16 +154,19 @@ typedef struct
     Camera camera;
     Vector3 cameraLastPosition;
 
-    Vector2 windowSize;
+  Vector2 windowSize;
+  int id;
+  int socket;
 
-    list_t *cube;
-    list_t *sound;
-    list_t *model;
-    list_t *bullet;
-    list_t *sprite;
-    list_t *item;
-    stat_t *stat;
-    menu_t *menu;
+  list_t *cube;
+  list_t *sound;
+  list_t *model;
+  list_t *bullet;
+  list_t *sprite;
+  list_t *item;
+  list_t *player;
+  stat_t *stat;
+  menu_t *menu;
 } game_t;
 
 /**
@@ -239,6 +251,27 @@ void initStat(game_t *game);
  */
 void initItem(game_t *game);
 
+/**
+ * @brief
+ *
+ * @param game
+ */
+void initPlayer(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void addInfoPlayerToGame(game_t *game, char *msg);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void addBulletToGame(game_t *game, char *msg);
+
 // CREATE
 
 /**
@@ -276,7 +309,7 @@ Model *getModel(game_t *game, model_e type);
  */
 void playSound(game_t *game, sound_e type);
 
-void createAmmoBox(game_t *game);
+void createAmmoBox(game_t *game, Vector3 pos);
 
 // UPDATE
 
@@ -372,6 +405,13 @@ void drawBullet(game_t *game);
  *
  * @param game
  */
+void drawPlayer(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
 void drawItem(game_t *game);
 
 /**
@@ -380,6 +420,13 @@ void drawItem(game_t *game);
  * @param game
  */
 void drawSpriteTwoD(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void drawTextTwoD(game_t *game);
 
 // MAIN
 
@@ -404,5 +451,23 @@ void initMenu(game_t *game);
  * @return int
  */
 int menu(menu_t *menu_st, float *x);
+
+/**
+ * @brief
+ *
+ * @param menu_st
+ */
+char **splitMsg(char *msg, char *delim);
+
+/**
+ * @brief
+ *
+ * @param menu_st
+ */
+void freeDoubleTab(char **tab);
+
+int send_tcp_packet(int sock, char const *msg, char const *eof);
+
+void removePlayerFromGame(game_t *game, int id);
 
 #endif /* !CLIENT_H_ */

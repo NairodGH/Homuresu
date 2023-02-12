@@ -94,14 +94,17 @@ set(CLIENT_SRC
     ${CLIENT_ROOT}/init/initMenu.c
     ${CLIENT_ROOT}/init/initStat.c
     ${CLIENT_ROOT}/init/initItem.c
+    ${CLIENT_ROOT}/init/initPlayer.c
 
     ${CLIENT_ROOT}/draw/drawBullet.c
+    ${CLIENT_ROOT}/draw/drawPlayer.c
     ${CLIENT_ROOT}/draw/drawCube.c
     ${CLIENT_ROOT}/draw/drawGame.c
     ${CLIENT_ROOT}/draw/drawTwoD.c
 
     ${CLIENT_ROOT}/manage/manageBullet.c
     ${CLIENT_ROOT}/manage/manageSounds.c
+    ${CLIENT_ROOT}/manage/managePlayer.c
 
     ${CLIENT_ROOT}/update/updateKeyboard/updateWalk.c
     ${CLIENT_ROOT}/manage/manageSprite.c
@@ -116,6 +119,7 @@ set(CLIENT_SRC
     ${CLIENT_ROOT}/network/get_packet.c
     ${CLIENT_ROOT}/network/init_client.c
     ${CLIENT_ROOT}/network/send_packet.c
+    ${CLIENT_ROOT}/action.c
     ${CLIENT_ROOT}/client.c
     ${CLIENT_ROOT}/main.c
     ${CLIENT_ROOT}/memory.c
@@ -156,6 +160,7 @@ set(SERVER_SRC
     ${SERVER_ROOT}/manage.c
     ${SERVER_ROOT}/server.c
     ${SERVER_ROOT}/cli_accept.c
+    ${SERVER_ROOT}/action.c
     ${SERVER_ROOT}/network/add_client.c
     ${SERVER_ROOT}/network/get_packet.c
     ${SERVER_ROOT}/network/init_srv.c

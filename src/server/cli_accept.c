@@ -12,6 +12,7 @@ static int count_client(client_t *clients)
 int assign_fd_connection(server_tcp_t *server, int con_fd)
 {
     client_t *tmp = NULL;
+    char msg[10];
 
     if (count_client(server->clients) >= MAX_CLIENTS) {
         printf("Warning : Fail to add client, limit has been reached\n");
@@ -22,6 +23,8 @@ int assign_fd_connection(server_tcp_t *server, int con_fd)
         printf("Error : Fail to add client\n");
         return 84;
     }
+    sprintf(msg, "HELLO %d", tmp->sock);
+    send_tcp_packet(tmp->sock, msg, EOF_NETWORK);
     printf("++ %s:%i\n", tmp->ip, tmp->port);
     return 0;
 }

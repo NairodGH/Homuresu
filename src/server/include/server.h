@@ -17,6 +17,21 @@
 #define BUFFER_SIZE 1024
 #define EOF_NETWORK "\r\n"
 
+typedef struct Vector3_s {
+    float x;
+    float y;
+    float z;
+} Vector3_t;
+
+typedef struct infoPlayer_s {
+    char *name;
+    Vector3_t pos;
+    Vector3_t dir;
+    int life;
+    int score;
+    int id;
+} infoPlayer_t;
+
 typedef struct client_s client_t;
 struct client_s
 {
@@ -26,6 +41,7 @@ struct client_s
     struct sockaddr_in addr;
     client_t *next;
     client_t *prev;
+    infoPlayer_t *info;
 };
 
 typedef struct server_tcp_s {
@@ -70,5 +86,10 @@ char *get_udp_packet(int sock);
 // send_packet.c
 int send_tcp_packet(int sock, char const *msg, char const *eof);
 int send_udp_packet(int sock, char const *msg, char const *eof, client_t *client);
+void send_message_to_all_clients(server_tcp_t *server, char *msg);
+void send_msg_to_all_cli_exepct_cli(server_tcp_t *server, client_t *client, char *msg);
+
+// action.c
+int client_action_mng(server_tcp_t *server, client_t *client, char *msg);
 
 #endif /* !SERVER_H_ */
