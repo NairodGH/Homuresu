@@ -29,8 +29,12 @@ void selection_menu_loop(menu_t *menu)
     if (IsKeyPressed(KEY_RIGHT)) {
         if (menu->selection_menu->current->next != NULL)
             menu->selection_menu->current = menu->selection_menu->current->next;
+        else
+            menu->selection_menu->current = menu->selection_menu->elements->head;
     } else if (IsKeyPressed(KEY_LEFT)) {
         if (menu->selection_menu->current->prev != NULL)
             menu->selection_menu->current = menu->selection_menu->current->prev;
+        else
+            menu->selection_menu->current = menu->selection_menu->elements->tail;
     }
 }
