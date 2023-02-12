@@ -75,6 +75,8 @@ typedef enum
   MODEL_DEADPOOL,
   MODEL_MIDORIYA,
   MODEL_BALD_MIDORIYA,
+  MODEL_AMOGUS,
+  MODEL_KNIGHT,
 } model_e;
 
 typedef struct
