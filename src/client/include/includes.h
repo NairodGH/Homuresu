@@ -135,7 +135,8 @@ typedef struct menu_s
     Texture2D building;
     Texture2D ground;
 
-    Model *Dorion;
+    Model Dorion;
+    float Spin_Dorion;
 } menu_t;
 
 typedef struct
