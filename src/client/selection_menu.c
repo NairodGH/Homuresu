@@ -13,7 +13,7 @@ void selection_menu_loop(menu_t *menu)
     DrawText("Selection Menu:", 25, 80, 20, WHITE);
     DrawText("Press LEFT/RIGHT to change selection", 70, 120, 20, WHITE);
     DrawText("Press SPACE to select", 70, 140, 20, WHITE);
-    DrawText("Press ESC to go back", 70, 160, 20, WHITE);
+    DrawText("Press BACKSPACE to go back", 70, 160, 20, WHITE);
 
     menu->mousePoint = GetMousePosition();
     SetMouseCursor(MOUSE_CURSOR_DEFAULT);
