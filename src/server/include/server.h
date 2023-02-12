@@ -41,7 +41,6 @@ struct client_s
     struct sockaddr_in addr;
     client_t *next;
     client_t *prev;
-    char message[256];
     infoPlayer_t *info;
 };
 
@@ -87,5 +86,10 @@ char *get_udp_packet(int sock);
 // send_packet.c
 int send_tcp_packet(int sock, char const *msg, char const *eof);
 int send_udp_packet(int sock, char const *msg, char const *eof, client_t *client);
+void send_message_to_all_clients(server_tcp_t *server, char *msg);
+void send_msg_to_all_cli_exepct_cli(server_tcp_t *server, client_t *client, char *msg);
+
+// action.c
+int client_action_mng(server_tcp_t *server, client_t *client, char *msg);
 
 #endif /* !SERVER_H_ */

@@ -10,12 +10,7 @@ int manage_tcp_recv_actions(server_tcp_t *server, client_t *client)
         return 1;
     } else {
         printf("Message from %s:%i : %s\n", client->ip, client->port, msg);
-        if (strcmp(msg, "exit") == 0) {
-            if (send_tcp_packet(client->sock, "Hello World from TCP", EOF_NETWORK) != 0)
-                return 84;
-            check = 1;
-        }
-        // parse_msg(msg, client); exemple msg : "pos : x y z, dir : x y z, life : x, score : x ..."
+        check = client_action_mng(server, client, msg);
     }
     free(msg);
     return check;

@@ -21,7 +21,7 @@
 
 #include "list.h"
 
-#define OBS_NBR 10
+#define OBS_NBR 0
 #define WALL_NBR 4
 #define MAP_SIZE 32.0f
 
@@ -158,6 +158,7 @@ typedef struct
 
   Vector2 windowSize;
   int id;
+  int socket;
 
   list_t *cube;
   list_t *sound;
@@ -168,7 +169,6 @@ typedef struct
   list_t *player;
   stat_t *stat;
   menu_t *menu;
-  void *client;
 } game_t;
 
 /**
