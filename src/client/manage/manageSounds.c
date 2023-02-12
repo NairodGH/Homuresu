@@ -1,6 +1,6 @@
 #include "includes.h"
 
-Sound *getSound(game_t *game, sound_e type)
+Music *getSound(game_t *game, sound_e type)
 {
     node_t *node = NULL;
     sound_t *sound = NULL;
@@ -16,20 +16,22 @@ Sound *getSound(game_t *game, sound_e type)
 
 void playSound(game_t *game, sound_e type)
 {
-    Sound *sound = getSound(game, type);
+    Music *sound = getSound(game, type);
 
     if (sound != NULL) {
         // PlaySound(*sound);
+        PlayMusicStream(*sound);
         // TODO
     }
 }
 
 void playSoundMulti(game_t *game, sound_e type)
 {
-    Sound *sound = getSound(game, type);
+    Music *sound = getSound(game, type);
 
     if (sound != NULL) {
         // PlaySoundMulti(*sound);
+        PlayMusicStream(*sound);
         // TODO
     }
 }
