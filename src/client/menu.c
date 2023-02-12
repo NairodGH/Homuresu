@@ -30,6 +30,7 @@ static void menu_ui(menu_t *menu_st)
     }
 
     DrawTextureRec(menu_st->quit_button, menu_st->quit_sourceRec, (Vector2){menu_st->quit_position.x, menu_st->quit_position.y}, WHITE);
+    DrawTextureEx(menu_st->soleil, (Vector2){menu_st->mousePoint.x - 44, menu_st->mousePoint.y - 44}, 0.0f, 0.2f, WHITE);
 
     if (CheckCollisionPointRec(menu_st->mousePoint, menu_st->quit_btnBounds)) {
         menu_st->quit_sourceRec.x = menu_st->quit_button.width / 2;
@@ -45,7 +46,6 @@ static void menu_ui(menu_t *menu_st)
     DrawTextureEx(menu_st->title, (Vector2){(GetMonitorWidth(GetCurrentMonitor()) - menu_st->title.width) / 2, 50}, 0.0f, 1.0f, WHITE);
     menu_st->mousePoint = GetMousePosition();
     SetMouseCursor(MOUSE_CURSOR_DEFAULT);
-    DrawCircle(menu_st->mousePoint.x, menu_st->mousePoint.y, 5, BLACK);
     EndDrawing();
 }
 
