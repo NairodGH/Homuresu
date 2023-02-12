@@ -73,13 +73,23 @@ set(CLIENT_INC
     ${CLIENT_ROOT}/include
 )
 
+if (UNIX)
+set(CLIENT_UNIX_SRC
+    ${CLIENT_ROOT}/network/get_packet.c
+    ${CLIENT_ROOT}/network/init_client.c
+    ${CLIENT_ROOT}/network/send_packet.c
+    ${CLIENT_ROOT}/memory.c
+    ${CLIENT_ROOT}/manage.c
+    ${CLIENT_ROOT}/client.c
+)
+endif()
+
 # fetch source files
 set(CLIENT_SRC
+    ${CLIENT_UNIX_SRC}
     ${CLIENT_ROOT}/main.c
     ${CLIENT_ROOT}/selection_menu.c
     ${CLIENT_ROOT}/menu.c
-    ${CLIENT_ROOT}/manage.c
-    ${CLIENT_ROOT}/client.c
 
     ${CLIENT_ROOT}/init/initProjectile.c
     ${CLIENT_ROOT}/init/initCamera.c
@@ -113,13 +123,6 @@ set(CLIENT_SRC
     ${CLIENT_ROOT}/update/updateEvent.c
     ${CLIENT_ROOT}/update/updateGame.c
 
-    ${CLIENT_ROOT}/network/get_packet.c
-    ${CLIENT_ROOT}/network/init_client.c
-    ${CLIENT_ROOT}/network/send_packet.c
-    ${CLIENT_ROOT}/memory.c
-    ${CLIENT_ROOT}/manage.c
-
-    ${CLIENT_ROOT}/client.c
     ${CLIENT_ROOT}/main.c
 )
 
@@ -138,6 +141,7 @@ target_link_libraries(${CLIENT} PUBLIC ${BLIB})
 set_target_properties(${CLIENT} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR})
 set_target_properties(${CLIENT} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR})
 
+if (UNIX)
 # ################# SERVER ###################
 
 # set executable name
@@ -179,3 +183,4 @@ target_link_libraries(${SERVER} PUBLIC raylib)
 target_link_libraries(${SERVER} PUBLIC ${BLIB})
 set_target_properties(${SERVER} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_SOURCE_DIR})
 set_target_properties(${SERVER} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR})
+endif()

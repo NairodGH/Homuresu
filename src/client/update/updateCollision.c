@@ -1,6 +1,6 @@
 #include "includes.h"
 
-static void checkCollisionprojectile(game_t *game, cube_t *cube)
+static void checkCollisionProjectile(game_t *game, cube_t *cube)
 {
     node_t *node = NULL;
     projectile_t *temp = NULL;

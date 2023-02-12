@@ -34,9 +34,6 @@ static void updateBindings(game_t *game)
         if (IsMouseButtonReleased(mousebinds[i].button))
             mousebinds[i].func(game, false);
     }
-    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-        updateEnter(game);
-    }
 }
 
 void updateEvent(game_t *game)

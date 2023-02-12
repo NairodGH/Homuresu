@@ -391,13 +391,6 @@ void updateDeadProjectile(game_t *game);
  *
  * @param game
  */
-void updateDeadItem(game_t *game);
-
-/**
- * @brief
- *
- * @param game
- */
 void updateGame(game_t *game);
 
 // DRAW
