@@ -83,6 +83,7 @@ set(CLIENT_SRC
     ${CLIENT_ROOT}/init/initWall.c
     ${CLIENT_ROOT}/init/initWindow.c
     ${CLIENT_ROOT}/init/initSounds.c
+    ${CLIENT_ROOT}/init/initMusic.c
     ${CLIENT_ROOT}/init/initGame.c
 
     ${CLIENT_ROOT}/draw/drawBullet.c

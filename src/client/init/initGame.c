@@ -7,5 +7,6 @@ void initGame(game_t *game)
     initCube(game);
     initWall(game);
     initBullet(game);
+    initMusic(game);
     initSounds(game);
 }

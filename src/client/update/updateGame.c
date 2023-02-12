@@ -3,7 +3,7 @@
 void updateGame(game_t *game)
 {
     game->cameraLastPosition = game->camera.position;
-    UpdateCamera(&game->camera);
+    UpdateCamera(&(game->camera));
     updateCollision(game);
     updateEvent(game);
     updateDeadBullet(game);

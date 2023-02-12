@@ -7,7 +7,10 @@ typedef struct {
 
 static const binding_t bindings[] = {
     {KEY_ENTER, updateEnter},
-    {KEY_W, updateWalk}
+    // {KEY_W, updateWalk},
+    // {KEY_A, updateWalk},
+    // {KEY_S, updateWalk},
+    // {KEY_D, updateWalk},
 };
 
 static void updateBinding(game_t *game)

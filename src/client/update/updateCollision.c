@@ -30,6 +30,7 @@ void checkCollision(game_t *game)
             game->camera.position.z > temp->position.z - temp->length / 2 &&
             game->camera.position.z < temp->position.z + temp->length / 2)
             game->camera.position = game->cameraLastPosition;
+            // playSound(game, SOUND_COLLISION_WALL);
         checkCollisionBullet(game, temp);
     }
 }

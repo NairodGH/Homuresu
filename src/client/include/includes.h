@@ -55,7 +55,8 @@ typedef struct sprite_s {
 
 typedef enum {
   SOUND_WALK,
-  SOUND_SHOOT,
+  SOUND_SHOT,
+  SOUND_COLLISION_WALL,
 } sound_e;
 
 typedef struct {
@@ -64,9 +65,14 @@ typedef struct {
 } sound_t;
 
 typedef struct {
-  Camera camera;
-  Vector3 cameraLastPosition;
+    bool isWalking;
+} player_t;
 
+typedef struct {
+  Camera camera;
+  Music music;
+  Vector3 cameraLastPosition;
+  player_t *player;
   list_t *cube;
   list_t *bullet;
   list_t *sound;
@@ -123,6 +129,13 @@ void initSounds(game_t *game);
  *
  * @param game
  */
+void initMusic(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
 void initGame(game_t *game);
 
 // MANAGE
@@ -152,6 +165,14 @@ Sound *getSound(game_t *game, sound_e type);
  * @param type
  */
 void playSound(game_t *game, sound_e type);
+
+/**
+ * @brief
+ *
+ * @param game
+ * @param type
+ */
+void playSoundMulti(game_t *game, sound_e type);
 
 // UPDATE
 
