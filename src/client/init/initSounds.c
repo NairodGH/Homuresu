@@ -4,12 +4,14 @@
 typedef struct {
     sound_e type;
     const char *path;
+    float volume;
 } relation_t;
 
 static const relation_t relation[] = {
-    {SOUND_WALK, "assets/sounds/walk.wav"},
-    {SOUND_COLLISION_WALL, "assets/sounds/collision_wall.wav"},
-    {SOUND_SHOT, "assets/sounds/shot.wav"},
+    {SOUND_WALK, "assets/sounds/walk.wav", 1.0f},
+    {SOUND_HIT, "assets/sounds/hit.wav", 0.2f},
+    {SOUND_SHOT, "assets/sounds/shot.wav", 0.5f},
+    {SOUND_JUMP, "assets/sounds/jump.wav", 0.2f},
 };
 
 void initSounds(game_t *game)
@@ -21,7 +23,7 @@ void initSounds(game_t *game)
         sound = calloc(1, sizeof(sound_t));
         sound->type = relation[i].type;
         sound->sound = LoadSound(relation[i].path);
-        SetSoundVolume(sound->sound, 0.2f);
+        SetSoundVolume(sound->sound, relation[i].volume);
         list_push_data(game->sound, sound);
     }
 }

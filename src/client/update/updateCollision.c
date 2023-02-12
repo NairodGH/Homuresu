@@ -14,6 +14,7 @@ static void checkCollisionBullet(game_t *game, cube_t *cube)
             temp->position.z > cube->position.z - cube->length / 2 &&
             temp->position.z < cube->position.z + cube->length / 2) {
             temp->isAlive = false;
+            playSound(game, SOUND_HIT);
         }
     }
 }
@@ -30,7 +31,6 @@ void checkCollision(game_t *game)
             game->camera.position.z > temp->position.z - temp->length / 2 &&
             game->camera.position.z < temp->position.z + temp->length / 2)
             game->camera.position = game->cameraLastPosition;
-            // playSound(game, SOUND_COLLISION_WALL);
         checkCollisionBullet(game, temp);
     }
 }

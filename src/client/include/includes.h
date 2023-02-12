@@ -56,7 +56,8 @@ typedef struct sprite_s {
 typedef enum {
   SOUND_WALK,
   SOUND_SHOT,
-  SOUND_COLLISION_WALL,
+  SOUND_HIT,
+  SOUND_JUMP,
 } sound_e;
 
 typedef struct {

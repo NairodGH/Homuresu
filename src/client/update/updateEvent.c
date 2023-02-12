@@ -7,16 +7,16 @@ typedef struct {
 
 static const binding_t bindings[] = {
     {KEY_ENTER, updateEnter},
-    // {KEY_W, updateWalk},
-    // {KEY_A, updateWalk},
-    // {KEY_S, updateWalk},
-    // {KEY_D, updateWalk},
+    {KEY_W, updateWalk},
+    {KEY_A, updateWalk},
+    {KEY_S, updateWalk},
+    {KEY_D, updateWalk},
 };
 
 static void updateBinding(game_t *game)
 {
     for (size_t i = 0; i < sizeof(bindings) / sizeof(bindings[0]); i++) {
-        if (IsKeyPressed(bindings[i].key)) {
+        if (IsKeyDown(bindings[i].key)) {
             bindings[i].func(game);
         }
     }
