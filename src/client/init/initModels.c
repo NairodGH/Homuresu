@@ -3,17 +3,18 @@
 typedef struct {
     model_e type;
     const char *path;
+    Vector3 rotation;
+    Vector3 scale;
 } relation_t;
 
 static const relation_t relation[] = {
-    {MODEL_BATARANG, "resources/batarang/Batarang.obj"},
-    {MODEL_DORION, "resources/dorion/Dorion.glb"},
-    {MODEL_DORION2, "resources/dorion/Dorion2.glb"},
-    {MODEL_AMMO_BOX, "resources/ammo_box.glb"},
-    {MODEL_DEADPOOL, "resources/deadpool/Deadpool.glb"},
-    {MODEL_MIDORIYA, "resources/midoriya/Midoriya.glb"},
-    {MODEL_BALD_MIDORIYA, "resources/midoriya/bald_Midoriya.glb"},
-    {MODEL_MAXWELL, "resources/maxwell/Maxwell.obj"},
+    {MODEL_BATARANG, "resources/batarang/Batarang.obj", {0, 0, 0}, {1, 1, 1}},
+    {MODEL_DORION, "resources/dorion/Dorion.glb", {90, 0, 270}, {0.6, 0.6, 0.6}},
+    {MODEL_DORION2, "resources/dorion/Dorion2.glb", {0, 90, 0}, {1.3, 1.3, 1.3}},
+    {MODEL_AMMO_BOX, "resources/ammo_box.glb", {270, 0, 0}, {0.03, 0.1, 0.03}},
+    {MODEL_DEADPOOL, "resources/deadpool/Deadpool.glb", {90, 180, 0}, {0.65, 0.65, 0.65}},
+    {MODEL_MIDORIYA, "resources/midoriya/Midoriya.glb", {0, 180, 0}, {0.013, 0.013, 0.013}},
+    {MODEL_BALD_MIDORIYA, "resources/midoriya/bald_Midoriya.glb", {0, 180, 0}, {0.013, 0.013, 0.013}},
 };
 
 Model *getModel(list_t *list, model_e type)
@@ -63,7 +64,10 @@ void initModels(game_t *game)
         model = calloc(1, sizeof(model_t));
         model->type = relation[i].type;
         model->model = LoadModel(relation[i].path);
-
+        model->model.transform = MatrixMultiply(model->model.transform, MatrixRotateX(relation[i].rotation.x * DEG2RAD));
+        model->model.transform = MatrixMultiply(model->model.transform, MatrixRotateY(relation[i].rotation.y * DEG2RAD));
+        model->model.transform = MatrixMultiply(model->model.transform, MatrixRotateZ(relation[i].rotation.z * DEG2RAD));
+        model->model.transform = MatrixMultiply(model->model.transform, MatrixScale(relation[i].scale.x, relation[i].scale.y, relation[i].scale.z));
         list_push_data(game->model, model);
     }
 }
