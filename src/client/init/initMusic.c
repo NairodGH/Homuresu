@@ -3,6 +3,5 @@
 void initMusic(game_t *game)
 {
     game->music = LoadSound("assets/sounds/music.wav");
-    SetSoundVolume(game->music, 0.3);
-    PlaySound(game->music);
+    SetSoundVolume(game->music, 0.15);
 }

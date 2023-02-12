@@ -1,18 +1,19 @@
 #ifndef IENCLI_H_
 #define IENCLI_H_
 
+#include "includes.h"
+#ifndef _WIN32
 #include <arpa/inet.h>
+#include <sys/select.h>
+#include <sys/time.h>
+#include <unistd.h>
 #include <ctype.h>
 #include <signal.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/select.h>
-#include <sys/time.h>
 #include <sys/types.h>
-#include <unistd.h>
-#include "includes.h"
 
 #define MAX_CLIENTS 100
 #define BUFFER_SIZE 1024
@@ -57,5 +58,5 @@ int loop_client(client_t *client, game_t *game);
 
 // action.c
 int client_action_mng(client_t *client, game_t *game, char *msg);
-
+#endif
 #endif /* !IENCLI_H_ */
