@@ -8,9 +8,11 @@ void drawPlayer(game_t *game)
     foreach(game->player->head, node) {
         temp = (player_t *)node->data;
         if (temp->isAlive) {
-            temp->model.model.transform = MatrixMultiply(
-                temp->model.model.transform, MatrixRotateY(atan2(temp->direction.x, temp->direction.z) * RAD2DEG));
+            Matrix transform = temp->model.model.transform;
+
+            temp->model.model.transform = MatrixMultiply(transform, MatrixRotateY(atan2(temp->direction.x, temp->direction.z) + PI));
             DrawModel(temp->model.model, temp->position, 1, WHITE);
+            temp->model.model.transform = transform;
         }
     }
 }
