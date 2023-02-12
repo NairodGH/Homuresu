@@ -2,5 +2,5 @@
 
 void updateR(game_t *game)
 {
-    createAmmoBox(game);
+    //createAmmoBox(game);
 }

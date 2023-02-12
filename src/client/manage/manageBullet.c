@@ -20,12 +20,11 @@ void createBullet(game_t *game, float speed, float size)
     send_tcp_packet(game->socket, msg, EOF_NETWORK);
 }
 
-void createAmmoBox(game_t *game)
+void createAmmoBox(game_t *game, Vector3 pos)
 {
     item_t *new = calloc(1, sizeof(item_t));
 
-    new->position = (Vector3){GetRandomValue(-(MAP_SIZE / 2) + 1, (MAP_SIZE / 2) - 1),
-                              0, GetRandomValue(-(MAP_SIZE / 2) + 1, (MAP_SIZE / 2) - 1)};
+    new->position = pos;
     new->model = *getModel(game, MODEL_AMMO_BOX);
     new->height = 1.0f;
     new->width = 1.0f;

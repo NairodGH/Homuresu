@@ -77,7 +77,7 @@ static char *sendInfoServer(game_t *game, char *msg)
         free(msg);
     msg = malloc(sizeof(char) * 100);
     sprintf(msg, "INFO %i %f %f %f %f %f %f %d %d", game->id,
-        game->camera.position.x, game->camera.position.y, game->camera.position.z,
+        game->camera.position.x, game->camera.position.y - 2, game->camera.position.z,
         game->camera.target.x, game->camera.target.y, game->camera.target.z,
         game->stat->life, game->stat->score);
     return msg;

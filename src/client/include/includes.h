@@ -312,7 +312,7 @@ Model *getModel(game_t *game, model_e type);
  */
 void playSound(game_t *game, sound_e type);
 
-void createAmmoBox(game_t *game);
+void createAmmoBox(game_t *game, Vector3 pos);
 
 // UPDATE
 
