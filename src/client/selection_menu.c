@@ -13,7 +13,7 @@ void selection_menu_loop(menu_t *menu)
     DrawRectangle(10, 50, 500, 150, BLACK);
     DrawRectangleLines(10, 50, 500, 150, WHITE);
     DrawText("Selection Menu:", 25, 80, 20, WHITE);
-    DrawText("Press LEFT/RIGHT to change selection", 70, 120, 20, WHITE);
+    DrawText("Press RIGHT to change selection", 70, 120, 20, WHITE);
     DrawText("Press SPACE to select", 70, 140, 20, WHITE);
     DrawText("Press BACKSPACE to go back", 70, 160, 20, WHITE);
 
@@ -34,7 +34,7 @@ void selection_menu_loop(menu_t *menu)
     BeginMode3D(menu->camera);
     add_back(menu);
     Model model = getModelbyModel_t(menu->selection_menu->elements, ((model_t *)menu->selection_menu->current->data));
-    DrawModelEx(model, (Vector3){ 10.0f, 0.0f, 0.0f }, (Vector3){ 0.0f, 1.0f, 0.0f }, 90.0f, (Vector3){ 1.0f, 1.0f, 1.0f }, WHITE);
+    DrawModelEx(model, (Vector3){ 3.0f, 0.0f, 0.0f }, (Vector3){ 0.0f, 1.0f, 0.0f }, 90.0f, (Vector3){ 1.0f, 1.0f, 1.0f }, WHITE);
     EndMode3D();
 
     if (IsKeyPressed(KEY_RIGHT)) {
@@ -42,10 +42,5 @@ void selection_menu_loop(menu_t *menu)
             menu->selection_menu->current = menu->selection_menu->current->next;
         else
             menu->selection_menu->current = menu->selection_menu->elements->head;
-    } else if (IsKeyPressed(KEY_LEFT)) {
-        if (menu->selection_menu->current->prev != NULL)
-            menu->selection_menu->current = menu->selection_menu->current->prev;
-        else
-            menu->selection_menu->current = menu->selection_menu->elements->tail;
     }
 }
