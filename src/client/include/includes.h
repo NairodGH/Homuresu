@@ -71,7 +71,7 @@ typedef struct {
 
 typedef struct {
   Camera camera;
-  Music music;
+  Sound music;
   Vector3 cameraLastPosition;
   player_t *player;
   list_t *cube;
