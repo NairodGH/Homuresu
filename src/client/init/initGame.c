@@ -6,7 +6,7 @@ void initGame(game_t *game)
     game->windowSize = (Vector2){GetMonitorWidth(GetCurrentMonitor()), GetMonitorHeight(GetCurrentMonitor())};
     initWindow(game->windowSize.x, game->windowSize.y);
     #else
-    initWindow(1920, 1080);
+    initWindow(1280, 720);
     #endif
     game->id = -1;
     initCamera(game);

@@ -157,9 +157,9 @@ typedef struct
 {
   Camera camera;
   Vector3 cameraLastPosition;
-    float height;
-    float gravity;
-    float speed;
+  float height;
+  float gravity;
+  float speed;
 
   Vector2 windowSize;
   int id;
