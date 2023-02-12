@@ -1,5 +1,14 @@
 #include "general.h"
 
+static int send_death(server_tcp_t *server, client_t *client)
+{
+    char *msg = malloc(sizeof(char) * 100);
+
+    sprintf(msg, "DEATH %i", client->sock);
+    send_msg_to_all_cli_exepct_cli(server, client, msg);
+    free(msg);
+}
+
 int manage_tcp_recv_actions(server_tcp_t *server, client_t *client)
 {
     int check = 0;

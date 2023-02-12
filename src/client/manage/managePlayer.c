@@ -67,3 +67,17 @@ void addInfoPlayerToGame(game_t *game, char *msg)
     player->stat.score = atoi(tab[8]);
     freeDoubleTab(tab);
 }
+
+void removePlayerFromGame(game_t *game, int id)
+{
+    node_t *node = NULL;
+    player_t *player = NULL;
+
+    foreach(game->player->head, node) {
+        player = (player_t *)node->data;
+        if (player->id == id) {
+            player->isAlive = false;
+            break;
+        }
+    }
+}

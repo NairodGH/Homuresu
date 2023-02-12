@@ -470,4 +470,6 @@ void freeDoubleTab(char **tab);
 
 int send_tcp_packet(int sock, char const *msg, char const *eof);
 
+void removePlayerFromGame(game_t *game, int id);
+
 #endif /* !CLIENT_H_ */

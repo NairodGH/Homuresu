@@ -7,6 +7,7 @@ void drawPlayer(game_t *game)
 
     foreach(game->player->head, node) {
         temp = (player_t *)node->data;
-        DrawModel(temp->model.model, temp->position, 1, WHITE);
+        if (temp->isAlive)
+            DrawModel(temp->model.model, temp->position, 1, WHITE);
     }
 }
