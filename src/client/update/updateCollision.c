@@ -77,6 +77,7 @@ static void checkCollisionItem(game_t *game)
                 sprintf(msg, "ITEM %f %f", temp->position.x, temp->position.z);
                 send_tcp_packet(game->socket, msg, EOF_NETWORK);
                 #endif
+                return;
             }
         }
     }

@@ -23,4 +23,5 @@ void updateGame(game_t *game)
     updateCollision(game);
     updateEvent(game);
     updateDeadProjectile(game);
+    updateDeadItem(game);
 }
