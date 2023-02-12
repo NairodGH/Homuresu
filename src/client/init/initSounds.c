@@ -20,8 +20,8 @@ void initSounds(game_t *game)
     for (size_t i = 0; i < sizeof(relation) / sizeof(relation_t); i++) {
         sound = calloc(1, sizeof(sound_t));
         sound->type = relation[i].type;
-        sound->sound = LoadMusicStream(relation[i].path);
-        SetMusicVolume(sound->sound, 0.2f);
+        sound->sound = LoadSound(relation[i].path);
+        SetSoundVolume(sound->sound, 0.2f);
         list_push_data(game->sound, sound);
     }
 }

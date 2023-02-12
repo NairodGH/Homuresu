@@ -61,7 +61,7 @@ typedef enum {
 
 typedef struct {
   sound_e type;
-  Music sound;
+  Sound sound;
 } sound_t;
 
 typedef struct {
@@ -156,7 +156,7 @@ void createBullet(game_t *game, float speed, float size);
  * @param type
  * @return Sound*
  */
-Music *getSound(game_t *game, sound_e type);
+Sound *getSound(game_t *game, sound_e type);
 
 /**
  * @brief
