@@ -155,6 +155,8 @@ typedef struct menu_s
 
   Model Dorion;
   float Spin_Dorion;
+
+  Texture2D soleil;
 } menu_t;
 
 typedef struct

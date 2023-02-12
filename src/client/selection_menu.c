@@ -19,7 +19,7 @@ void selection_menu_loop(menu_t *menu)
 
     menu->mousePoint = GetMousePosition();
     SetMouseCursor(MOUSE_CURSOR_DEFAULT);
-    DrawCircle(menu->mousePoint.x, menu->mousePoint.y, 5, BLACK);
+    DrawTextureEx(menu->soleil, (Vector2){menu->mousePoint.x - 44, menu->mousePoint.y - 44}, 0.0f, 0.2f, WHITE);
     EndDrawing();
 
     if (isModel(menu->selection_menu->current, MODEL_BATARANG)

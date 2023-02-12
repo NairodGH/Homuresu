@@ -55,5 +55,7 @@ void initMenu(game_t *game)
     game->menu->Dorion = LoadModel("resources/dorion/Dorion.glb");
     game->menu->Dorion.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = LoadTexture("resources/dorion/Dorion2.png");
     game->menu->Spin_Dorion = 0.0f;
+
+    game->menu->soleil = LoadTexture("./resources/menu/Soleil.png");
     initSelectionMenu(game);
 }
