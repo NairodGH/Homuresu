@@ -57,6 +57,7 @@ typedef enum
   MODEL_BATARANG,
   MODEL_DORION,
   MODEL_DORION2,
+  MODEL_AMMO_BOX,
 } model_e;
 
 typedef struct
@@ -99,7 +100,7 @@ typedef struct
   float width;
   float height;
   float length;
-  Texture2D texture;
+  Model model;
   char *name;
   bool isAlive;
 } item_t;
