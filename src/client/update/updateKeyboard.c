@@ -7,8 +7,8 @@ void sprint(game_t *game, bool isPressed)
 
 void jump(game_t *game, bool isPressed)
 {
-    if (isPressed && game->height == 1.0f)
-        game->height -= 0.1f;
+    if (isPressed && game->height == 0.25f)
+        game->height -= 0.01f;
 }
 
 void walk(game_t *game, bool isPressed)
