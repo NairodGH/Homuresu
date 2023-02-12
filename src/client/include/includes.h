@@ -18,12 +18,23 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <time.h>
+#include <float.h>
 
 #include "list.h"
 
-#define OBS_NBR 0
+#define OBS_NBR 20
 #define WALL_NBR 4
 #define MAP_SIZE 32.0f
+
+typedef struct projectile_s {
+  Vector3 position;
+  Vector3 direction;
+  Model model;
+  float speed;
+  float size;
+  bool isAlive;
+  int id;
+} projectile_t;
 
 typedef enum
 {
@@ -81,9 +92,8 @@ typedef struct
   int cooldownShoot;
   int lastShoot;
 } stat_t;
-
-typedef struct
-{
+    
+typedef struct {
   int id;
   Vector3 position;
   Vector3 direction;
@@ -91,17 +101,6 @@ typedef struct
   stat_t stat;
   bool isAlive;
 } player_t;
-
-typedef struct bullet_s
-{
-  Vector3 position;
-  Vector3 direction;
-  Model model;
-  float speed;
-  float size;
-  bool isAlive;
-  int id;
-} bullet_t;
 
 typedef struct
 {
@@ -136,6 +135,7 @@ typedef struct menu_s
   Camera camera;
   Vector2 mousePoint;
 
+  Sound music;
   Texture2D button;
 
   Rectangle sourceRec;
@@ -162,6 +162,9 @@ typedef struct
 {
   Camera camera;
   Vector3 cameraLastPosition;
+  float height;
+  float gravity;
+  float speed;
   Sound music;
 
   Vector2 windowSize;
@@ -171,7 +174,7 @@ typedef struct
   list_t *cube;
   list_t *sound;
   list_t *model;
-  list_t *bullet;
+  list_t *projectile;
   list_t *sprite;
   list_t *item;
   list_t *player;
@@ -214,9 +217,9 @@ void initCamera(game_t *game);
  * @param speed
  * @param size
  * @param camera
- * @return bullet_t*
+ * @return projectile_t*
  */
-void initBullet(game_t *game);
+void initProjectile(game_t *game);
 
 /**
  * @brief
@@ -287,18 +290,18 @@ void addInfoPlayerToGame(game_t *game, char *msg);
  *
  * @param game
  */
-void addBulletToGame(game_t *game, char *msg);
+void addProjectileToGame(game_t *game, char *msg);
 
 // CREATE
 
 /**
- * @brief Create a Bullet object
+ * @brief Create a projectile object
  *
  * @param game
  * @param speed
  * @param size
  */
-void createBullet(game_t *game, float speed, float size);
+void createProjectile(game_t *game, float speed, float size);
 
 /**
  * @brief Get the Sound object
@@ -347,6 +350,14 @@ void createAmmoBox(game_t *game, Vector3 pos);
  * @brief
  *
  * @param game
+ * @param isPressed
+ */
+void shoot(game_t *game, bool isPressed);
+
+/**
+ * @brief
+ *
+ * @param nsm
  */
 void setupSprite(game_t *game, spriteName_t name, Vector2 position, Vector2 size, float scale, Color tint);
 
@@ -354,16 +365,25 @@ void setupSprite(game_t *game, spriteName_t name, Vector2 position, Vector2 size
  * @brief
  *
  * @param game
+ * @param isPressed
  */
-void updateEnter(game_t *game);
+void sprint(game_t *game, bool isPressed);
 
 /**
  * @brief
  *
  * @param game
+ * @param isPressed
  */
-void updateWalk(game_t *game);
-void updateR(game_t *game);
+void jump(game_t *game, bool isPressed);
+
+/**
+ * @brief
+ *
+ * @param game
+ * @param isPressed
+ */
+void walk(game_t *game, bool isPressed);
 
 /**
  * @brief
@@ -391,14 +411,7 @@ void updateCollision(game_t *game);
  *
  * @param game
  */
-void updateDeadBullet(game_t *game);
-
-/**
- * @brief
- *
- * @param game
- */
-void updateDeadItem(game_t *game);
+void updateDeadProjectile(game_t *game);
 
 /**
  * @brief
@@ -428,7 +441,7 @@ void drawCube(game_t *game);
  *
  * @param game
  */
-void drawBullet(game_t *game);
+void drawProjectile(game_t *game);
 
 /**
  * @brief

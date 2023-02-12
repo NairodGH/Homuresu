@@ -15,16 +15,16 @@ void removeItemFromGame(game_t *game, float x, float z)
     }
 }
 
-static void checkCollisionBullet(game_t *game, cube_t *cube)
+static void checkCollisionProjectile(game_t *game, cube_t *cube)
 {
     node_t *node = NULL;
+    projectile_t *temp = NULL;
     node_t *node2 = NULL;
-    bullet_t *temp = NULL;
     player_t *player = NULL;
     char *msg = calloc(1, 100);
 
-    foreach(game->bullet->head, node) {
-        temp = (bullet_t *)node->data;
+    foreach(game->projectile->head, node) {
+        temp = (projectile_t *)node->data;
         if (temp->isAlive == false)
             continue;
         if ((temp->position.x > cube->position.x - cube->width / 2 &&
@@ -47,9 +47,11 @@ static void checkCollisionBullet(game_t *game, cube_t *cube)
                 temp->position.z < player->position.z + 0.5) {
                 temp->isAlive = false;
                 game->stat->score += 1;
+                #ifndef _WIN32
                 sprintf(msg, "LIFE %d %d", player->id, -20);
                 send_tcp_packet(game->socket, msg, EOF_NETWORK);
                 return;
+                #endif
             }
         }
     }
@@ -71,8 +73,10 @@ static void checkCollisionItem(game_t *game)
                 playSound(game, SOUND_AMMO);
                 game->stat->ammo += 10;
                 temp->isAlive = false;
+                #ifndef _WIN32
                 sprintf(msg, "ITEM %f %f", temp->position.x, temp->position.z);
                 send_tcp_packet(game->socket, msg, EOF_NETWORK);
+                #endif
             }
         }
     }
@@ -88,10 +92,9 @@ void checkCollision(game_t *game)
         if (game->camera.position.x > temp->position.x - temp->width / 2 &&
             game->camera.position.x < temp->position.x + temp->width / 2 &&
             game->camera.position.z > temp->position.z - temp->length / 2 &&
-            game->camera.position.z < temp->position.z + temp->length / 2) {
+            game->camera.position.z < temp->position.z + temp->length / 2)
             game->camera.position = game->cameraLastPosition;
-        }
-        checkCollisionBullet(game, temp);
+        checkCollisionProjectile(game, temp);
     }
     checkCollisionItem(game);
 }

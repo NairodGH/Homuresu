@@ -25,6 +25,9 @@ void initMenu(game_t *game)
     game->menu->button.height *= 5;
     game->menu->sourceRec = (Rectangle){ 0, 0, (float)game->menu->button.width / 2, game->menu->button.height};
 
+    game->menu->music = LoadSound("resources/menu/menu_music.wav");
+    SetSoundVolume(game->menu->music, 0.1f);
+
     game->menu->btnBounds = (Rectangle){ (GetMonitorWidth(GetCurrentMonitor()) / 2) - (game->menu->button.width / 3),
     (GetMonitorHeight(GetCurrentMonitor()) - game->menu->button.height) - 50, game->menu->button.width / 2, game->menu->button.height};
 
@@ -47,7 +50,7 @@ void initMenu(game_t *game)
     game->menu->camera.fovy = 60.0f;
     game->menu->camera.projection = CAMERA_PERSPECTIVE;
 
-    game->menu->is_menu = 1;
+    game->menu->is_menu = 0;
 
     game->menu->title = LoadTexture("./resources/menu/title_homuresu.png");
     game->menu->title.width *= 4;

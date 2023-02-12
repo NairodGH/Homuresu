@@ -1,11 +1,11 @@
 #include "iencli.h"
 
-void createBullet(game_t *game, float speed, float size)
+void createProjectile(game_t *game, float speed, float size)
 {
-    bullet_t *new = calloc(1, sizeof(bullet_t));
+    projectile_t *new = calloc(1, sizeof(projectile_t));
     char *msg = calloc(300, sizeof(char));
 
-    new->position = (Vector3){game->camera.position.x, game->camera.position.y, game->camera.position.z};
+    new->position = game->camera.position;
     new->direction = Vector3Normalize(Vector3Subtract((Vector3){game->camera.target.x, game->camera.target.y, game->camera.target.z}, new->position));
     new->speed = speed;
     new->size = size;
@@ -13,12 +13,14 @@ void createBullet(game_t *game, float speed, float size)
     new->model.transform = MatrixMultiply(new->model.transform, MatrixRotateY(atan2(new->direction.x, new->direction.z)));
     new->isAlive = true;
     new->id = game->id;
-    list_push_data(game->bullet, new);
+    list_push_data(game->projectile, new);
     game->stat->lastShoot = time(NULL);
     game->stat->ammo--;
+    #ifndef _WIN32
     sprintf(msg, "BULLET %d %f %f %f %f %f %f %f %f", game->id, new->position.x, new->position.y, new->position.z,
                     new->direction.x, new->direction.y, new->direction.z, new->speed, new->size);
     send_tcp_packet(game->socket, msg, EOF_NETWORK);
+    #endif
 }
 
 void createAmmoBox(game_t *game, Vector3 pos)
@@ -35,11 +37,11 @@ void createAmmoBox(game_t *game, Vector3 pos)
     list_push_data(game->item, new);
 }
 
-void addBulletToGame(game_t *game, char *msg)
+void addProjectileToGame(game_t *game, char *msg)
 {
     char **tab = splitMsg(msg, " ");
     int id = atoi(tab[0]);
-    bullet_t *new = calloc(1, sizeof(bullet_t));
+    projectile_t *new = calloc(1, sizeof(projectile_t));
 
     new->id = id;
     new->position = (Vector3){atof(tab[1]), atof(tab[2]), atof(tab[3])};
@@ -49,5 +51,5 @@ void addBulletToGame(game_t *game, char *msg)
     new->model = *getModel(game, MODEL_BATARANG);
     new->model.transform = MatrixMultiply(new->model.transform, MatrixRotateY(atan2(new->direction.x, new->direction.z)));
     new->isAlive = true;
-    list_push_data(game->bullet, new);
+    list_push_data(game->projectile, new);
 }

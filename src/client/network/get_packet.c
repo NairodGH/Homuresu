@@ -53,4 +53,5 @@ char *get_udp_packet(int sock)
         if (check_eof(msg, size) != 0)
             break;
     }
+    return NULL;
 }

@@ -1,4 +1,6 @@
 #include "includes.h"
+
+#ifndef _WIN32
 #include "iencli.h"
 
 client_t *client = NULL;
@@ -16,7 +18,7 @@ static int init_client(client_t *client, game_t *game)
     return check;
 }
 
-int main(int ac, char **av)
+int withNetwork(int ac, char **av)
 {
     game_t *game = calloc(1, sizeof(game_t));
     int check = 0;
@@ -40,5 +42,41 @@ int main(int ac, char **av)
         return check;
     }
     free(game);
+    return 0;
+}
+#endif
+
+void withoutNetworkLoop(game_t *game)
+{
+    float x = 0;
+
+    while (!WindowShouldClose()) {
+        if (game->menu->is_menu) {
+            if (menu(game->menu, &x) == 1)
+               break;
+        } else {
+            updateGame(game);
+            drawGame(game);
+        }
+    }
+    CloseWindow();
+}
+
+void withoutNetwork()
+{
+    game_t *game = calloc(1, sizeof(game_t));
+
+    initGame(game);
+    withoutNetworkLoop(game);
+    free(game);
+}
+
+int main(int ac, char **av)
+{
+    #ifdef _WIN32
+    withoutNetwork();
+    #else
+    withNetwork(ac, av);
+    #endif
     return 0;
 }
