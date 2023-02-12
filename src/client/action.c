@@ -7,7 +7,7 @@ int client_action_mng(client_t *client, game_t *game, char *msg)
     } else if (strncmp(msg, "LIFE", 4) == 0) {
         updateLifePlayer(game, atoi(msg + 5), atoi(strchr(msg + 5, ' ') + 1));
     } else if (strncmp(msg, "BULLET", 6) == 0) {
-        addBulletToGame(game, msg + 7);
+        addProjectileToGame(game, msg + 7);
     } else if (strncmp(msg, "INFO", 4) == 0) {
         addInfoPlayerToGame(game, msg + 5);
     } else if (strncmp(msg, "DEAD", 4) == 0) {

@@ -18,7 +18,7 @@ static int init_client(client_t *client, game_t *game)
     return check;
 }
 
-void withNetwork(int ac, char **av)
+int withNetwork(int ac, char **av)
 {
     game_t *game = calloc(1, sizeof(game_t));
     int check = 0;
@@ -42,6 +42,7 @@ void withNetwork(int ac, char **av)
         return check;
     }
     free(game);
+    return 0;
 }
 #endif
 
@@ -75,7 +76,7 @@ int main(int ac, char **av)
     #ifdef _WIN32
     withoutNetwork();
     #else
-    withNetwork();
+    withNetwork(ac, av);
     #endif
     return 0;
 }
