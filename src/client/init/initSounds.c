@@ -8,7 +8,7 @@ typedef struct {
 
 static const relation_t relation[] = {
     {SOUND_WALK, "assets/sounds/walk.wav", 1.0f},
-    {SOUND_HIT, "assets/sounds/hit.wav", 0.2f},
+    {SOUND_HIT, "assets/sounds/hit.wav", 0.05f},
     {SOUND_SHOT, "assets/sounds/shot.wav", 0.5f},
     {SOUND_JUMP, "assets/sounds/jump.wav", 0.2f},
     {SOUND_AMMO, "assets/sounds/ammo.wav", 1.5f},

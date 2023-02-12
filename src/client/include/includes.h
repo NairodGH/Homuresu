@@ -136,6 +136,7 @@ typedef struct menu_s
   Camera camera;
   Vector2 mousePoint;
 
+  Sound music;
   Texture2D button;
 
   Rectangle sourceRec;
