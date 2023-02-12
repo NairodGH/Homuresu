@@ -21,6 +21,7 @@ int main(int ac, char **av)
     game_t *game = calloc(1, sizeof(game_t));
     int check = 0;
 
+    InitAudioDevice();
     client = init_struct();
     if (client == NULL) {
         printf("Error: Client structure initialization failed\n");

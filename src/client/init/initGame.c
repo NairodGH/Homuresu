@@ -11,6 +11,7 @@ void initGame(game_t *game)
     initBullet(game);
     initCube(game);
     initWall(game);
+    initMusic(game);
     initSounds(game);
     initSprite(game);
     initStat(game);

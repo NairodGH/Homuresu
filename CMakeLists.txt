@@ -78,6 +78,7 @@ set(CLIENT_SRC
     ${CLIENT_ROOT}/main.c
     ${CLIENT_ROOT}/selection_menu.c
     ${CLIENT_ROOT}/menu.c
+    ${CLIENT_ROOT}/selection_menu.c
     ${CLIENT_ROOT}/manage.c
     ${CLIENT_ROOT}/client.c
 
@@ -86,10 +87,10 @@ set(CLIENT_SRC
     ${CLIENT_ROOT}/init/initWall.c
     ${CLIENT_ROOT}/init/initWindow.c
     ${CLIENT_ROOT}/init/initSounds.c
+    ${CLIENT_ROOT}/init/initMusic.c
     ${CLIENT_ROOT}/init/initModels.c
     ${CLIENT_ROOT}/init/initGame.c
     ${CLIENT_ROOT}/init/initSprite.c
-    ${CLIENT_ROOT}/init/initStat.c
     ${CLIENT_ROOT}/init/initMenu.c
     ${CLIENT_ROOT}/init/initStat.c
     ${CLIENT_ROOT}/init/initItem.c

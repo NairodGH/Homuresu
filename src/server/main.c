@@ -41,8 +41,8 @@ int main(int ac, char **av)
     gn = init_gn_struct();
     if (gn == NULL)
         return 84;
-    gn->srv_tcp->port = DEFAULT_PORT;
-    gn->srv_udp->port = 4243;
+    gn->srv_tcp->port = ac == 2 ? atoi(av[1]) : DEFAULT_PORT;
+    gn->srv_udp->port = gn->srv_udp->port + 1;
     printf("Server initialization...\n");
     if (init_server_tcp(gn->srv_tcp) != 0)
         return 84;

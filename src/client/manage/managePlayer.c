@@ -83,3 +83,8 @@ void removePlayerFromGame(game_t *game, int id)
         }
     }
 }
+
+void updateLifePlayer(game_t *game, int id, int life)
+{
+    game->stat->life = life;
+}

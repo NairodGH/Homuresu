@@ -40,10 +40,14 @@ typedef struct
   char *name;
 } sprite_t;
 
+
 typedef enum
 {
   SOUND_WALK,
-  SOUND_SHOOT,
+  SOUND_SHOT,
+  SOUND_HIT,
+  SOUND_JUMP,
+  SOUND_AMMO,
 } sound_e;
 
 typedef struct
@@ -114,62 +118,59 @@ typedef struct
   bool isAlive;
 } item_t;
 
-typedef struct selection_menu_s
-{
-  list_t *elements;
+typedef struct selection_menu_s {
+    list_t *elements;
+    node_t *current;
 
-  Texture2D right_button;
-  Rectangle right_sourceRec;
-  Rectangle right_btnBounds;
-
-  Texture2D left_button;
-  Rectangle left_sourceRec;
-  Rectangle left_btnBounds;
-
-  Texture2D validate_button;
-  Rectangle validate_sourceRec;
-  Rectangle validate_btnBounds;
+    int selection;
 } selection_menu_t;
 
 typedef struct menu_s
 {
-  Camera camera;
-  Vector2 mousePoint;
+    Camera camera;
+    Vector2 mousePoint;
 
-  Texture2D button;
+    Texture2D button;
 
-  Rectangle sourceRec;
-  Rectangle btnBounds;
+    Rectangle sourceRec;
+    Rectangle btnBounds;
 
-  Texture2D quit_button;
-  Rectangle quit_sourceRec;
-  Rectangle quit_btnBounds;
-  Vector2 quit_position;
+    Texture2D quit_button;
+    Rectangle quit_sourceRec;
+    Rectangle quit_btnBounds;
+    Vector2 quit_position;
 
-  Texture2D title;
+    Texture2D title;
 
-  int is_menu;
-  Vector2 windowSize;
+    int is_menu;
+    Vector2 windowSize;
+    selection_menu_t *selection_menu;
+    Texture2D building;
+    Texture2D ground;
+
+    Model Dorion;
+    float Spin_Dorion;
 } menu_t;
 
 typedef struct
 {
-  Camera camera;
-  Vector3 cameraLastPosition;
+    Camera camera;
+    Vector3 cameraLastPosition;
+    Sound music;
 
-  Vector2 windowSize;
-  int id;
-  int socket;
+    Vector2 windowSize;
+    int id;
+    int socket;
 
-  list_t *cube;
-  list_t *sound;
-  list_t *model;
-  list_t *bullet;
-  list_t *sprite;
-  list_t *item;
-  list_t *player;
-  stat_t *stat;
-  menu_t *menu;
+    list_t *cube;
+    list_t *sound;
+    list_t *model;
+    list_t *bullet;
+    list_t *sprite;
+    list_t *item;
+    list_t *player;
+    stat_t *stat;
+    menu_t *menu;
 } game_t;
 
 /**
@@ -217,6 +218,13 @@ void initBullet(game_t *game);
  * @param game
  */
 void initSounds(game_t *game);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
+void initMusic(game_t *game);
 
 /**
  * @brief
@@ -312,6 +320,19 @@ Model *getModel(game_t *game, model_e type);
  */
 void playSound(game_t *game, sound_e type);
 
+/**
+ * @brief
+ *
+ * @param game
+ * @param type
+ */
+void playSoundMulti(game_t *game, sound_e type);
+
+/**
+ * @brief
+ *
+ * @param game
+ */
 void createAmmoBox(game_t *game, Vector3 pos);
 
 // UPDATE
@@ -472,5 +493,9 @@ void freeDoubleTab(char **tab);
 int send_tcp_packet(int sock, char const *msg, char const *eof);
 
 void removePlayerFromGame(game_t *game, int id);
+
+void removeItemFromGame(game_t *game, float x, float z);
+
+void updateLifePlayer(game_t *game, int id, int life);
 
 #endif /* !CLIENT_H_ */
