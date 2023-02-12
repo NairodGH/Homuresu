@@ -24,15 +24,16 @@ void freeDoubleTab(char **tab)
     free(tab);
 }
 
-static player_t * createPlayer(int id, game_t *game)
+static player_t * createPlayer(int id, game_t *game, model_e type)
 {
     player_t *player = calloc(1, sizeof(player_t));
 
     player->position = (Vector3){0, 0, 0};
     player->direction = (Vector3){0, 0, 0};
     player->isAlive = true;
-    player->model.type = MODEL_DORION;
+    player->model.type = type;
     player->model.model = *getModel(game->model, player->model.type);
+    printf("model: %d\n", player->model.type);
     player->id = id;
     player->stat.life = 100;
     player->stat.score = 0;
@@ -46,6 +47,7 @@ void addInfoPlayerToGame(game_t *game, char *msg)
     player_t *player = NULL;
     node_t *node = NULL;
     bool find = false;
+    model_e type = atoi(tab[9]);
 
     foreach(game->player->head, node) {
         player = (player_t *)node->data;
@@ -55,7 +57,7 @@ void addInfoPlayerToGame(game_t *game, char *msg)
         }
     }
     if (!find) {
-        player = createPlayer(id, game);
+        player = createPlayer(id, game, type);
         list_push_data(game->player, player);
     }
     player->position.x = atof(tab[1]);
@@ -66,6 +68,7 @@ void addInfoPlayerToGame(game_t *game, char *msg)
     player->direction.z = atof(tab[6]);
     player->stat.life = atoi(tab[7]);
     player->stat.score = atoi(tab[8]);
+    player->idModel = type;
     freeDoubleTab(tab);
 }
 

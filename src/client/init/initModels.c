@@ -47,6 +47,20 @@ Model getModelbyModel_t(list_t *list, model_t *model)
     return (Model){0};
 }
 
+model_e getModelType(list_t *list, model_t *model)
+{
+    node_t *node = NULL;
+    model_t *tmp = NULL;
+
+    foreach(list->head, node) {
+        tmp = (model_t *)node->data;
+        if (tmp == model) {
+            return tmp->type;
+        }
+    }
+    return 0;
+}
+
 bool isModel(node_t *node, model_e type)
 {
     model_t *model = (model_t *)node->data;
