@@ -53,7 +53,6 @@ static void menu_ui(menu_t *menu_st)
 
 void add_back(menu_t *menu_st)
 {
-    BeginMode3D(menu_st->camera);
     ClearBackground(SKYBLUE);
 
     DrawCubeTexture(menu_st->building, (Vector3){ 0.0f, 0.0f, -25.0f }, 50.0f, 20.0f, 0.1f, WHITE);
@@ -61,7 +60,6 @@ void add_back(menu_t *menu_st)
     DrawCubeTexture(menu_st->building, (Vector3){ -20.0f, 0.0f, 0.0f }, 0.1f, 20.0f, 50.0f, WHITE);
     DrawCubeTexture(menu_st->building, (Vector3){ 25.0f, 0.0f, 0.0f }, 0.1f, 20.0f, 50.0f, WHITE);
     DrawCubeTexture(menu_st->ground, (Vector3){ 0.0f, 0.0f, 0.0f }, 50.0f, 0.1f, 50.0f, WHITE);
-    put_dorian(menu_st);
 }
 
 static void check_mouse(void)
@@ -83,9 +81,11 @@ int menu(menu_t *menu_st)
     while (menu_st->is_menu == 1) {
 
         check_mouse();
+        BeginMode3D(menu_st->camera);
         add_back(menu_st);
 
         if (menu_st->selection_menu->selection == 0) {
+            put_dorian(menu_st);
             menu_ui(menu_st);
             if (IsKeyPressed(KEY_ESCAPE))
                 menu_st->is_menu = 0;
