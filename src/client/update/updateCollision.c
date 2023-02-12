@@ -22,9 +22,10 @@ static void checkCollisionBullet(game_t *game, cube_t *cube)
 static void checkCollisionItem(game_t *game)
 {
     node_t *node = NULL;
+    node_t *temp_safe = NULL;
     item_t *temp = NULL;
 
-    foreach(game->item->head, node) {
+    foreach_safe(game->item->head, node, temp_safe) {
         temp = (item_t *)node->data;
         if (game->camera.position.x > temp->position.x - temp->width / 2 &&
             game->camera.position.x < temp->position.x + temp->width / 2 &&
@@ -32,7 +33,8 @@ static void checkCollisionItem(game_t *game)
             game->camera.position.z < temp->position.z + temp->length / 2) {
             if (strcmp(temp->name, "ammoBox") == 0) {
                 game->stat->ammo += 10;
-                temp->isAlive = false;
+                list_remove_node(game->item, node);
+                free(temp);
             }
         }
     }

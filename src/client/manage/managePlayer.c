@@ -72,11 +72,13 @@ void removePlayerFromGame(game_t *game, int id)
 {
     node_t *node = NULL;
     player_t *player = NULL;
+    node_t *tmp = NULL;
 
-    foreach(game->player->head, node) {
+    foreach_safe(game->player->head, node, tmp) {
         player = (player_t *)node->data;
         if (player->id == id) {
-            player->isAlive = false;
+            list_remove_node(game->player, node);
+            free(player);
             break;
         }
     }

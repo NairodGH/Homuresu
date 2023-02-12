@@ -12,7 +12,7 @@ void drawPlayer(game_t *game)
             temp->model.model.transform = MatrixMultiply(
                 temp->model.model.transform, MatrixScale(0.6, 0.6, 0.6));
             temp->model.model.transform = MatrixMultiply(
-                temp->model.model.transform, MatrixRotateY(atan2(temp->direction.x, temp->direction.z)));
+                temp->model.model.transform, MatrixRotateY(atan2(temp->direction.x, temp->direction.z) * RAD2DEG));
             DrawModel(temp->model.model, temp->position, 1, WHITE);
         }
     }
