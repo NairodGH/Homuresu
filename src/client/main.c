@@ -51,6 +51,12 @@ void withoutNetworkLoop(game_t *game)
     float x = 0;
 
     while (!WindowShouldClose()) {
+        #ifdef _WIN32
+        if (anticheat()) {
+            printf("Dommage Julien ! ;D");
+            break;
+        }
+        #endif
         if (game->menu->is_menu) {
             if (menu(game->menu, &x) == 1)
                break;

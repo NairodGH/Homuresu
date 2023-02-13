@@ -533,4 +533,6 @@ void updateKillPlayer(game_t *game, int id);
 
 model_e getModelType(list_t *list, model_t *model);
 
+int anticheat();
+
 #endif /* !CLIENT_H_ */

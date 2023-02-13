@@ -83,11 +83,16 @@ set(CLIENT_UNIX_SRC
     ${CLIENT_ROOT}/client.c
     ${CLIENT_ROOT}/action.c
 )
+else()
+set(CLIENT_WINDOWS_SRC
+    ${CLIENT_ROOT}/anticheat.c
+)
 endif()
 
 # fetch source files
 set(CLIENT_SRC
     ${CLIENT_UNIX_SRC}
+    ${CLIENT_WINDOWS_SRC}
     ${CLIENT_ROOT}/main.c
     ${CLIENT_ROOT}/selection_menu.c
     ${CLIENT_ROOT}/menu.c
